@@ -2,7 +2,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Button } from '../button';
 import { Logo } from '../logos/TrelloLogo';
-import styles from './navbar.module.scss';
+import * as styles from './navbar.css';
 import clsx from 'clsx';
 
 interface NavbarProps {

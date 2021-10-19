@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/dist/client/router';
 import * as React from 'react';
 import { Button } from '../button';
-import styles from './hero.module.scss';
+import * as styles from './hero.css';
 
 interface HeroProps {
   setIntersectionRef: React.Dispatch<React.SetStateAction<HTMLElement | null>>;
@@ -21,7 +21,7 @@ export const Hero = ({ setIntersectionRef }: HeroProps) => {
   return (
     <section id="hero" className={styles.hero} ref={setIntersectionRef}>
       <div className={styles.container}>
-        <div className={styles['text-container']}>
+        <div className={styles.textContainer}>
           <h1 className={styles.heading}>
             Trello helps teams move work forward.
           </h1>
@@ -44,7 +44,7 @@ export const Hero = ({ setIntersectionRef }: HeroProps) => {
             <Button variant="filled">Sign up—it&apos;s free!</Button>
           </form>
         </div>
-        <div className={styles['image-container']}>
+        <div className={styles.imageContainer}>
           <Image
             priority
             src="/images/hero-image.png"

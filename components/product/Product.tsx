@@ -7,7 +7,7 @@ import {
   GoogleLogo,
   SquareSpaceLogo,
 } from '..';
-import styles from './product.module.scss';
+import * as styles from './product.css';
 
 export const Product = () => {
   return (
@@ -30,7 +30,7 @@ export const Product = () => {
           width={1902}
           height={1334}
         />
-        <p className={styles['used-by-text']}>
+        <p className={styles.usedByText}>
           Join over 1,000,000 teams worldwide that are using Trello to get more
           done.
         </p>

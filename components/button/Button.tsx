@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import * as React from 'react';
-import styles from './button.module.scss';
+import * as styles from './button.css';
 import clsx from 'clsx';
 
 interface ButtonProps {
@@ -17,7 +17,8 @@ export const Button = ({
   fontWeight = 'regular',
   children,
 }: React.PropsWithChildren<ButtonProps>) => {
-  const classes = `${styles.button} ${styles[variant]} ${styles[fontWeight]}`;
+  const classes = clsx(styles.button, styles[variant], styles[fontWeight]);
+
   if (to) {
     return (
       <Link href={to}>
@@ -26,7 +27,7 @@ export const Button = ({
     );
   }
   return (
-    <button className={clsx(classes, styles['button-nolink'], className)}>
+    <button className={clsx(classes, styles.buttonNoLink, className)}>
       {children}
     </button>
   );
