@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/dist/client/router';
 import * as React from 'react';
-import { Button } from '../button';
+import { Button } from '../../common';
 import * as styles from './hero.css';
 
 interface HeroProps {

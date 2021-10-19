@@ -6,7 +6,7 @@ import {
   FenderLogo,
   GoogleLogo,
   SquareSpaceLogo,
-} from '..';
+} from '../..';
 import * as styles from './product.css';
 
 export const Product = () => {
@@ -25,6 +25,7 @@ export const Product = () => {
           Start doing →
         </Button>
         <Image
+          priority
           src="/images/product-image.png"
           alt="product"
           width={1902}
