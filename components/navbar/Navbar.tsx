@@ -6,28 +6,12 @@ import styles from './navbar.module.scss';
 import clsx from 'clsx';
 
 interface NavbarProps {
-  intersectionRef: HTMLElement | null;
+  isScrolling: boolean;
 }
 
-export const Navbar = ({ intersectionRef }: NavbarProps) => {
-  const [isOverlay, setIsOverlay] = React.useState(false);
-
-  React.useLayoutEffect(() => {
-    if (!intersectionRef) {
-      return;
-    }
-    const observer = new IntersectionObserver(
-      (entries) => setIsOverlay(!entries[0].isIntersecting),
-      { rootMargin: '-580px 0px 0px 0px' }
-    );
-
-    observer.observe(intersectionRef);
-
-    return () => observer.unobserve(intersectionRef);
-  }, [intersectionRef]);
-
+export const Navbar = ({ isScrolling }: NavbarProps) => {
   return (
-    <header className={clsx(styles.header, isOverlay && styles.overlay)}>
+    <header className={clsx(styles.header, isScrolling && styles.overlay)}>
       <nav className={styles.nav}>
         <Link href="/">
           <a className={styles.logo}>
