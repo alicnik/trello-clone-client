@@ -25,7 +25,6 @@ export const subHeading = style({
   marginBottom: '0.5rem',
   fontFamily: "'Charlie Display', sans-serif",
   fontWeight: 500,
-  padding: '0 1rem',
 });
 
 export const imageAtEnd = style({

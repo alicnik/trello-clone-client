@@ -1,4 +1,5 @@
 import { FeatureBlock, LearnMoreExpandable } from './feature-block-component';
+import * as styles from './feature-blocks.css';
 
 export const AutomationFeaturesBlock = () => {
   return (
@@ -15,11 +16,11 @@ export const AutomationFeaturesBlock = () => {
       imageWidth={979}
     >
       <LearnMoreExpandable>
-        <p>
+        <p className={styles.learnMoreSummary}>
           Butler uses natural language commands to automate just about any task
           in Trello:
         </p>
-        <ul>
+        <ul className={styles.learnMoreList}>
           <li>Automate common actions like moving lists</li>
           <li>Create custom buttons to build process quickly</li>
           <li>Surface upcoming deadlines to the team</li>

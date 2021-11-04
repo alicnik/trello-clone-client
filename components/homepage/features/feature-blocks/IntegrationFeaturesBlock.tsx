@@ -1,4 +1,5 @@
 import { FeatureBlock, LearnMoreExpandable } from './feature-block-component';
+import * as styles from './feature-blocks.css';
 
 export const IntegrationFeaturesBlock = () => {
   return (
@@ -16,11 +17,11 @@ export const IntegrationFeaturesBlock = () => {
       imageOrder="end"
     >
       <LearnMoreExpandable>
-        <p>
+        <p className={styles.learnMoreSummary}>
           From Reporting to Custom Fields to your beloved software
           integrations—we’ve got functionalities, your favorites, and more!
         </p>
-        <ul>
+        <ul className={styles.learnMoreList}>
           <li>Confluence</li>
           <li>Slack</li>
           <li>Dropbox</li>

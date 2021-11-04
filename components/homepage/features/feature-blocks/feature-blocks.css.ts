@@ -8,3 +8,12 @@ export const subHeading = style({
   fontFamily: "'Charlie Display', sans-serif",
   fontWeight: 500,
 });
+
+export const learnMoreSummary = style({
+  marginBottom: '1.5rem',
+});
+
+export const learnMoreList = style({
+  marginBottom: '1rem',
+  paddingLeft: '2rem',
+});

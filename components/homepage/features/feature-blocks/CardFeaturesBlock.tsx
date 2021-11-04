@@ -1,4 +1,5 @@
 import { FeatureBlock, LearnMoreExpandable } from './feature-block-component';
+import * as styles from './feature-blocks.css';
 
 export const CardFeaturesBlock = () => {
   return (
@@ -16,14 +17,14 @@ export const CardFeaturesBlock = () => {
       imageOrder="end"
     >
       <LearnMoreExpandable>
-        <p>
+        <p className={styles.learnMoreSummary}>
           Spin up a Trello card with a click, then uncover everything it can
           hold. Break down bigger card tasks into steps with file attachment
           previews, reminders, checklists and comments—emoji reactions included!
           Plus, gain powerful perspective by seeing all cards by list and status
           at the board level.
         </p>
-        <ul>
+        <ul className={styles.learnMoreList}>
           <li>Manage deadlines</li>
           <li>Provide and track feedback</li>
           <li>Assign tasks and hand off work</li>

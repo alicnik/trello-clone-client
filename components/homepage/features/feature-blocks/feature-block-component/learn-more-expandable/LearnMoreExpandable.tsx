@@ -1,4 +1,3 @@
-import useWebAnimations, { slideInDown } from '@wellyshen/use-web-animations';
 import * as React from 'react';
 import * as styles from './learn-more-expandable.css';
 
