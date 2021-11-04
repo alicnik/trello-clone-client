@@ -26,6 +26,7 @@ export const Button = ({
       </Link>
     );
   }
+
   return (
     <button className={clsx(classes, styles.buttonNoLink, className)}>
       {children}

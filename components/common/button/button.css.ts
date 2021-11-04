@@ -30,6 +30,7 @@ export const filled = style({
 
 export const outlined = style({
   color: '#0065ff',
+  backgroundColor: '#fff',
   border: '1px solid #0065ff',
   userSelect: 'none',
   padding: '0.375rem 0.75rem',
@@ -40,7 +41,9 @@ export const outlined = style({
     'color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
 
   ':hover': {
-    color: '#fff',
+    color: '#4c9aff',
+    borderColor: '#4c9aff',
+    backgroundColor: 'rgba(76, 154, 255, 0.1)',
     textDecoration: 'none',
   },
 });

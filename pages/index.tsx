@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import React from 'react';
-import { Hero, Product, Features } from '../components/homepage';
-import { Navbar } from '../components/common';
+import { Hero, Product, Features, PricingTour } from 'components/homepage';
+import { Navbar } from 'components/common';
 
 const Home: NextPage = () => {
   const [isScrolling, setIsScrolling] = React.useState(false);
@@ -29,6 +29,7 @@ const Home: NextPage = () => {
       <Hero setIntersectionRef={setIntersectionRef} />
       <Product />
       <Features />
+      <PricingTour />
     </>
   );
 };
