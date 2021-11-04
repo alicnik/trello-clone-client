@@ -1,4 +1,4 @@
-import { FeatureBlock } from './feature-block-component';
+import { FeatureBlock } from './feature-block';
 
 export const FeaturesIntroBlock = () => {
   return (

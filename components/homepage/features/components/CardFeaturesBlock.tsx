@@ -1,4 +1,4 @@
-import { FeatureBlock, LearnMoreExpandable } from './feature-block-component';
+import { FeatureBlock, LearnMoreExpandable } from './feature-block';
 import * as styles from './feature-blocks.css';
 
 export const CardFeaturesBlock = () => {

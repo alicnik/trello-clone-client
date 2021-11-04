@@ -4,7 +4,7 @@ import {
   AutomationFeaturesBlock,
   CardFeaturesBlock,
   IntegrationFeaturesBlock,
-} from './feature-blocks';
+} from './components';
 import * as styles from './features.css';
 
 export const Features = () => {
