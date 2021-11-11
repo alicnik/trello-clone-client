@@ -22,10 +22,17 @@ export const testimonials: Testimonial[] = [
     altText: 'Egencia logo',
   },
   {
-    text: 'Trellow makes it easy to keep everyone on the same page. As changes happen, the real-time updates with email notifications have been key.',
+    text: 'Trello makes it easy to keep everyone on the same page. As changes happen, the real-time updates with email notifications have been key.',
     attribution: 'Hayden Dotson - Sales Manager, Detroit Red Wings',
     industry: 'Sport',
     logoSrc: '/images/logos/red-wings.svg',
     altText: 'Detroit Red Wings logo',
+  },
+  {
+    text: "Now that we've switched to a remote environment, with the use of Trello, we can now limit the number of meetings we have regarding specific projects and turn to Trello for updates instead.",
+    attribution: 'Hayley Ennes - HR Manager, Sprout Social',
+    industry: 'Marketing',
+    logoSrc: '/images/logos/sprout-social.svg',
+    altText: 'Sprout Social logo',
   },
 ];

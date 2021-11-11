@@ -33,7 +33,8 @@ export const attributionContainer = style({
 });
 
 export const attributionName = style({
-  fontWeight: 'bold',
+  fontWeight: 'bolder',
+  fontSize: '1rem',
   textTransform: 'uppercase',
 });
 

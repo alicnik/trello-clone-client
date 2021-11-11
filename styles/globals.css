@@ -21,6 +21,13 @@
   font-weight: 500;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Charlie Display';
+  src: url('/fonts/CharlieDisplay-Semibold.ttf');
+  font-style: bold;
+  font-weight: 600;
+  font-display: swap;
+}
 
 * {
   margin: 0;

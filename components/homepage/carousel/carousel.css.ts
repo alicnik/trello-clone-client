@@ -14,7 +14,7 @@ export const container = style({
 export const navigation = style({
   display: 'flex',
   justifyContent: 'flex-end',
-  marginBottom: 50,
+  marginBottom: '1.5rem',
 });
 
 export const outerSlider = style({
@@ -26,8 +26,8 @@ export const innerSlider = style({
   transition: 'transform 0.2s ease',
 });
 
-export const button = style({
-  padding: '7px 14px',
-  marginLeft: 10,
-  fontSize: '1.5rem',
+export const dotContainer = style({
+  display: 'flex',
+  gap: '0.5rem',
+  alignItems: 'center',
 });
