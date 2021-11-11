@@ -1,6 +1,12 @@
 import type { NextPage } from 'next';
 import React from 'react';
-import { Hero, Product, Features, PricingTour } from 'components/homepage';
+import {
+  Hero,
+  Product,
+  Features,
+  PricingTour,
+  Carousel,
+} from 'components/homepage';
 import { Navbar } from 'components/common';
 
 const Home: NextPage = () => {
@@ -30,6 +36,7 @@ const Home: NextPage = () => {
       <Product />
       <Features />
       <PricingTour />
+      <Carousel />
     </>
   );
 };
