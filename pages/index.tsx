@@ -6,6 +6,7 @@ import {
   Features,
   PricingTour,
   Carousel,
+  SignupCTA,
 } from 'components/homepage';
 import { Navbar } from 'components/common';
 
@@ -37,6 +38,7 @@ const Home: NextPage = () => {
       <Features />
       <PricingTour />
       <Carousel />
+      <SignupCTA />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from 'next/router';
 import * as React from 'react';
-import { Button } from '../../common';
+import { Button, TextInput } from 'components/common';
 import * as styles from './hero.css';
 
 interface HeroProps {
@@ -31,10 +31,9 @@ export const Hero = ({ setIntersectionRef }: HeroProps) => {
             unique—accomplish it all with Trello.
           </p>
           <form className={styles.form} onSubmit={handleSubmit}>
-            <input
+            <TextInput
               type="email"
               placeholder="Email"
-              className={styles.input}
               defaultValue={
                 typeof window !== 'undefined'
                   ? window.localStorage.getItem('signup-email') ?? ''

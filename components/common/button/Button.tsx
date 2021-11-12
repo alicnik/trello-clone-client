@@ -5,6 +5,7 @@ import clsx from 'clsx';
 
 interface ButtonProps {
   variant: 'filled' | 'outlined' | 'link';
+  background?: 'blue' | 'green';
   fontWeight?: 'regular' | 'medium';
   className?: string;
   to?: string;
@@ -12,12 +13,18 @@ interface ButtonProps {
 
 export const Button = ({
   variant,
+  background = 'blue',
   to,
   className,
   fontWeight = 'regular',
   children,
 }: React.PropsWithChildren<ButtonProps>) => {
-  const classes = clsx(styles.button, styles[variant], styles[fontWeight]);
+  const classes = clsx(
+    styles.button,
+    styles[background],
+    styles[variant],
+    styles[fontWeight]
+  );
 
   if (to) {
     return (

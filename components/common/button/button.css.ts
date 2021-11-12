@@ -17,14 +17,27 @@ export const buttonNoLink = style({
 });
 
 export const filled = style({
-  backgroundColor: '#0065ff',
   borderRadius: '0.2rem',
   color: '#fff',
   transition:
     'color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
+});
+
+export const blue = style({
+  backgroundColor: '#0065ff',
 
   ':hover': {
     backgroundColor: '#0051cc',
+  },
+});
+
+export const green = style({
+  backgroundColor: 'rgb(54, 179, 126)',
+  borderColor: 'rgb(54, 179, 126)',
+
+  ':hover': {
+    backgroundColor: 'rgb(0, 135, 90)',
+    borderColor: 'rgb(0, 135, 90)',
   },
 });
 
