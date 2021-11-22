@@ -21,7 +21,7 @@ export const Button = ({
 }: React.PropsWithChildren<ButtonProps>) => {
   const classes = clsx(
     styles.button,
-    styles[background],
+    variant !== 'link' && styles[background],
     styles[variant],
     styles[fontWeight]
   );

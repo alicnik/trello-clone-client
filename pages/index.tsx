@@ -7,6 +7,7 @@ import {
   PricingTour,
   Carousel,
   SignupCTA,
+  MobileApps,
 } from 'components/homepage';
 import { Navbar } from 'components/common';
 
@@ -39,6 +40,7 @@ const Home: NextPage = () => {
       <PricingTour />
       <Carousel />
       <SignupCTA />
+      <MobileApps />
     </>
   );
 };
