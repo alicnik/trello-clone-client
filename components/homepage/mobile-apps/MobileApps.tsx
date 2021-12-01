@@ -5,34 +5,38 @@ import * as styles from './mobile-apps.css';
 
 export function MobileApps() {
   return (
-    <div className={styles.container}>
-      <p className={styles.text}>
-        Trello also works great on your smaller screen.
-      </p>
-      <Link
-        href="https://apps.apple.com/app/trello-organize-anything/id461504587"
-        passHref
-      >
-        <Image
-          src="/images/logos/app-store.svg"
-          layout="fixed"
-          alt="app store logo"
-          width={217}
-          height={64}
-        />
-      </Link>
-      <Link
-        href="https://play.google.com/store/apps/details?id=com.trello"
-        passHref
-      >
-        <Image
-          src="/images/logos/google-play.svg"
-          layout="fixed"
-          alt="app store logo"
-          width={217}
-          height={64}
-        />
-      </Link>
-    </div>
+    <section className={styles.backdrop}>
+      <div className={styles.container}>
+        <p className={styles.text}>
+          Trello also works great on your smaller screen.
+        </p>
+        <Link
+          href="https://apps.apple.com/app/trello-organize-anything/id461504587"
+          passHref
+        >
+          <a className={styles.imageWrapper}>
+            <Image
+              src="/images/logos/app-store.svg"
+              alt="app store logo"
+              width={150}
+              height={45}
+            />
+          </a>
+        </Link>
+        <Link
+          href="https://play.google.com/store/apps/details?id=com.trello"
+          passHref
+        >
+          <a className={styles.imageWrapper}>
+            <Image
+              src="/images/logos/google-play.svg"
+              alt="app store logo"
+              width={150}
+              height={45}
+            />
+          </a>
+        </Link>
+      </div>
+    </section>
   );
 }
