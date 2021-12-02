@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
 
 export const section = style({
-  padding: '5rem 1rem',
+  padding: '3rem 1rem',
 });
 
 export const container = style({
