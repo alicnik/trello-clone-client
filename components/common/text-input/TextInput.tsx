@@ -3,25 +3,39 @@ import * as React from 'react';
 import * as styles from './text-input.css';
 
 type BaseProps = Partial<
-  Pick<HTMLInputElement, 'type' | 'placeholder' | 'defaultValue' | 'className'>
+  Pick<
+    HTMLInputElement,
+    | 'type'
+    | 'placeholder'
+    | 'defaultValue'
+    | 'className'
+    | 'value'
+    | 'autocapitalize'
+  >
 >;
 
 interface TextInputProps extends BaseProps {
   placeholder: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  name?: string;
+  autoComplete?: string;
 }
 
 export function TextInput({
-  type = 'text',
-  placeholder,
+  name,
+  value,
+  onChange,
   className,
-  defaultValue,
+  autoComplete,
+  ...props
 }: TextInputProps) {
   return (
     <input
-      type={type}
-      placeholder={placeholder}
+      name={name}
       className={clsx(styles.input, className)}
-      defaultValue={defaultValue}
+      onChange={onChange}
+      autoComplete={autoComplete}
+      {...props}
     />
   );
 }

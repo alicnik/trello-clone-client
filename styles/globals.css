@@ -40,6 +40,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Charlie Text', sans-serif;
+  height: 100%;
 }
 
 a {
@@ -47,6 +48,7 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+#__next {
+  isolation: isolate;
+  height: 100%;
 }

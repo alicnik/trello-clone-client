@@ -9,12 +9,16 @@ interface ButtonProps {
   fontWeight?: 'regular' | 'medium';
   className?: string;
   to?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
 }
 
 export const Button = ({
   variant,
   background = 'blue',
   to,
+  type = 'button',
+  disabled,
   className,
   fontWeight = 'regular',
   children,
@@ -35,7 +39,11 @@ export const Button = ({
   }
 
   return (
-    <button className={clsx(classes, styles.buttonNoLink, className)}>
+    <button
+      className={clsx(classes, styles.buttonNoLink, className)}
+      type={type}
+      disabled={true}
+    >
       {children}
     </button>
   );

@@ -9,7 +9,14 @@ import {
   SignupCTA,
   MobileApps,
 } from 'components/homepage';
-import { Navbar, Footer } from 'components/common';
+import {
+  Navbar,
+  FooterWrapper,
+  FooterLanguageSelect,
+  FooterLinks,
+  FooterLogo,
+  FooterCopyrightNotice,
+} from 'components/common';
 
 const Home: NextPage = () => {
   const [isScrolling, setIsScrolling] = React.useState(false);
@@ -41,7 +48,12 @@ const Home: NextPage = () => {
       <Carousel />
       <SignupCTA />
       <MobileApps />
-      <Footer />
+      <FooterWrapper>
+        <FooterLanguageSelect />
+        <FooterLinks />
+        <FooterLogo colour="grey" />
+        <FooterCopyrightNotice />
+      </FooterWrapper>
     </>
   );
 };

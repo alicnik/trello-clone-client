@@ -9,7 +9,8 @@ export const input = style({
   border: '1px solid #ced4da',
   flexGrow: 1,
   transition: 'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;',
-  fontFamily: "'Charlie Text', sans-serif",
+  // fontFamily: "'Charlie Text', sans-serif",
+  fontFamily: 'inherit',
 
   ':focus': {
     outline: 'none',

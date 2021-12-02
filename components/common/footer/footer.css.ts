@@ -6,6 +6,7 @@ export const footer = style({
   alignItems: 'center',
   gap: '1.25rem',
   margin: '4rem 0',
+  paddingBottom: '4rem',
 });
 
 export const dropdown = style({
@@ -28,6 +29,8 @@ export const image = style({
 
 export const list = style({
   display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
   listStyle: 'none',
   gap: '1rem',
   color: '#8993A4',
