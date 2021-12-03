@@ -1,5 +1,5 @@
 import { getSingleBoard } from 'utils/api/boards';
-import { Board, List as ListI, Card as CardI } from 'utils/api/types';
+import { Board } from 'utils/api/types';
 import {
   GetServerSidePropsContext,
   GetServerSidePropsResult,
@@ -9,12 +9,8 @@ import * as React from 'react';
 import { SingleBoardLayout } from 'components/single-board';
 import * as styles from 'styles/single-board.css';
 import { useQuery } from 'react-query';
-import {
-  DragDropContext,
-  Droppable,
-  Draggable,
-  DropResult,
-} from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
+import { List } from 'components/single-board';
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
@@ -142,63 +138,3 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
 };
 
 export default SingleBoard;
-
-interface ListProps {
-  list: ListI;
-  index: number;
-}
-
-function List({ list, index }: ListProps) {
-  return (
-    <Draggable key={list.id} draggableId={list.id} index={index}>
-      {(provided) => (
-        <div
-          className={styles.list}
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-        >
-          <h2 className={styles.listTitle} {...provided.dragHandleProps}>
-            {list.title}
-          </h2>
-          <Droppable droppableId={list.id} type="task">
-            {(provided) => (
-              <div
-                style={{ flexGrow: 1 }}
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-              >
-                {list.cards.map((card, index) => (
-                  <Card key={card.id} card={card} index={index} />
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-          <button className={styles.addCard}>+ Add a card</button>
-        </div>
-      )}
-    </Draggable>
-  );
-}
-
-interface CardProps {
-  card: CardI;
-  index: number;
-}
-
-function Card({ card, index }: CardProps) {
-  return (
-    <Draggable draggableId={card.id} index={index}>
-      {(provided) => (
-        <div
-          className={styles.card}
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-        >
-          {card.title}
-        </div>
-      )}
-    </Draggable>
-  );
-}
