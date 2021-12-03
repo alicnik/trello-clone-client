@@ -8,9 +8,12 @@ import {
 import * as React from 'react';
 import { SingleBoardLayout } from 'components/single-board';
 import * as styles from 'styles/single-board.css';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { List } from 'components/single-board';
+import axios from 'axios';
+import { useUpdateBoard } from 'hooks/useUpdateBoard';
+import { useUpdateList } from 'hooks/useUpdateList';
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
@@ -35,18 +38,22 @@ interface SingleBoardProps {
 }
 
 const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
-  // const { data: board, isLoading } = useQuery(
-  //   ['boards', initialState.id],
-  //   () => getSingleBoard(initialState.id),
-  //   { initialData: initialState }
-  // );
+  const { data: board, isLoading } = useQuery(
+    ['boards', initialState.id],
+    () => getSingleBoard(initialState.id),
+    { initialData: initialState }
+  );
 
-  const [board, setBoard] = React.useState(initialState);
+  const boardMutation = useUpdateBoard();
+  const listMutation = useUpdateList(initialState.id);
+
+  // const [board, setBoard] = React.useState(initialState);
   const [windowReady, setWindowReady] = React.useState(false);
 
   React.useEffect(() => setWindowReady(true), []);
 
-  const handleDragEnd = (result: DropResult) => {
+  const handleDragEnd = async (result: DropResult) => {
+    if (!board) return;
     const { source, destination, type } = result;
 
     // Early return if the item has not been dropped in a valid destination
@@ -67,7 +74,7 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
       const updatedListOrder = [...board.lists];
       const [removed] = updatedListOrder.splice(source.index, 1);
       updatedListOrder.splice(destination.index, 0, removed);
-      setBoard({ ...board, lists: updatedListOrder });
+      boardMutation.mutate({ ...board, lists: updatedListOrder });
       return;
     }
 
@@ -88,7 +95,10 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
       const [removed] = newCardOrder.splice(source.index, 1);
       newCardOrder.splice(destination.index, 0, removed);
       newLists[originListIndex].cards = newCardOrder;
-      setBoard({ ...board, lists: newLists });
+      listMutation.mutate({
+        originListId: board.lists[originListIndex].id,
+        updatedOriginCards: newCardOrder,
+      });
       return;
     }
 
@@ -101,13 +111,24 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
     updatedDestinationCardOrder.splice(destination.index, 0, removed);
     newLists[endListIndex].cards = updatedDestinationCardOrder;
 
-    setBoard({ ...board, lists: newLists });
+    await listMutation.mutateAsync({
+      originListId: board.lists[originListIndex].id,
+      updatedOriginCards: updatedOriginCardOrder,
+      destinationListId: board.lists[endListIndex].id,
+      updatedDestinationCards: updatedDestinationCardOrder,
+    });
+    listMutation.mutate({
+      originListId: board.lists[endListIndex].id,
+      updatedOriginCards: updatedDestinationCardOrder,
+      destinationListId: board.lists[endListIndex].id,
+      updatedDestinationCards: updatedOriginCardOrder,
+    });
     return;
   };
 
-  // if (isLoading || !board) {
-  //   return <h2>Loading...</h2>;
-  // }
+  if (isLoading || !board) {
+    return <h2>Loading...</h2>;
+  }
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>

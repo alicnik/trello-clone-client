@@ -20,11 +20,7 @@ export function List({ list, index }: ListProps) {
           <h2 className={styles.listTitle} {...dragProvided.dragHandleProps}>
             {list.title}
           </h2>
-          <Droppable
-            droppableId={list.id}
-            type="card"
-            // ignoreContainerClipping
-          >
+          <Droppable droppableId={list.id} type="card" ignoreContainerClipping>
             {(dropProvided) => (
               <div
                 className={styles.cardsContainer}
