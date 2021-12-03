@@ -13,9 +13,9 @@ export interface LoginResponse {
 }
 
 export interface RegisterRequest {
-  emailAddress: string;
+  username: string;
+  email: string;
   password: string;
-  passwordConfirmation: string;
 }
 export interface RegisterResponse {
   id: number;

@@ -1,5 +1,5 @@
-import { getSingleBoard } from 'api/boards';
-import { Board } from 'api/types';
+import { getSingleBoard } from 'utils/api/boards';
+import { Board } from 'utils/api/types';
 import {
   GetServerSidePropsContext,
   GetServerSidePropsResult,
@@ -11,10 +11,10 @@ export async function getServerSideProps(
   context: GetServerSidePropsContext
 ): Promise<GetServerSidePropsResult<SingleBoardProps>> {
   try {
-    const res = await getSingleBoard(context.params?.id as string);
+    const data = await getSingleBoard(context.params?.id as string);
     return {
       props: {
-        initialState: res.data,
+        initialState: data,
       },
     };
   } catch (err) {

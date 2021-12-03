@@ -11,7 +11,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import { login } from 'utils/api';
+import { login, register } from 'utils/api';
 import * as styles from '../styles/signup.css';
 
 const SignUp: NextPage = () => {
@@ -33,8 +33,9 @@ const SignUp: NextPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await login(form);
-      router.push('/boards');
+      const res = await register(form);
+      const username = res.data.username;
+      router.push(`/${username}/boards`);
     } catch (err) {
       console.error(err);
     }

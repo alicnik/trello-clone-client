@@ -14,11 +14,13 @@
     "@vanilla-extract/dynamic": "^2.0.0",
     "@vanilla-extract/next-plugin": "^1.0.0",
     "@wellyshen/use-web-animations": "^0.9.1",
+    "axios": "^0.24.0",
     "clsx": "^1.1.1",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-intersection-observer": "^8.32.1"
+    "react-intersection-observer": "^8.32.1",
+    "react-query": "^3.34.0"
   },
   "devDependencies": {
     "@types/react": "17.0.30",
