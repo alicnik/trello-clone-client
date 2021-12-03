@@ -5,6 +5,7 @@ export const listContainer = style({
   backgroundColor: 'lightblue',
   display: 'flex',
   justifyContent: 'flex-start',
+  alignItems: 'flex-start',
   gap: '1rem',
   padding: '0.5rem 1rem',
   fontFamily:
@@ -17,10 +18,10 @@ export const list = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '0.5rem',
-  height: 'fit-content',
   maxHeight: '100%',
   width: 272,
   padding: '0.4rem',
+  minHeight: 100,
 });
 
 export const listTitle = style({
@@ -40,6 +41,7 @@ export const card = style({
   minHeight: 20,
   padding: '0.5rem',
   fontSize: '0.8rem',
+  marginBottom: '0.5rem',
 });
 
 export const addCard = style({
