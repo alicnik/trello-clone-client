@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { axiosClient } from './client';
 import { setToken } from './lib';
+import { User } from './types';
 
 export interface LoginRequest {
   username: string;
@@ -49,5 +50,5 @@ export function register(newUserDetails: RegisterRequest) {
 }
 
 export function getSingleUser(username: string) {
-  return axiosClient.get(`/users/${username}`);
+  return axiosClient.get<User>(`/users/${username}`).then((res) => res.data);
 }

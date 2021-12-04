@@ -3,9 +3,19 @@ import { style } from '@vanilla-extract/css';
 export const header = style({
   display: 'flex',
   padding: '0.35rem 1rem',
-  backgroundColor: 'rgba(0, 0, 0, 0.45)',
-  backdropFilter: 'blur(6px)',
+  fontFamily:
+    '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif',
 });
+
+export const blurredHeader = style({
+  backdropFilter: 'blur(6px)',
+  backgroundColor: 'rgba(0, 0, 0, 0.45)',
+});
+
+export const blueHeader = style({
+  backgroundColor: '#026AA7',
+});
+
 export const navbar = style({
   display: 'flex',
   width: '100%',

@@ -1,13 +1,23 @@
+import clsx from 'clsx';
 import Link from 'next/link';
 import * as styles from './internal-navbar.css';
 
 interface InternalNavbarProps {
   username: string;
+  colour?: 'translucent' | 'blue';
 }
 
-export function InternalNavbar({ username }: InternalNavbarProps) {
+export function InternalNavbar({
+  username,
+  colour = 'translucent',
+}: InternalNavbarProps) {
   return (
-    <header className={styles.header}>
+    <header
+      className={clsx(
+        styles.header,
+        colour === 'translucent' ? styles.blurredHeader : styles.blueHeader
+      )}
+    >
       <nav className={styles.navbar}>
         <ul className={styles.list}>
           <li className={styles.listItem}>

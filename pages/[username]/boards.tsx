@@ -1,34 +1,53 @@
-import Link from 'next/link';
-import { NextPage } from 'next';
-import { GetServerSideProps } from 'next';
-import { getUserBoards } from 'utils/api/boards';
-import { Board } from 'utils/api/types';
+import type { NextPage, GetServerSideProps } from 'next';
+import type { User } from 'utils/api/types';
+import { getSingleUser } from 'utils/api';
+import * as styles from '../../styles/boards-index.css';
+import { InternalNavbar } from 'components/common';
+import { BoardsSidebar, BoardCardList, BoardCard } from 'components/boards';
 
-type BoardProps = { boards: Board[] };
+type BoardProps = { user: User };
 
 export const getServerSideProps: GetServerSideProps<BoardProps> = async (
   context
 ) => {
-  const boards = await getUserBoards(context.params?.username as string);
-  return { props: { boards } };
+  const user = await getSingleUser(context.params?.username as string);
+  return { props: { user } };
 };
 
-const Boards: NextPage<BoardProps> = ({ boards }) => {
-  console.log(boards);
+const Boards: NextPage<BoardProps> = ({ user }) => {
+  const hasFavourites = user.boards.some((board) =>
+    board.starredBy.some((u) => u.id === user.id)
+  );
+  console.log(hasFavourites);
+
   return (
     <>
-      {boards.map((board) => (
-        <Link key={board.id} href={`/boards/${board.id}`} passHref>
-          <div
-            style={{
-              background: board.background || undefined,
-              cursor: 'pointer',
-            }}
-          >
-            <h2>{board.boardName}</h2>
-          </div>
-        </Link>
-      ))}
+      <InternalNavbar username={user.username} colour="blue" />
+      <main className={styles.main}>
+        <div className={styles.container}>
+          <BoardsSidebar username={user.username} />
+          <section className={styles.boards}>
+            {hasFavourites ? (
+              <BoardCardList
+                boards={user.boards}
+                userId={user.id}
+                isStarredList={true}
+              />
+            ) : null}
+            <div>
+              <h2 className={styles.boardCardTitle}>
+                <span className={styles.personalBoardsIcon}>P</span> Personal
+                Boards
+              </h2>
+              <BoardCardList
+                boards={user.boards}
+                userId={user.id}
+                isStarredList={false}
+              />
+            </div>
+          </section>
+        </div>
+      </main>
     </>
   );
 };

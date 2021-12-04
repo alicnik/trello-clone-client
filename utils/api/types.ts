@@ -7,7 +7,7 @@ export interface Board {
   owner: Pick<User, 'username' | 'emailAddress' | 'id' | 'cardMemberships'>;
   lists: List[];
   cards: [];
-  listOrder: string[];
+  starredBy: User[];
 }
 
 export interface User {
