@@ -2,6 +2,8 @@ import { style } from '@vanilla-extract/css';
 
 export const main = style({
   padding: '2rem',
+  backgroundColor: '#fafbfc',
+  height: '100%',
 });
 
 export const container = style({

@@ -10,3 +10,11 @@ export async function getSingleBoard(boardId: string): Promise<Board> {
   const res = await axiosClient.get<Board>(`/boards/${boardId}`);
   return res.data;
 }
+
+export async function createBoard(newBoardDetails: {
+  boardName: string;
+  background: string;
+}) {
+  const res = await axiosClient.post<Board>('/boards', newBoardDetails);
+  return res.data;
+}
