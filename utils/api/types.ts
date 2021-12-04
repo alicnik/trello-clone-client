@@ -17,6 +17,7 @@ export interface User {
   boards: Board[];
   cards: Card[];
   cardMemberships: Card[];
+  starredBoards: Board[];
 }
 
 export interface List {

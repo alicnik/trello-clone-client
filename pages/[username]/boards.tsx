@@ -3,22 +3,40 @@ import type { User } from 'utils/api/types';
 import { getSingleUser } from 'utils/api';
 import * as styles from '../../styles/boards-index.css';
 import { InternalNavbar } from 'components/common';
-import { BoardsSidebar, BoardCardList, BoardCard } from 'components/boards';
+import { BoardsSidebar, BoardCardList } from 'components/boards';
+import { useQuery } from 'react-query';
 
-type BoardProps = { user: User };
+type BoardProps = { initialData: User };
 
 export const getServerSideProps: GetServerSideProps<BoardProps> = async (
   context
 ) => {
-  const user = await getSingleUser(context.params?.username as string);
-  return { props: { user } };
+  try {
+    const initialData = await getSingleUser(context.params?.username as string);
+    return { props: { initialData } };
+  } catch (err) {
+    console.log(err);
+    return {
+      notFound: true,
+    };
+  }
 };
 
-const Boards: NextPage<BoardProps> = ({ user }) => {
+const Boards: NextPage<BoardProps> = ({ initialData }) => {
+  // console.log(initialData);
+  const { data: user } = useQuery(
+    ['users', initialData.id],
+    () => getSingleUser(initialData.username),
+    { initialData }
+  );
+
+  console.log(user);
+  if (!user) {
+    return <h2>Loading...</h2>;
+  }
   const hasFavourites = user.boards.some((board) =>
     board.starredBy.some((u) => u.id === user.id)
   );
-  console.log(hasFavourites);
 
   return (
     <>

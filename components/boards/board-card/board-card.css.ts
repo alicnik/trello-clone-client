@@ -10,7 +10,10 @@ export const boardCard = style({
   position: 'relative',
 
   selectors: {
-    '&:hover': {},
+    '&:hover': {
+      backgroundImage:
+        'linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)) !important',
+    },
   },
 });
 

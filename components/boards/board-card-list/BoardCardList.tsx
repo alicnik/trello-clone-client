@@ -1,8 +1,8 @@
-import Link from 'next/link';
+import * as styles from './board-card-list.css';
 import { HiOutlineStar } from 'react-icons/hi';
 import type { Board } from 'utils/api/types';
-import * as styles from './board-card-list.css';
 import { BoardCard } from '../board-card';
+import { CreateBoardCard } from '..';
 
 interface BoardCardListProps {
   boards: Board[];
@@ -17,7 +17,7 @@ export function BoardCardList({
 }: BoardCardListProps) {
   if (isStarredList) {
     return (
-      <div>
+      <div className={styles.boardListWrapper}>
         <h2 className={styles.boardListTitle}>
           <HiOutlineStar /> Starred Boards
         </h2>
@@ -25,22 +25,29 @@ export function BoardCardList({
           {boards
             .filter((board) => board.starredBy.some((u) => u.id === userId))
             .map((board) => (
-              <BoardCard key={board.id} board={board} isFavourite={true} />
+              <BoardCard
+                key={board.id}
+                initialBoard={board}
+                isFavourite={true}
+              />
             ))}
         </div>
       </div>
     );
   }
-
   return (
     <div className={styles.boardListContainer}>
       {boards.map((board) => {
         const isFavourite = board.starredBy.some((u) => u.id === userId);
         return (
-          <BoardCard key={board.id} board={board} isFavourite={isFavourite} />
+          <BoardCard
+            key={board.id}
+            initialBoard={board}
+            isFavourite={isFavourite}
+          />
         );
       })}
-      <BoardCard createNew={true} />
+      <CreateBoardCard />
     </div>
   );
 }

@@ -19,6 +19,7 @@ export async function getServerSideProps(
   context: GetServerSidePropsContext
 ): Promise<GetServerSidePropsResult<SingleBoardProps>> {
   try {
+    console.log(context.params);
     const data = await getSingleBoard(context.params?.id as string);
     return {
       props: {
@@ -129,6 +130,8 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
   if (isLoading || !board) {
     return <h2>Loading...</h2>;
   }
+
+  console.log(board);
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>

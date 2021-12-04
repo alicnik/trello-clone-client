@@ -1,5 +1,9 @@
 import { style } from '@vanilla-extract/css';
 
+export const boardListWrapper = style({
+  marginBottom: '3.5rem',
+});
+
 export const boardListContainer = style({
   display: 'flex',
   gap: '1rem',

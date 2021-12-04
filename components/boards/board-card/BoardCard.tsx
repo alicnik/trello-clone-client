@@ -1,27 +1,22 @@
+import * as React from 'react';
 import Link from 'next/link';
-import { HiOutlineStar, HiStar } from 'react-icons/hi';
+import { useQuery } from 'react-query';
+import { getSingleBoard } from 'utils/api/boards';
 import type { Board } from 'utils/api/types';
 import * as styles from './board-card.css';
+import { FavouriteStar } from 'components';
 
 interface BoardCardProps {
-  board?: Board;
+  initialBoard: Board;
   isFavourite?: boolean;
-  createNew?: boolean;
 }
 
-export function BoardCard({ board, isFavourite, createNew = false }: BoardCardProps) {
-  if (createNew) {
-    return (
-      <div
-        className={styles.boardCard}
-        style={{
-          background: 'lightGrey',
-        }}
-      >
-        <p className={styles.createBoardText}>Create new board</p>
-      </div>
-    );
-  }
+export function BoardCard({ initialBoard, isFavourite }: BoardCardProps) {
+  const { data: board } = useQuery(
+    ['boards', initialBoard.id],
+    () => getSingleBoard(initialBoard.id),
+    { initialData: initialBoard }
+  );
 
   if (!board) {
     return null;
@@ -37,9 +32,26 @@ export function BoardCard({ board, isFavourite, createNew = false }: BoardCardPr
       >
         <h2 className={styles.boardCardTitle}>{board.boardName}</h2>
         <span className={styles.favourite}>
-          {isFavourite ? <HiStar /> : <HiOutlineStar />}
+          {isFavourite ? (
+            <FavouriteStar board={board} isFavourite={true} />
+          ) : (
+            <FavouriteStar board={board} isFavourite={false} />
+          )}
         </span>
       </div>
     </Link>
+  );
+}
+
+export function CreateBoardCard() {
+  return (
+    <div
+      className={styles.boardCard}
+      style={{
+        background: 'lightGrey',
+      }}
+    >
+      <p className={styles.createBoardText}>Create new board</p>
+    </div>
   );
 }
