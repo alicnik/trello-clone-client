@@ -5,7 +5,6 @@ import { getSingleBoard } from 'utils/api/boards';
 import type { Board } from 'utils/api/types';
 import * as styles from './board-card.css';
 import { FavouriteStar } from 'components';
-import clsx from 'clsx';
 
 interface BoardCardProps {
   initialBoard: Board;

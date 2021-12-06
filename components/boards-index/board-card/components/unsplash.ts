@@ -1,3 +1,5 @@
+export type UnsplashItem = typeof unsplashData[0];
+
 export const unsplashData = [
   {
     id: 'CSpjU6hYo_0',

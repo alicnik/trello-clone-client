@@ -2,7 +2,6 @@ import { style } from '@vanilla-extract/css';
 
 export const listContainer = style({
   height: '100%',
-  backgroundColor: 'lightblue',
   display: 'flex',
   justifyContent: 'flex-start',
   alignItems: 'flex-start',

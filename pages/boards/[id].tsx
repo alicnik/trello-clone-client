@@ -14,6 +14,7 @@ import { List } from 'components/single-board';
 import axios from 'axios';
 import { useUpdateBoard } from 'hooks/useUpdateBoard';
 import { useUpdateList } from 'hooks/useUpdateList';
+import { getBackground } from 'utils';
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
@@ -145,6 +146,7 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
             {(provided) => (
               <div
                 className={styles.listContainer}
+                style={getBackground(board.background)}
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >

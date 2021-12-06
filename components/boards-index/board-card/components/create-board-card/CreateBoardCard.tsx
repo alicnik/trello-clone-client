@@ -1,15 +1,19 @@
 import * as React from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import clsx from 'clsx';
-import * as styles from './board-card.css';
+import * as baseStyles from '../../board-card.css';
+import * as dialogStyles from './dialog.css';
 import { VscChromeClose } from 'react-icons/vsc';
-import { unsplashData } from './unsplash';
+import { unsplashData, UnsplashItem } from '../unsplash';
 import { createBoard } from 'utils/api/boards';
 import { useRouter } from 'next/router';
+import { getBackground } from 'utils';
+import { BackgroundPicker } from '../background-picker/BackgroundPicker';
 
 export function CreateBoardCard() {
   const router = useRouter();
-  const [unsplashPhotos, setUnsplashPhotos] = React.useState(unsplashData);
+  const [unsplashPhotos, setUnsplashPhotos] =
+    React.useState<UnsplashItem[]>(unsplashData);
   const suggestedBackgrounds = unsplashPhotos
     .slice(0, 4)
     .map((photo) => `url("${photo.urls.thumb}")`)
@@ -23,12 +27,6 @@ export function CreateBoardCard() {
     boardName: '',
     background: suggestedBackgrounds[0] ?? 'rgba(0, 0, 0, 0)',
   });
-
-  const getBackground = (value: string) => {
-    return value.includes('unsplash')
-      ? { backgroundImage: value }
-      : { backgroundColor: value };
-  };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, boardName: e.target.value });
@@ -45,20 +43,23 @@ export function CreateBoardCard() {
 
   return (
     <DialogPrimitive.Root>
-      <DialogPrimitive.Overlay className={styles.overlay} />
+      <DialogPrimitive.Overlay className={dialogStyles.overlay} />
       <DialogPrimitive.Trigger asChild>
-        <div className={clsx(styles.boardCard, styles.createBoardCard)}>
-          <p className={styles.createBoardText}>Create new board</p>
+        <div className={clsx(baseStyles.boardCard, baseStyles.createBoardCard)}>
+          <p className={baseStyles.createBoardText}>Create new board</p>
         </div>
       </DialogPrimitive.Trigger>
-      <DialogPrimitive.Content className={styles.content}>
-        <div className={styles.dialogContentContainer}>
+      <DialogPrimitive.Content
+        className={dialogStyles.content}
+        aria-label="Create new board"
+      >
+        <div className={dialogStyles.dialogContentContainer}>
           <div
-            className={styles.titleInputContainer}
+            className={dialogStyles.titleInputContainer}
             style={getBackground(form.background)}
           >
             <div
-              className={styles.titleInputBackdrop}
+              className={dialogStyles.titleInputBackdrop}
               style={{
                 backgroundImage: form.background.includes('unsplash')
                   ? 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))'
@@ -67,7 +68,7 @@ export function CreateBoardCard() {
             >
               <input
                 type="text"
-                className={styles.titleInput}
+                className={dialogStyles.titleInput}
                 autoComplete="off"
                 autoCorrect="off"
                 spellCheck="false"
@@ -76,31 +77,25 @@ export function CreateBoardCard() {
                 value={form.boardName}
                 onChange={handleTitleChange}
               />
-              <DialogPrimitive.Close className={styles.closeIcon} asChild>
+              <DialogPrimitive.Close className={dialogStyles.closeIcon} asChild>
                 <span>
                   <VscChromeClose />
                 </span>
               </DialogPrimitive.Close>
             </div>
           </div>
-          <div className={styles.backgroundChoices}>
-            {suggestedBackgrounds.map((value) => {
-              console.log(`url(${value})`);
-              return (
-                <button
-                  key={value}
-                  className={styles.backgroundThumbnail}
-                  onClick={() => setForm({ ...form, background: value })}
-                  style={getBackground(value)}
-                />
-              );
-            })}
-          </div>
+          <BackgroundPicker
+            form={form}
+            setForm={setForm}
+            suggestedBackgrounds={suggestedBackgrounds}
+            unsplashPhotos={unsplashPhotos}
+            setUnsplashPhotos={setUnsplashPhotos}
+          />
         </div>
         <button
           className={clsx(
-            styles.createBoardButton,
-            !form.boardName && styles.buttonDisabled
+            dialogStyles.createBoardButton,
+            !form.boardName && dialogStyles.buttonDisabled
           )}
           onClick={handleCreateBoardClick}
           disabled={!form.boardName}

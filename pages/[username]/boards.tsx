@@ -3,7 +3,7 @@ import type { User } from 'utils/api/types';
 import { getSingleUser } from 'utils/api';
 import * as styles from '../../styles/boards-index.css';
 import { InternalNavbar } from 'components/common';
-import { BoardsSidebar, BoardCardList } from 'components/boards';
+import { BoardsSidebar, BoardCardList } from 'components/boards-index';
 import { useQuery } from 'react-query';
 
 type BoardProps = { initialData: User };

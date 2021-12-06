@@ -2,7 +2,7 @@ export interface Board {
   id: string;
   boardName: string;
   description: string | null;
-  background: string | null;
+  background: string;
   created: Date;
   owner: Pick<User, 'username' | 'emailAddress' | 'id' | 'cardMemberships'>;
   lists: List[];
