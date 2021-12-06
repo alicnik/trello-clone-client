@@ -42,11 +42,3 @@ export function BoardCard({ initialBoard, isFavourite }: BoardCardProps) {
     </Link>
   );
 }
-
-// export function CreateBoardCard() {
-//   return (
-//     <div className={clsx(styles.boardCard, styles.createBoardCard)}>
-//       <p className={styles.createBoardText}>Create new board</p>
-//     </div>
-//   );
-// }

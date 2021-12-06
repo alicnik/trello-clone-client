@@ -13,36 +13,8 @@ export const content = style({
   borderRadius: 3,
   padding: '1rem',
   fontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif`,
-});
-
-export const header = style({
-  position: 'relative',
-  color: '#5e6c84',
-  paddingBottom: '1rem',
-  borderBottom: '1px solid rgba(9, 30, 66, 0.13)',
-  textAlign: 'center',
-});
-
-export const title = style({
-  display: 'inline',
-  fontSize: '0.925rem',
-  fontWeight: 400,
-});
-
-export const closeButton = style({
-  position: 'absolute',
-  top: 0,
-  right: 0,
-  lineHeight: 1.4,
-  cursor: 'pointer',
-  padding: 2,
-  color: '#6b778c',
-
-  selectors: {
-    '&:hover': {
-      color: '#172b4d',
-    },
-  },
+  maxHeight: '90vh',
+  overflow: 'auto',
 });
 
 export const gridHeader = style({
@@ -79,12 +51,13 @@ export const seeMoreButton = style({
 export const grid = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
+  gridTemplateRows: 'repeat(2, 56px)',
   gap: '0.5rem',
   width: '100%',
 });
 
 export const backgroundThumbnailLarge = style({
-  height: 56,
+  height: '100%',
   width: '100%',
   borderRadius: 3,
 });
@@ -112,4 +85,19 @@ export const artist = style({
 export const artistWhenMouseOverParent = style({
   color: '#DFE1E6',
   backgroundColor: 'rgba(0, 0, 0, 0.4)',
+});
+
+export const unsplashLink = style({
+  color: '#172b4d',
+  textDecoration: 'underline',
+});
+
+export const allPhotosGrid = style({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2, 1fr)',
+  gridAutoRows: 76,
+  width: '100%',
+  gap: '0.5rem',
+  paddingTop: '0.5rem',
+  overflowY: 'auto',
 });
