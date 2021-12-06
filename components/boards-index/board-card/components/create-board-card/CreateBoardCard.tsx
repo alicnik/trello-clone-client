@@ -33,13 +33,24 @@ export function CreateBoardCard() {
   };
 
   const handleCreateBoardClick = async () => {
+    let newBoard;
     try {
-      const fullImgUrl = unsplashData.find((p) =>
-        form.background.includes(p.urls.thumb)
-      )?.urls.full;
-      console.log(fullImgUrl);
-      if (!fullImgUrl) throw new Error();
-      const newBoard = await createBoard({ ...form, background: fullImgUrl });
+      if (form.background.includes('unsplash')) {
+        const fullImgUrl = unsplashData.find((p) =>
+          form.background.includes(p.urls.thumb)
+        )?.urls.full;
+        if (!fullImgUrl) throw new Error();
+        newBoard = await createBoard({
+          ...form,
+          background: fullImgUrl,
+          backgroundThumbnail: form.background,
+        });
+      } else {
+        newBoard = await createBoard({
+          ...form,
+          backgroundThumbnail: form.background,
+        });
+      }
       router.push(`/boards/${newBoard.id}`);
     } catch (err) {
       console.log(err);

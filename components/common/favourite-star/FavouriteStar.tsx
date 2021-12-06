@@ -23,6 +23,7 @@ export function FavouriteStar({ board, isFavourite }: FavouriteStarProps) {
     if (!board) return;
     const updatedBoard = { ...board };
     mutation.mutate(updatedBoard);
+    setIsMouseOverFavourite(isFavourite);
   };
 
   if (isMouseOverFavourite && isFavourite) {

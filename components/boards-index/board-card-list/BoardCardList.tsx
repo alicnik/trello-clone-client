@@ -21,7 +21,7 @@ export function BoardCardList({
         <h2 className={styles.boardListTitle}>
           <HiOutlineStar /> Starred Boards
         </h2>
-        <div>
+        <div className={styles.boardListContainer}>
           {boards
             .filter((board) => board.starredBy.some((u) => u.id === userId))
             .map((board) => (

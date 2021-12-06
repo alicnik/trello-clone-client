@@ -3,6 +3,7 @@ export interface Board {
   boardName: string;
   description: string | null;
   background: string;
+  backgroundThumbnail: string;
   created: Date;
   owner: Pick<User, 'username' | 'emailAddress' | 'id' | 'cardMemberships'>;
   lists: List[];

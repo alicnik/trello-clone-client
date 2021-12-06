@@ -14,6 +14,7 @@ export async function getSingleBoard(boardId: string): Promise<Board> {
 export async function createBoard(newBoardDetails: {
   boardName: string;
   background: string;
+  backgroundThumbnail: string;
 }) {
   const res = await axiosClient.post<Board>('/boards', newBoardDetails);
   return res.data;

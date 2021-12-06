@@ -23,9 +23,14 @@ export function BoardCard({ initialBoard, isFavourite }: BoardCardProps) {
     return null;
   }
 
+  console.log(board.backgroundThumbnail);
+
   return (
     <Link key={board.id} href={`/boards/${board.id}`} passHref>
-      <div className={styles.boardCard} style={getBackground(board.background)}>
+      <div
+        className={styles.boardCard}
+        style={getBackground(board.backgroundThumbnail)}
+      >
         <h2 className={styles.boardCardTitle}>{board.boardName}</h2>
         <span className={styles.favourite}>
           {isFavourite ? (
