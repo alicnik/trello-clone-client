@@ -1,5 +1,5 @@
 export function getBackground(value: string) {
   return value.includes('unsplash')
-    ? { backgroundImage: value }
+    ? { backgroundImage: `url("${value}")` }
     : { backgroundColor: value };
 }

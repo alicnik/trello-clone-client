@@ -16,7 +16,7 @@ export function CreateBoardCard() {
     React.useState<UnsplashItem[]>(unsplashData);
   const suggestedBackgrounds = unsplashPhotos
     .slice(0, 4)
-    .map((photo) => `url("${photo.urls.thumb}")`)
+    .map((photo) => photo.urls.thumb)
     .concat([
       'rgb(0, 121, 191)',
       'rgb(210, 144, 52)',
@@ -34,7 +34,12 @@ export function CreateBoardCard() {
 
   const handleCreateBoardClick = async () => {
     try {
-      const newBoard = await createBoard(form);
+      const fullImgUrl = unsplashData.find((p) =>
+        form.background.includes(p.urls.thumb)
+      )?.urls.full;
+      console.log(fullImgUrl);
+      if (!fullImgUrl) throw new Error();
+      const newBoard = await createBoard({ ...form, background: fullImgUrl });
       router.push(`/boards/${newBoard.id}`);
     } catch (err) {
       console.log(err);

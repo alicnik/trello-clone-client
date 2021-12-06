@@ -146,7 +146,6 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
             {(provided) => (
               <div
                 className={styles.listContainer}
-                style={getBackground(board.background)}
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >

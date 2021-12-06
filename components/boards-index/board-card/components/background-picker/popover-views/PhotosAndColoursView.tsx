@@ -36,17 +36,14 @@ export function PhotosAndColoursView({
         <GridHeader heading="Photos" onClick={() => setView('photos')} />
         <div className={popoverStyles.grid}>
           {unsplashPhotos.slice(0, 6).map((photo) => {
-            const photoUrl = `url("${photo.urls.thumb}")`;
-            const artistName = photo.user.name;
-            const artistLink = photo.user.links.html;
             return (
               <LargeThumbnail
-                key={photoUrl}
-                value={photoUrl}
+                key={photo.urls.thumb}
+                value={photo.urls.thumb}
                 form={form}
                 onClick={(value) => setForm({ ...form, background: value })}
-                artistName={artistName}
-                artistLink={artistLink}
+                artistName={photo.user.name}
+                artistLink={photo.user.links.html}
               />
             );
           })}

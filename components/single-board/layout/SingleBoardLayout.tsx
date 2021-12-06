@@ -1,11 +1,12 @@
 import Head from 'next/head';
 import { InternalNavbar } from 'components/common';
 import * as styles from './single-board-layout.css';
+import { getBackground } from 'utils';
 
 interface SingleBoardLayoutProps {
   boardName: string;
   username: string;
-  background: string | null;
+  background: string;
 }
 
 export function SingleBoardLayout({
@@ -20,10 +21,7 @@ export function SingleBoardLayout({
         <title>{`${boardName} | Trello`}</title>
         <link rel="icon" type="image/png" sizes="64x64" href={favicon} />
       </Head>
-      <main
-        className={styles.container}
-        style={{ background: background ?? 'blue' }}
-      >
+      <main className={styles.container} style={getBackground(background)}>
         <InternalNavbar username={username} />
         <div className={styles.innerContainer}>
           <div className={styles.boardNav}>{boardName}</div>

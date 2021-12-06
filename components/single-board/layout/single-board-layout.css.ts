@@ -3,6 +3,8 @@ import { style } from '@vanilla-extract/css';
 export const container = style({
   height: '100%',
   overflowX: 'auto',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
 });
 
 export const innerContainer = style({

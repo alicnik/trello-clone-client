@@ -8,19 +8,31 @@ export const boardCard = style({
   width: 200,
   color: '#fff',
   position: 'relative',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  zIndex: 1,
 
   selectors: {
-    '&:hover': {
+    '&:hover::after': {
+      content: '',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
       backgroundImage:
-        'linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)) !important',
+        'linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))',
     },
   },
 });
 
 export const boardCardTitle = style({
   fontSize: '1.15rem',
-  zIndex: 1,
+  zIndex: 10,
   marginBottom: '0.8rem',
+  position: 'absolute',
+  top: '0.5rem',
+  left: '0.75rem',
 });
 
 export const createBoardCard = style({
@@ -43,7 +55,7 @@ export const favourite = style({
   position: 'absolute',
   bottom: '0.5rem',
   right: '0.5rem',
-  zIndex: 1,
+  zIndex: 10,
 });
 
 // POPOVER

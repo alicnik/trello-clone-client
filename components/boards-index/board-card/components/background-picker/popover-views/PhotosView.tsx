@@ -37,13 +37,10 @@ export function PhotosView({
       />{' '}
       <div className={styles.allPhotosGrid}>
         {unsplashData.map((photo, index) => {
-          const photoUrl = `url("${photo.urls.thumb}")`;
-          const artistName = photo.user.name;
-          const artistLink = photo.user.links.html;
           return (
             <LargeThumbnail
-              key={photoUrl}
-              value={photoUrl}
+              key={photo.id}
+              value={photo.urls.thumb}
               form={form}
               onClick={(value) => {
                 if (index > 3) {
@@ -55,8 +52,8 @@ export function PhotosView({
                 }
                 setForm({ ...form, background: value });
               }}
-              artistName={artistName}
-              artistLink={artistLink}
+              artistName={photo.user.name}
+              artistLink={photo.user.links.html}
             />
           );
         })}

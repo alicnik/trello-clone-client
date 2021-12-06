@@ -5,6 +5,7 @@ import { getSingleBoard } from 'utils/api/boards';
 import type { Board } from 'utils/api/types';
 import * as styles from './board-card.css';
 import { FavouriteStar } from 'components';
+import { getBackground } from 'utils';
 
 interface BoardCardProps {
   initialBoard: Board;
@@ -24,12 +25,7 @@ export function BoardCard({ initialBoard, isFavourite }: BoardCardProps) {
 
   return (
     <Link key={board.id} href={`/boards/${board.id}`} passHref>
-      <div
-        className={styles.boardCard}
-        style={{
-          background: board.background || 'rgb(0, 121, 191)',
-        }}
-      >
+      <div className={styles.boardCard} style={getBackground(board.background)}>
         <h2 className={styles.boardCardTitle}>{board.boardName}</h2>
         <span className={styles.favourite}>
           {isFavourite ? (
