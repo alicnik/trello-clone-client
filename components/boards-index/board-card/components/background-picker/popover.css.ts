@@ -13,8 +13,8 @@ export const content = style({
   borderRadius: 3,
   padding: '1rem',
   fontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif`,
-  maxHeight: '90vh',
-  overflow: 'auto',
+  maxHeight: '95vh',
+  overflow: 'hidden',
 });
 
 export const gridHeader = style({
@@ -97,7 +97,8 @@ export const allPhotosGrid = style({
   gridTemplateColumns: 'repeat(2, 1fr)',
   gridAutoRows: 76,
   width: '100%',
+  maxHeight: '95vh',
   gap: '0.5rem',
   paddingTop: '0.5rem',
-  overflowY: 'auto',
+  overflowY: 'scroll',
 });
