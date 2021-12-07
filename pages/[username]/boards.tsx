@@ -5,6 +5,7 @@ import * as styles from '../../styles/boards-index.css';
 import { InternalNavbar } from 'components/common';
 import { BoardsSidebar, BoardCardList } from 'components/boards-index';
 import { useQuery } from 'react-query';
+import Head from 'next/head';
 
 type BoardProps = { initialData: User };
 
@@ -40,6 +41,10 @@ const Boards: NextPage<BoardProps> = ({ initialData }) => {
 
   return (
     <>
+      <Head>
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <title>Boards | Trello</title>
+      </Head>
       <InternalNavbar username={user.username} colour="blue" />
       <main className={styles.main}>
         <div className={styles.container}>
