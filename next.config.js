@@ -3,6 +3,6 @@
 const { createVanillaExtractPlugin } = require('@vanilla-extract/next-plugin');
 const withVanillaExtract = createVanillaExtractPlugin();
 
-const nextConfig = { reactStrictMode: true };
+const nextConfig = { reactStrictMode: false };
 
 module.exports = withVanillaExtract(nextConfig);

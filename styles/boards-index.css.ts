@@ -35,7 +35,6 @@ export const personalBoardsIcon = style({
   borderRadius: 3,
   color: '#fff',
   backgroundImage: 'linear-gradient(rgb(178, 40, 101), rgb(205, 90, 145))',
-  marginRight: '0.3rem',
 });
 
 export const boardCard = style({
@@ -53,6 +52,9 @@ export const boardCard = style({
 });
 
 export const boardCardTitle = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.4rem',
   fontSize: '1.15rem',
   zIndex: 1,
   marginBottom: '0.8rem',

@@ -14,7 +14,6 @@ export function useUpdateBoard() {
         queryCache.setQueryData(['boards', updatedBoard.id], updatedBoard);
       },
       onSuccess: (updatedBoard) => {
-        console.log('success');
         queryCache.setQueryData(['boards', updatedBoard.id], updatedBoard);
       },
     }

@@ -51,7 +51,11 @@ export function CreateBoardCard() {
           backgroundThumbnail: form.background,
         });
       }
-      router.push(`/boards/${newBoard.id}`);
+      const username = router.query.username;
+      router.push({
+        pathname: `/${username}/boards/${newBoard.id}`,
+        query: { username },
+      });
     } catch (err) {
       console.log(err);
     }

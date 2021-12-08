@@ -55,7 +55,6 @@ export function BackgroundPicker({
           </Popover.Trigger>
           <Popover.Content asChild sideOffset={-100} align="start">
             <section className={popoverStyles.content}>
-              {console.log(view)}
               {view === 'all' ? (
                 <PhotosAndColoursView
                   form={form}

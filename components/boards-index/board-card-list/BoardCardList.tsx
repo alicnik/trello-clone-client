@@ -7,13 +7,15 @@ import { CreateBoardCard } from '..';
 interface BoardCardListProps {
   boards: Board[];
   userId: string;
-  isStarredList: boolean;
+  showCreateCard?: boolean;
+  isStarredList?: boolean;
 }
 
 export function BoardCardList({
   boards,
   userId,
-  isStarredList,
+  showCreateCard = true,
+  isStarredList = false,
 }: BoardCardListProps) {
   if (isStarredList) {
     return (
@@ -23,7 +25,9 @@ export function BoardCardList({
         </h2>
         <div className={styles.boardListContainer}>
           {boards
-            .filter((board) => board.starredBy.some((u) => u.id === userId))
+            .filter((board) => {
+              return board.starredBy.some((u) => u.id === userId);
+            })
             .map((board) => (
               <BoardCard
                 key={board.id}
@@ -35,6 +39,7 @@ export function BoardCardList({
       </div>
     );
   }
+
   return (
     <div className={styles.boardListContainer}>
       {boards.map((board) => {
@@ -47,7 +52,7 @@ export function BoardCardList({
           />
         );
       })}
-      <CreateBoardCard />
+      {showCreateCard ? <CreateBoardCard /> : null}
     </div>
   );
 }

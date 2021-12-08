@@ -6,6 +6,7 @@ import type { Board } from 'utils/api/types';
 import * as styles from './board-card.css';
 import { FavouriteStar } from 'components';
 import { getBackground } from 'utils';
+import { useRouter } from 'next/router';
 
 interface BoardCardProps {
   initialBoard: Board;
@@ -13,6 +14,8 @@ interface BoardCardProps {
 }
 
 export function BoardCard({ initialBoard, isFavourite }: BoardCardProps) {
+  const router = useRouter();
+  const username = initialBoard.owner?.username ?? router.query.username;
   const { data: board } = useQuery(
     ['boards', initialBoard.id],
     () => getSingleBoard(initialBoard.id),
@@ -23,10 +26,13 @@ export function BoardCard({ initialBoard, isFavourite }: BoardCardProps) {
     return null;
   }
 
-  console.log(board.backgroundThumbnail);
-
   return (
-    <Link key={board.id} href={`/boards/${board.id}`} passHref>
+    <Link
+      key={board.id}
+      href={`/${username}/boards/${board.id}`}
+      prefetch={false}
+      passHref
+    >
       <div
         className={styles.boardCard}
         style={getBackground(board.backgroundThumbnail)}

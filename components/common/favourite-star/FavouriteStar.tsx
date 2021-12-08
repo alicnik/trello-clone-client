@@ -18,7 +18,6 @@ export function FavouriteStar({ board, isFavourite }: FavouriteStarProps) {
   const handleMouseLeave = () => setIsMouseOverFavourite(false);
 
   const handleFavouriteClick = (e: React.MouseEvent<SVGElement>) => {
-    console.log('CLIKC');
     e.preventDefault();
     if (!board) return;
     const updatedBoard = { ...board };

@@ -51,7 +51,6 @@ export function register(newUserDetails: RegisterRequest) {
 
 export function getSingleUser(username: string) {
   return axiosClient.get<User>(`/users/${username}`).then((res) => {
-    console.log(res);
     return res.data;
   });
 }

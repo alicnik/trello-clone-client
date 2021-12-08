@@ -15,12 +15,12 @@ import axios from 'axios';
 import { useUpdateBoard } from 'hooks/useUpdateBoard';
 import { useUpdateList } from 'hooks/useUpdateList';
 import { getBackground } from 'utils';
+import { useRouter } from 'next/router';
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
 ): Promise<GetServerSidePropsResult<SingleBoardProps>> {
   try {
-    console.log(context.params);
     const data = await getSingleBoard(context.params?.id as string);
     return {
       props: {
@@ -40,6 +40,7 @@ interface SingleBoardProps {
 }
 
 const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
+  const router = useRouter();
   const { data: board, isLoading } = useQuery(
     ['boards', initialState.id],
     () => getSingleBoard(initialState.id),
@@ -49,10 +50,16 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
   const boardMutation = useUpdateBoard();
   const listMutation = useUpdateList(initialState.id);
 
-  // const [board, setBoard] = React.useState(initialState);
   const [windowReady, setWindowReady] = React.useState(false);
 
-  React.useEffect(() => setWindowReady(true), []);
+  React.useEffect(() => {
+    const { username, id: boardId } = router.query as {
+      username: string;
+      id: string;
+    };
+    axios.post(`http://localhost:8080/api/v1/${username}/boards/${boardId}`);
+    setWindowReady(true);
+  }, [router]);
 
   const handleDragEnd = async (result: DropResult) => {
     if (!board) return;
@@ -88,8 +95,6 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
       (list) => list.id === destination.droppableId
     );
     const newLists = [...board.lists];
-
-    console.log(originListIndex, endListIndex);
 
     // Reorder cards in the same list
     if (originListIndex === endListIndex) {
@@ -131,8 +136,6 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
   if (isLoading || !board) {
     return <h2>Loading...</h2>;
   }
-
-  console.log(board);
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
