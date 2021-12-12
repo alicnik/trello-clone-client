@@ -19,7 +19,6 @@ export function useFavouriteBoard() {
         queryCache.setQueryData(['boards', updatedBoard.id], updatedBoard);
       },
       onSuccess: (updatedBoard) => {
-        console.log('success', updatedBoard);
         queryCache.setQueryData(['boards', updatedBoard.id], updatedBoard);
         queryCache.invalidateQueries(['users', updatedBoard.owner.username]);
       },

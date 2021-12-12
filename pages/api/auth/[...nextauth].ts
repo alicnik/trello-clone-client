@@ -9,14 +9,12 @@ export default NextAuth({
       name: 'Credentials',
       credentials: { username: {}, password: {} },
       authorize: async (credentials) => {
-        console.log('HELLO', credentials);
         const data = await axios
           .post('http://localhost:8080/api/v1/login', {
             username: credentials?.username,
             password: credentials?.password,
           })
           .then((res) => res.data);
-        console.log('DATA', data);
         if (!data.access_token) {
           return null;
         }
@@ -43,7 +41,6 @@ export default NextAuth({
 
     async session({ session, token }) {
       session.accessToken = token.accessToken;
-      console.log('SESSION', session);
       return session;
     },
   },

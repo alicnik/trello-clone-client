@@ -65,7 +65,7 @@ export function CreateBoardCard() {
         query: { username },
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 

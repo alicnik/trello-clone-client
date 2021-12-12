@@ -23,7 +23,7 @@ export const getServerSideProps: GetServerSideProps<BoardProps> = async (
     );
     return { props: { initialData, session } };
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return {
       notFound: true,
     };
