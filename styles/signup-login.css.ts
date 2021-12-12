@@ -8,7 +8,7 @@ export const form = style({
   backgroundColor: '#FFF',
   borderRadius: 3,
   padding: '1.5rem 3rem',
-  maxWidth: 585,
+  maxWidth: 400,
   boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
   margin: '0 auto',
 });
@@ -68,4 +68,13 @@ export const link = style({
       textDecoration: 'underline',
     },
   },
+});
+
+export const error = style({
+  backgroundColor: '#eb5a46',
+  color: '#fbedeb',
+  fontSize: '0.875rem',
+  lineHeight: 1.3333,
+  padding: '0.5rem 1rem',
+  borderRadius: 5,
 });

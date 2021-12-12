@@ -7,15 +7,21 @@ import { InternalNavbar } from 'components/common';
 import { BoardsSidebar, BoardCardList } from 'components/boards-index';
 import { useQuery } from 'react-query';
 import Head from 'next/head';
+import { getSession, useSession } from 'next-auth/react';
 
 type BoardProps = { initialData: User };
 
 export const getServerSideProps: GetServerSideProps<BoardProps> = async (
   context
 ) => {
+  const username = context.params?.username as string;
+  const session = await getSession(context);
   try {
-    const initialData = await getSingleUser(context.params?.username as string);
-    return { props: { initialData } };
+    const initialData = await getSingleUser(
+      username,
+      session?.accessToken as string
+    );
+    return { props: { initialData, session } };
   } catch (err) {
     console.log(err);
     return {
@@ -25,13 +31,20 @@ export const getServerSideProps: GetServerSideProps<BoardProps> = async (
 };
 
 const Boards: NextPage<BoardProps> = ({ initialData }) => {
+  const { data: session, status } = useSession();
   const { data: user } = useQuery(
-    ['users', initialData.id],
-    () => getSingleUser(initialData.username),
+    ['users', initialData.username],
+    () => {
+      if (status === 'loading' || !session) return;
+      return getSingleUser(
+        initialData.username,
+        session?.accessToken as string
+      );
+    },
     { initialData }
   );
 
-  if (!user) {
+  if (!user || !user?.boards) {
     return <h2>Loading...</h2>;
   }
 

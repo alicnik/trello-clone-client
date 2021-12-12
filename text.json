@@ -1,0 +1,421 @@
+{
+  "id": "ab7d7bfa-ac62-4910-8825-6edd45d3412f",
+  "username": "alicnik",
+  "emailAddress": "alicnik@hotmail.com",
+  "boards": [
+    {
+      "id": "e01b723b-b636-4270-b527-243baac3772f",
+      "boardName": "First Board",
+      "description": null,
+      "background": "lightblue",
+      "backgroundThumbnail": "lightblue",
+      "created": "2021-12-12T19:34:27.181425",
+      "owner": {
+        "id": "ab7d7bfa-ac62-4910-8825-6edd45d3412f",
+        "username": "alicnik",
+        "emailAddress": "alicnik@hotmail.com",
+        "cardMemberships": [],
+        "starredBoards": [
+          {
+            "id": "e01b723b-b636-4270-b527-243baac3772f",
+            "boardName": "First Board",
+            "description": null,
+            "background": "lightblue",
+            "backgroundThumbnail": "lightblue",
+            "created": "2021-12-12T19:34:27.181425",
+            "lists": [
+              {
+                "id": "0fad242a-de02-4d2e-b544-4b90908bb802",
+                "title": "First List",
+                "cards": [
+                  {
+                    "id": "5f8ef7aa-acb7-45f9-aea9-7d32181f089b",
+                    "title": "First card",
+                    "author": null,
+                    "board": null,
+                    "boardList": null,
+                    "members": [],
+                    "labels": [],
+                    "comments": [],
+                    "linkedComments": []
+                  },
+                  {
+                    "id": "32cc8d4e-d2da-4f85-a74f-54ddb7866ecf",
+                    "title": "Third card",
+                    "author": null,
+                    "board": null,
+                    "boardList": null,
+                    "members": [],
+                    "labels": [],
+                    "comments": [],
+                    "linkedComments": []
+                  }
+                ],
+                "archived": false
+              },
+              {
+                "id": "dc5447f8-022c-49b2-ae62-f98216db0786",
+                "title": "Second List",
+                "cards": [
+                  {
+                    "id": "970b274b-1c3e-471a-bb74-cc544ffcae1c",
+                    "title": "Second card",
+                    "author": null,
+                    "board": null,
+                    "boardList": null,
+                    "members": [],
+                    "labels": [],
+                    "comments": [],
+                    "linkedComments": []
+                  },
+                  {
+                    "id": "b14c7c89-072e-46c4-8e23-4d0130b64495",
+                    "title": "Fourth card",
+                    "author": null,
+                    "board": null,
+                    "boardList": null,
+                    "members": [],
+                    "labels": [],
+                    "comments": [],
+                    "linkedComments": []
+                  }
+                ],
+                "archived": false
+              }
+            ],
+            "cards": [],
+            "recentlyViewedBy": []
+          }
+        ]
+      },
+      "lists": [
+        {
+          "id": "0fad242a-de02-4d2e-b544-4b90908bb802",
+          "title": "First List",
+          "cards": [
+            {
+              "id": "5f8ef7aa-acb7-45f9-aea9-7d32181f089b",
+              "title": "First card",
+              "author": null,
+              "board": null,
+              "boardList": null,
+              "members": [],
+              "labels": [],
+              "comments": [],
+              "linkedComments": []
+            },
+            {
+              "id": "32cc8d4e-d2da-4f85-a74f-54ddb7866ecf",
+              "title": "Third card",
+              "author": null,
+              "board": null,
+              "boardList": null,
+              "members": [],
+              "labels": [],
+              "comments": [],
+              "linkedComments": []
+            }
+          ],
+          "archived": false
+        },
+        {
+          "id": "dc5447f8-022c-49b2-ae62-f98216db0786",
+          "title": "Second List",
+          "cards": [
+            {
+              "id": "970b274b-1c3e-471a-bb74-cc544ffcae1c",
+              "title": "Second card",
+              "author": null,
+              "board": null,
+              "boardList": null,
+              "members": [],
+              "labels": [],
+              "comments": [],
+              "linkedComments": []
+            },
+            {
+              "id": "b14c7c89-072e-46c4-8e23-4d0130b64495",
+              "title": "Fourth card",
+              "author": null,
+              "board": null,
+              "boardList": null,
+              "members": [],
+              "labels": [],
+              "comments": [],
+              "linkedComments": []
+            }
+          ],
+          "archived": false
+        }
+      ],
+      "cards": [],
+      "starredBy": [
+        {
+          "id": "ab7d7bfa-ac62-4910-8825-6edd45d3412f",
+          "username": "alicnik",
+          "emailAddress": "alicnik@hotmail.com",
+          "cards": [],
+          "cardMemberships": []
+        }
+      ],
+      "recentlyViewedBy": []
+    },
+    {
+      "id": "db980363-5c03-4b4a-aa39-efd26ddbadcc",
+      "boardName": "test",
+      "description": null,
+      "background": "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?crop=entropy&cs=srgb&fm=jpg&ixid=MnwyODA2MzZ8MHwxfHNlYXJjaHwxfHx3YWxscGFwZXJ8ZW58MHwwfHx8MTYzODYzOTk0NQ&ixlib=rb-1.2.1&q=85",
+      "backgroundThumbnail": "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyODA2MzZ8MHwxfHNlYXJjaHwxfHx3YWxscGFwZXJ8ZW58MHwwfHx8MTYzODYzOTk0NQ&ixlib=rb-1.2.1&q=80&w=200",
+      "created": "2021-12-12T19:39:22.840882",
+      "owner": {
+        "id": "ab7d7bfa-ac62-4910-8825-6edd45d3412f",
+        "username": "alicnik",
+        "emailAddress": "alicnik@hotmail.com",
+        "cardMemberships": [],
+        "starredBoards": [
+          {
+            "id": "e01b723b-b636-4270-b527-243baac3772f",
+            "boardName": "First Board",
+            "description": null,
+            "background": "lightblue",
+            "backgroundThumbnail": "lightblue",
+            "created": "2021-12-12T19:34:27.181425",
+            "lists": [
+              {
+                "id": "0fad242a-de02-4d2e-b544-4b90908bb802",
+                "title": "First List",
+                "cards": [
+                  {
+                    "id": "5f8ef7aa-acb7-45f9-aea9-7d32181f089b",
+                    "title": "First card",
+                    "author": null,
+                    "board": null,
+                    "boardList": null,
+                    "members": [],
+                    "labels": [],
+                    "comments": [],
+                    "linkedComments": []
+                  },
+                  {
+                    "id": "32cc8d4e-d2da-4f85-a74f-54ddb7866ecf",
+                    "title": "Third card",
+                    "author": null,
+                    "board": null,
+                    "boardList": null,
+                    "members": [],
+                    "labels": [],
+                    "comments": [],
+                    "linkedComments": []
+                  }
+                ],
+                "archived": false
+              },
+              {
+                "id": "dc5447f8-022c-49b2-ae62-f98216db0786",
+                "title": "Second List",
+                "cards": [
+                  {
+                    "id": "970b274b-1c3e-471a-bb74-cc544ffcae1c",
+                    "title": "Second card",
+                    "author": null,
+                    "board": null,
+                    "boardList": null,
+                    "members": [],
+                    "labels": [],
+                    "comments": [],
+                    "linkedComments": []
+                  },
+                  {
+                    "id": "b14c7c89-072e-46c4-8e23-4d0130b64495",
+                    "title": "Fourth card",
+                    "author": null,
+                    "board": null,
+                    "boardList": null,
+                    "members": [],
+                    "labels": [],
+                    "comments": [],
+                    "linkedComments": []
+                  }
+                ],
+                "archived": false
+              }
+            ],
+            "cards": [],
+            "recentlyViewedBy": []
+          }
+        ]
+      },
+      "lists": [],
+      "cards": [],
+      "starredBy": [],
+      "recentlyViewedBy": []
+    }
+  ],
+  "cards": [],
+  "cardMemberships": [],
+  "starredBoards": [
+    {
+      "id": "e01b723b-b636-4270-b527-243baac3772f",
+      "boardName": "First Board",
+      "description": null,
+      "background": "lightblue",
+      "backgroundThumbnail": "lightblue",
+      "created": "2021-12-12T19:34:27.181425",
+      "lists": [
+        {
+          "id": "0fad242a-de02-4d2e-b544-4b90908bb802",
+          "title": "First List",
+          "cards": [
+            {
+              "id": "5f8ef7aa-acb7-45f9-aea9-7d32181f089b",
+              "title": "First card",
+              "author": null,
+              "board": null,
+              "boardList": null,
+              "members": [],
+              "labels": [],
+              "comments": [],
+              "linkedComments": []
+            },
+            {
+              "id": "32cc8d4e-d2da-4f85-a74f-54ddb7866ecf",
+              "title": "Third card",
+              "author": null,
+              "board": null,
+              "boardList": null,
+              "members": [],
+              "labels": [],
+              "comments": [],
+              "linkedComments": []
+            }
+          ],
+          "archived": false
+        },
+        {
+          "id": "dc5447f8-022c-49b2-ae62-f98216db0786",
+          "title": "Second List",
+          "cards": [
+            {
+              "id": "970b274b-1c3e-471a-bb74-cc544ffcae1c",
+              "title": "Second card",
+              "author": null,
+              "board": null,
+              "boardList": null,
+              "members": [],
+              "labels": [],
+              "comments": [],
+              "linkedComments": []
+            },
+            {
+              "id": "b14c7c89-072e-46c4-8e23-4d0130b64495",
+              "title": "Fourth card",
+              "author": null,
+              "board": null,
+              "boardList": null,
+              "members": [],
+              "labels": [],
+              "comments": [],
+              "linkedComments": []
+            }
+          ],
+          "archived": false
+        }
+      ],
+      "cards": [],
+      "recentlyViewedBy": []
+    }
+  ],
+  "recentBoards": [
+    {
+      "id": "e01b723b-b636-4270-b527-243baac3772f",
+      "boardName": "First Board",
+      "description": null,
+      "background": "lightblue",
+      "backgroundThumbnail": "lightblue",
+      "created": "2021-12-12T19:34:27.181425",
+      "lists": [
+        {
+          "id": "0fad242a-de02-4d2e-b544-4b90908bb802",
+          "title": "First List",
+          "cards": [
+            {
+              "id": "5f8ef7aa-acb7-45f9-aea9-7d32181f089b",
+              "title": "First card",
+              "author": null,
+              "board": null,
+              "boardList": null,
+              "members": [],
+              "labels": [],
+              "comments": [],
+              "linkedComments": []
+            },
+            {
+              "id": "32cc8d4e-d2da-4f85-a74f-54ddb7866ecf",
+              "title": "Third card",
+              "author": null,
+              "board": null,
+              "boardList": null,
+              "members": [],
+              "labels": [],
+              "comments": [],
+              "linkedComments": []
+            }
+          ],
+          "archived": false
+        },
+        {
+          "id": "dc5447f8-022c-49b2-ae62-f98216db0786",
+          "title": "Second List",
+          "cards": [
+            {
+              "id": "970b274b-1c3e-471a-bb74-cc544ffcae1c",
+              "title": "Second card",
+              "author": null,
+              "board": null,
+              "boardList": null,
+              "members": [],
+              "labels": [],
+              "comments": [],
+              "linkedComments": []
+            },
+            {
+              "id": "b14c7c89-072e-46c4-8e23-4d0130b64495",
+              "title": "Fourth card",
+              "author": null,
+              "board": null,
+              "boardList": null,
+              "members": [],
+              "labels": [],
+              "comments": [],
+              "linkedComments": []
+            }
+          ],
+          "archived": false
+        }
+      ],
+      "cards": [],
+      "starredBy": [
+        {
+          "id": "ab7d7bfa-ac62-4910-8825-6edd45d3412f",
+          "username": "alicnik",
+          "emailAddress": "alicnik@hotmail.com",
+          "cards": [],
+          "cardMemberships": []
+        }
+      ],
+      "recentlyViewedBy": []
+    },
+    {
+      "id": "db980363-5c03-4b4a-aa39-efd26ddbadcc",
+      "boardName": "test",
+      "description": null,
+      "background": "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?crop=entropy&cs=srgb&fm=jpg&ixid=MnwyODA2MzZ8MHwxfHNlYXJjaHwxfHx3YWxscGFwZXJ8ZW58MHwwfHx8MTYzODYzOTk0NQ&ixlib=rb-1.2.1&q=85",
+      "backgroundThumbnail": "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyODA2MzZ8MHwxfHNlYXJjaHwxfHx3YWxscGFwZXJ8ZW58MHwwfHx8MTYzODYzOTk0NQ&ixlib=rb-1.2.1&q=80&w=200",
+      "created": "2021-12-12T19:39:22.840882",
+      "lists": [],
+      "cards": [],
+      "starredBy": [],
+      "recentlyViewedBy": []
+    }
+  ]
+}

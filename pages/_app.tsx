@@ -1,18 +1,21 @@
 import type { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { IdProvider } from '@radix-ui/react-id';
+import { SessionProvider } from 'next-auth/react';
 
 import '../styles/globals.css';
 
 const queryClient = new QueryClient();
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
-    <IdProvider>
+    <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
+        <IdProvider>
+          <Component {...pageProps} />
+        </IdProvider>
       </QueryClientProvider>
-    </IdProvider>
+    </SessionProvider>
   );
 }
 export default MyApp;

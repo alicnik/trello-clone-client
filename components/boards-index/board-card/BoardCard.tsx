@@ -7,6 +7,7 @@ import * as styles from './board-card.css';
 import { FavouriteStar } from 'components';
 import { getBackground } from 'utils';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 
 interface BoardCardProps {
   initialBoard: Board;
@@ -15,10 +16,14 @@ interface BoardCardProps {
 
 export function BoardCard({ initialBoard, isFavourite }: BoardCardProps) {
   const router = useRouter();
+  const { data: session, status } = useSession();
   const username = initialBoard.owner?.username ?? router.query.username;
   const { data: board } = useQuery(
     ['boards', initialBoard.id],
-    () => getSingleBoard(initialBoard.id),
+    () => {
+      if (status === 'loading') return;
+      return getSingleBoard(initialBoard.id, session?.accessToken as string);
+    },
     { initialData: initialBoard }
   );
 

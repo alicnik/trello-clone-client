@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import React from 'react';
+import Head from 'next/head';
 import {
   Hero,
   Product,
@@ -40,6 +41,9 @@ const Home: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <link rel="icon" type="image/png" href="/favicon.png" />
+      </Head>
       <Navbar isScrolling={isScrolling} />
       <Hero setIntersectionRef={setIntersectionRef} />
       <Product />

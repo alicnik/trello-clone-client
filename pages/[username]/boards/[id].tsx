@@ -16,15 +16,22 @@ import { useUpdateBoard } from 'hooks/useUpdateBoard';
 import { useUpdateList } from 'hooks/useUpdateList';
 import { getBackground } from 'utils';
 import { useRouter } from 'next/router';
+import { getSession, useSession } from 'next-auth/react';
+import { Session } from 'next-auth';
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
 ): Promise<GetServerSidePropsResult<SingleBoardProps>> {
+  const session = await getSession(context);
   try {
-    const data = await getSingleBoard(context.params?.id as string);
+    const data = await getSingleBoard(
+      context.params?.id as string,
+      session?.accessToken as string
+    );
     return {
       props: {
         initialState: data,
+        session,
       },
     };
   } catch (err) {
@@ -37,13 +44,20 @@ export async function getServerSideProps(
 
 interface SingleBoardProps {
   initialState: Board;
+  session: Session | null;
 }
 
 const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
   const router = useRouter();
+  const { data: session, status } = useSession();
   const { data: board, isLoading } = useQuery(
     ['boards', initialState.id],
-    () => getSingleBoard(initialState.id),
+    () => {
+      if (!session || status === 'loading') {
+        return;
+      }
+      return getSingleBoard(initialState.id, session?.accessToken as string);
+    },
     { initialData: initialState }
   );
 
@@ -57,9 +71,13 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
       username: string;
       id: string;
     };
-    axios.post(`http://localhost:8080/api/v1/${username}/boards/${boardId}`);
+    axios.post(
+      `http://localhost:8080/api/v1/${username}/boards/${boardId}`,
+      null,
+      { headers: { Authorization: `Bearer ${session?.accessToken}` } }
+    );
     setWindowReady(true);
-  }, [router]);
+  }, [router, session?.accessToken]);
 
   const handleDragEnd = async (result: DropResult) => {
     if (!board) return;

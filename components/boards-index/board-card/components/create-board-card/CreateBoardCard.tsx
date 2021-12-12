@@ -9,9 +9,11 @@ import { createBoard } from 'utils/api/boards';
 import { useRouter } from 'next/router';
 import { getBackground } from 'utils';
 import { BackgroundPicker } from '../background-picker/BackgroundPicker';
+import { useSession } from 'next-auth/react';
 
 export function CreateBoardCard() {
   const router = useRouter();
+  const { data: session } = useSession();
   const [unsplashPhotos, setUnsplashPhotos] =
     React.useState<UnsplashItem[]>(unsplashData);
   const suggestedBackgrounds = unsplashPhotos
@@ -40,16 +42,22 @@ export function CreateBoardCard() {
           form.background.includes(p.urls.thumb)
         )?.urls.full;
         if (!fullImgUrl) throw new Error();
-        newBoard = await createBoard({
-          ...form,
-          background: fullImgUrl,
-          backgroundThumbnail: form.background,
-        });
+        newBoard = await createBoard(
+          {
+            ...form,
+            background: fullImgUrl,
+            backgroundThumbnail: form.background,
+          },
+          session?.accessToken as string
+        );
       } else {
-        newBoard = await createBoard({
-          ...form,
-          backgroundThumbnail: form.background,
-        });
+        newBoard = await createBoard(
+          {
+            ...form,
+            backgroundThumbnail: form.background,
+          },
+          session?.accessToken as string
+        );
       }
       const username = router.query.username;
       router.push({

@@ -2,10 +2,11 @@ import * as React from 'react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { register } from 'utils/api';
+import { login, register } from 'utils/api';
 import { TextInput } from 'components/common';
 import { AuthLayout } from 'components/signup-login';
-import * as styles from '../styles/signup.css';
+import * as styles from '../styles/signup-login.css';
+import { setToken } from 'utils/api/lib';
 
 const SignUp: NextPage = () => {
   const router = useRouter();
@@ -28,6 +29,9 @@ const SignUp: NextPage = () => {
     try {
       const res = await register(form);
       const username = res.data.username;
+      const loginRes = await login({ username, password: form.password });
+      const token = loginRes.data.access_token;
+      setToken(token);
       router.push(`/${username}/boards`);
     } catch (err) {
       console.error(err);
@@ -63,7 +67,7 @@ const SignUp: NextPage = () => {
           className={styles.input}
           value={form.password}
           onChange={handleChange}
-          autoComplete="email"
+          autoComplete="password"
         />
         <small className={styles.legal}>
           By signing up, you confirm that you&apos;ve read and accepted our
