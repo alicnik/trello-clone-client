@@ -12,7 +12,8 @@ export const content = style({
 export const listItem = style({
   cursor: 'pointer',
   fontSize: '0.875rem',
-  padding: '0.5rem 0',
+  padding: '0.5rem',
+  marginRight: '-0.8rem',
   borderRadius: 3,
 
   selectors: {

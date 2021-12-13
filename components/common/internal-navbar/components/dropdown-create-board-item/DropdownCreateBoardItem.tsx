@@ -80,6 +80,7 @@ export function DropdownCreateBoardItem() {
         pathname: `/${username}/boards/${newBoard.id}`,
         query: { username },
       });
+      localStorage.removeItem('dropdown-create-board-values');
     } catch (err) {
       console.error(err);
     }

@@ -48,15 +48,6 @@ export function InternalNavbar({
           >
             <DropdownCreateBoardItem />
           </NavbarItem>
-          <li
-            className={styles.listItem}
-            onClick={() => {
-              removeToken();
-              router.push('/');
-            }}
-          >
-            Logout
-          </li>
         </ul>
         <div className={styles.rightNav}>
           <input type="search" />
