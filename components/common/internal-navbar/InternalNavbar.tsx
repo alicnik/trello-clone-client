@@ -1,7 +1,9 @@
+import * as React from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { removeToken } from 'utils/api/lib';
+import { NavbarItem } from './components';
 import * as styles from './internal-navbar.css';
 
 interface InternalNavbarProps {
@@ -14,6 +16,9 @@ export function InternalNavbar({
   colour = 'translucent',
 }: InternalNavbarProps) {
   const router = useRouter();
+  const [open, setOpen] = React.useState<'recent' | 'starred' | 'outde' | null>(
+    null
+  );
   return (
     <header
       className={clsx(
@@ -28,8 +33,8 @@ export function InternalNavbar({
               <div className={styles.logo} />
             </Link>
           </li>
-          <li className={styles.listItem}>Recent</li>
-          <li className={styles.listItem}>Starred</li>
+          <NavbarItem title="Recent" label="Recent boards" />
+          <NavbarItem title="Starred" label="Starred boards" type="starred" />
           <li className={styles.listItem}>Create</li>
           <li
             className={styles.listItem}

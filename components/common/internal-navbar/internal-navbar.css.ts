@@ -31,6 +31,7 @@ export const list = style({
 
 export const listItem = style({
   cursor: 'pointer',
+  fontSize: '0.875rem',
 });
 
 export const logo = style({

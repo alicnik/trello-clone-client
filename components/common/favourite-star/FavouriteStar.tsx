@@ -8,9 +8,14 @@ import clsx from 'clsx';
 interface FavouriteStarProps {
   board: Board;
   isFavourite: boolean;
+  className?: string;
 }
 
-export function FavouriteStar({ board, isFavourite }: FavouriteStarProps) {
+export function FavouriteStar({
+  board,
+  isFavourite,
+  className,
+}: FavouriteStarProps) {
   const mutation = useFavouriteBoard();
   const [isMouseOverFavourite, setIsMouseOverFavourite] = React.useState(false);
 
@@ -28,7 +33,7 @@ export function FavouriteStar({ board, isFavourite }: FavouriteStarProps) {
   if (isMouseOverFavourite && isFavourite) {
     return (
       <HiOutlineStar
-        className={styles.star}
+        className={clsx(styles.star, className)}
         onClick={handleFavouriteClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -39,7 +44,7 @@ export function FavouriteStar({ board, isFavourite }: FavouriteStarProps) {
   if (isFavourite) {
     return (
       <HiStar
-        className={clsx(styles.star, styles.favouriteStar)}
+        className={clsx(styles.star, styles.favouriteStar, className)}
         onClick={handleFavouriteClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -49,7 +54,7 @@ export function FavouriteStar({ board, isFavourite }: FavouriteStarProps) {
 
   return (
     <HiOutlineStar
-      className={styles.star}
+      className={clsx(styles.star, className)}
       onClick={handleFavouriteClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
