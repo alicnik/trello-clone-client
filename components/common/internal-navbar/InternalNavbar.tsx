@@ -7,6 +7,7 @@ import { NavbarItem } from './components/navbar-item';
 import * as styles from './internal-navbar.css';
 import { DropdownBoardsContent } from './components';
 import { DropdownCreateBoardItem } from './components/dropdown-create-board-item';
+import { DropdownAccountItem } from './components/dropdown-account-item';
 
 interface InternalNavbarProps {
   username: string;
@@ -59,7 +60,14 @@ export function InternalNavbar({
         </ul>
         <div className={styles.rightNav}>
           <input type="search" />
-          <div>AN</div>
+          <NavbarItem
+            title="AN"
+            label="Account"
+            withChevron={false}
+            className={styles.userButton}
+          >
+            <DropdownAccountItem />
+          </NavbarItem>
         </div>
       </nav>
     </header>

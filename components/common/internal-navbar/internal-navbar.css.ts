@@ -63,3 +63,14 @@ export const createButton = style({
     },
   },
 });
+
+export const userButton = style({
+  listStyle: 'none',
+  padding: '0.5rem',
+  backgroundColor: '#DFE1E6',
+  borderRadius: '50%',
+  fontWeight: 700,
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  marginLeft: '1rem',
+});
