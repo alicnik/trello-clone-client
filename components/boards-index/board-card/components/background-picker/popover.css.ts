@@ -15,6 +15,7 @@ export const content = style({
   fontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif`,
   maxHeight: '95vh',
   overflow: 'hidden',
+  boxShadow: '0 8px 16px -4px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%)',
 });
 
 export const gridHeader = style({

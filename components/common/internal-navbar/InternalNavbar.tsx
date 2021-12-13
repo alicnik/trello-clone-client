@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import { removeToken } from 'utils/api/lib';
 import { NavbarItem } from './components/navbar-item';
 import * as styles from './internal-navbar.css';
+import { DropdownBoardsContent } from './components';
+import { DropdownCreateBoardItem } from './components/dropdown-create-board-item';
 
 interface InternalNavbarProps {
   username: string;
@@ -16,9 +18,7 @@ export function InternalNavbar({
   colour = 'translucent',
 }: InternalNavbarProps) {
   const router = useRouter();
-  const [open, setOpen] = React.useState<'recent' | 'starred' | 'outde' | null>(
-    null
-  );
+
   return (
     <header
       className={clsx(
@@ -33,9 +33,20 @@ export function InternalNavbar({
               <div className={styles.logo} />
             </Link>
           </li>
-          <NavbarItem title="Recent" label="Recent boards" />
-          <NavbarItem title="Starred" label="Starred boards" type="starred" />
-          <li className={styles.listItem}>Create</li>
+          <NavbarItem title="Recent" label="Recent boards">
+            <DropdownBoardsContent type="recent" />
+          </NavbarItem>
+          <NavbarItem title="Starred" label="Starred boards">
+            <DropdownBoardsContent type="starred" />
+          </NavbarItem>
+          <NavbarItem
+            className={styles.createButton}
+            title="Create"
+            label="Create"
+            withChevron={false}
+          >
+            <DropdownCreateBoardItem />
+          </NavbarItem>
           <li
             className={styles.listItem}
             onClick={() => {

@@ -52,3 +52,14 @@ export const logo = style({
 export const rightNav = style({
   display: 'flex',
 });
+
+export const createButton = style({
+  backgroundColor: 'rgba(0, 0, 0, 0.24)',
+  padding: '0.5rem 0.75rem',
+
+  selectors: {
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.24)',
+    },
+  },
+});

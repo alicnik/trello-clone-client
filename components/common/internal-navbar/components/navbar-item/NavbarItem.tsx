@@ -3,17 +3,20 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as styles from './navbar-item.css';
 import { VscChromeClose } from 'react-icons/vsc';
 import { HiOutlineChevronDown } from 'react-icons/hi';
+import clsx from 'clsx';
 
 interface NavbarItemProps {
   title: string;
   label: string;
   withChevron?: boolean;
+  className?: string;
 }
 
 export function NavbarItem({
   title,
   label,
   children,
+  className,
   withChevron = true,
 }: React.PropsWithChildren<NavbarItemProps>) {
   const [open, setOpen] = React.useState(false);
@@ -24,7 +27,7 @@ export function NavbarItem({
     <DropdownMenu.Root modal={false} open={open}>
       <DropdownMenu.Trigger asChild>
         <li
-          className={styles.listItem}
+          className={clsx(styles.listItem, className)}
           ref={triggerRef}
           onClick={() => {
             if (hasInteractedOutside) {
@@ -35,7 +38,9 @@ export function NavbarItem({
           }}
         >
           {title}
-          <HiOutlineChevronDown className={styles.downChevron} />
+          {withChevron && (
+            <HiOutlineChevronDown className={styles.downChevron} />
+          )}
         </li>
       </DropdownMenu.Trigger>
       <DropdownMenu.Content
@@ -47,7 +52,7 @@ export function NavbarItem({
           const isTriggerElement =
             target === triggerRef.current ||
             target.parentElement === triggerRef.current ||
-            target.parentElement.parentElement === triggerRef.current;
+            target.parentElement?.parentElement === triggerRef.current;
           if (isTriggerElement) {
             setHasInteractedOutside(true);
           }
@@ -58,11 +63,9 @@ export function NavbarItem({
           <DropdownMenu.Label className={styles.label}>
             {label}
           </DropdownMenu.Label>
-          {withChevron && (
-            <span className={styles.closeButton} onClick={() => setOpen(false)}>
-              <VscChromeClose />
-            </span>
-          )}
+          <span className={styles.closeButton} onClick={() => setOpen(false)}>
+            <VscChromeClose />
+          </span>
         </header>
         {children}
       </DropdownMenu.Content>

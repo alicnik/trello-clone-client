@@ -10,6 +10,9 @@ import { useRouter } from 'next/router';
 import { getBackground } from 'utils';
 import { BackgroundPicker } from '../background-picker/BackgroundPicker';
 import { useSession } from 'next-auth/react';
+import * as Popover from '@radix-ui/react-popover';
+import * as popoverStyles from '../background-picker/popover.css';
+import { BsThreeDots } from 'react-icons/bs';
 
 export function CreateBoardCard() {
   const router = useRouter();
@@ -115,10 +118,29 @@ export function CreateBoardCard() {
           <BackgroundPicker
             form={form}
             setForm={setForm}
-            suggestedBackgrounds={suggestedBackgrounds}
             unsplashPhotos={unsplashPhotos}
             setUnsplashPhotos={setUnsplashPhotos}
-          />
+            backgroundContainerStyles={dialogStyles.backgroundChoices}
+          >
+            {suggestedBackgrounds.map((value) => {
+              return (
+                <button
+                  key={value}
+                  className={clsx(
+                    dialogStyles.backgroundThumbnail,
+                    form.background === value && dialogStyles.chosenBackground
+                  )}
+                  onClick={() => setForm({ ...form, background: value })}
+                  style={getBackground(value)}
+                />
+              );
+            })}
+            <Popover.Trigger asChild>
+              <button className={dialogStyles.backgroundThumbnail}>
+                <BsThreeDots className={popoverStyles.ellipsisIcon} />
+              </button>
+            </Popover.Trigger>
+          </BackgroundPicker>
         </div>
         <button
           className={clsx(

@@ -1,11 +1,6 @@
 import * as React from 'react';
 import * as Popover from '@radix-ui/react-popover';
-import clsx from 'clsx';
-import * as dialogStyles from '../create-board-card/dialog.css';
 import * as popoverStyles from './popover.css';
-import { VscChromeClose } from 'react-icons/vsc';
-import { BsThreeDots } from 'react-icons/bs';
-import { getBackground } from 'utils';
 import { UnsplashItem } from '../unsplash';
 import { ColoursView, PhotosAndColoursView } from './popover-views';
 import { PhotosView } from './popover-views/PhotosView';
@@ -18,42 +13,39 @@ export interface Form {
 interface BackgroundPickerProps {
   form: Form;
   setForm: React.Dispatch<React.SetStateAction<Form>>;
-  suggestedBackgrounds: string[];
   unsplashPhotos: UnsplashItem[];
   setUnsplashPhotos: React.Dispatch<React.SetStateAction<UnsplashItem[]>>;
+  backgroundContainerStyles?: string;
+  side?: 'right' | 'bottom';
+  alignOffset?: number;
+  sideOffset?: number;
 }
 
 export function BackgroundPicker({
   form,
   setForm,
-  suggestedBackgrounds,
   unsplashPhotos,
   setUnsplashPhotos,
-}: BackgroundPickerProps) {
+  backgroundContainerStyles,
+  side = 'bottom',
+  alignOffset = 0,
+  sideOffset = -100,
+  children,
+}: React.PropsWithChildren<BackgroundPickerProps>) {
   const [view, setView] = React.useState<'all' | 'photos' | 'colours'>('all');
   return (
     <Popover.Root modal>
       <Popover.Anchor asChild>
-        <div className={dialogStyles.backgroundChoices}>
-          {suggestedBackgrounds.map((value) => {
-            return (
-              <button
-                key={value}
-                className={clsx(
-                  dialogStyles.backgroundThumbnail,
-                  form.background === value && dialogStyles.chosenBackground
-                )}
-                onClick={() => setForm({ ...form, background: value })}
-                style={getBackground(value)}
-              />
-            );
-          })}
-          <Popover.Trigger asChild>
-            <button className={dialogStyles.backgroundThumbnail}>
-              <BsThreeDots className={popoverStyles.ellipsisIcon} />
-            </button>
-          </Popover.Trigger>
-          <Popover.Content asChild sideOffset={-100} align="start">
+        <div className={backgroundContainerStyles}>
+          {children}
+
+          <Popover.Content
+            asChild
+            sideOffset={sideOffset}
+            align="start"
+            side={side}
+            alignOffset={alignOffset}
+          >
             <section className={popoverStyles.content}>
               {view === 'all' ? (
                 <PhotosAndColoursView

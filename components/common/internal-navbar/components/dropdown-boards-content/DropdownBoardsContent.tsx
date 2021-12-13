@@ -22,11 +22,15 @@ export function DropdownBoardsContent({ type }: DropdownBoardsContentProps) {
 
   const { recentBoards, starredBoards } = user;
 
-  return type === 'recent'
-    ? recentBoards?.map((board) => (
-        <DropdownBoardItem key={board.id} board={board} user={user} />
-      ))
-    : starredBoards?.map((board) => (
-        <DropdownBoardItem key={board.id} board={board} user={user} />
-      ));
+  return (
+    <>
+      {type === 'recent'
+        ? recentBoards?.map((board) => (
+            <DropdownBoardItem key={board.id} board={board} user={user} />
+          ))
+        : starredBoards?.map((board) => (
+            <DropdownBoardItem key={board.id} board={board} user={user} />
+          ))}
+    </>
+  );
 }
