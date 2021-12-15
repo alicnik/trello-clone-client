@@ -67,6 +67,7 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
   const boardMutation = useUpdateBoard();
   const listMutation = useUpdateList(initialState.id);
   const listContainerRef = React.useRef<HTMLDivElement>(null);
+  const isFirstRender = React.useRef(true);
 
   const [windowReady, setWindowReady] = React.useState(false);
 
@@ -83,14 +84,29 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
     setWindowReady(true);
   }, [router, session?.accessToken]);
 
+  React.useLayoutEffect(() => {
+    if (board?.lists.length === initialState.lists.length) {
+      listContainerRef.current?.scrollTo({ left: 0 });
+      isFirstRender.current = false;
+    }
+  });
+
   React.useEffect(() => {
-    const scrollWidth = listContainerRef.current?.scrollWidth ?? 0;
+    if (
+      isFirstRender.current ||
+      board?.lists.length === initialState.lists.length
+    ) {
+      console.log('use effect not running');
+      return;
+    }
+    console.log('scrolling to end');
+    const scrollToEnd = listContainerRef.current?.scrollWidth ?? 0;
     listContainerRef.current?.scrollTo({
       top: 0,
-      left: scrollWidth + 900,
+      left: scrollToEnd + 900,
       behavior: 'smooth',
     });
-  }, [board?.lists.length]);
+  }, [board?.lists.length, initialState.lists.length]);
 
   const handleDragEnd = async (result: DropResult) => {
     if (!board) return;

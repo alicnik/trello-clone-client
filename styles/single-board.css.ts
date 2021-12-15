@@ -15,10 +15,8 @@ export const listContainer = style({
   display: 'flex',
   justifyContent: 'flex-start',
   alignItems: 'flex-start',
-  gap: '1rem',
   fontFamily:
     '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif',
-  marginRight: '1rem',
 });
 
 export const addListContainer = style({

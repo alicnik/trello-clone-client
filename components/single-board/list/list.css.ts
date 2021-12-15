@@ -9,6 +9,7 @@ export const list = style({
   maxHeight: '100%',
   width: 272,
   padding: '0.4rem',
+  marginRight: '1rem',
 });
 
 export const listTitle = style({
