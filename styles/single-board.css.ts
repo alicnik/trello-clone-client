@@ -33,6 +33,9 @@ export const addListContainer = style({
     '&:hover': {
       backgroundColor: '#ffffff52',
     },
+    '&:focus-within': {
+      backgroundColor: '#ebecf0',
+    },
   },
 });
 
@@ -91,9 +94,13 @@ const close = keyframes({
 export const collapsibleContent = style({
   overflow: 'hidden',
   padding: '0.65rem 0.8rem',
+  borderRadius: 3,
 
   selectors: {
-    '&[data-state="open"]': { animation: `${open} 50ms ease-out` },
+    '&[data-state="open"]': {
+      animation: `${open} 50ms ease-out`,
+      backgroundColor: '#ebecf0',
+    },
     '&[data-state="closed"]': { animation: `${close} 30ms ease-out` },
   },
 });

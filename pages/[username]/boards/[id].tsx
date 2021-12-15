@@ -1,22 +1,23 @@
-import { getSingleBoard } from 'utils/api/boards';
-import { Board } from 'utils/api/types';
+import * as React from 'react';
 import {
   GetServerSidePropsContext,
   GetServerSidePropsResult,
   NextPage,
 } from 'next';
-import * as React from 'react';
-import { SingleBoardLayout } from 'components/single-board';
-import * as styles from 'styles/single-board.css';
 import { useQuery } from 'react-query';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
-import { List } from 'components/single-board';
-import axios from 'axios';
-import { useUpdateBoard } from 'hooks/useUpdateBoard';
-import { useUpdateList } from 'hooks/useUpdateList';
 import { useRouter } from 'next/router';
 import { getSession, useSession } from 'next-auth/react';
 import { Session } from 'next-auth';
+import axios from 'axios';
+
+import { getSingleBoard } from 'utils/api/boards';
+import { Board } from 'utils/api/types';
+import { SingleBoardLayout } from 'components/single-board';
+import * as styles from 'styles/single-board.css';
+import { List } from 'components/single-board';
+import { useUpdateBoard } from 'hooks/useUpdateBoard';
+import { useUpdateList } from 'hooks/useUpdateList';
 import { FiPlus } from 'react-icons/fi';
 import { VscChromeClose } from 'react-icons/vsc';
 import * as Collapsible from '@radix-ui/react-collapsible';
@@ -67,7 +68,7 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
   const boardMutation = useUpdateBoard();
   const listMutation = useUpdateList(initialState.id);
   const listContainerRef = React.useRef<HTMLDivElement>(null);
-  const isFirstRender = React.useRef(true);
+  const isInitialRender = React.useRef(true);
 
   const [windowReady, setWindowReady] = React.useState(false);
 
@@ -84,29 +85,23 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
     setWindowReady(true);
   }, [router, session?.accessToken]);
 
-  React.useLayoutEffect(() => {
-    if (board?.lists.length === initialState.lists.length) {
-      listContainerRef.current?.scrollTo({ left: 0 });
-      isFirstRender.current = false;
-    }
-  });
-
   React.useEffect(() => {
     if (
-      isFirstRender.current ||
+      isInitialRender.current ||
       board?.lists.length === initialState.lists.length
     ) {
-      console.log('use effect not running');
+      listContainerRef.current?.scrollTo({ left: 0 });
+      isInitialRender.current = false;
       return;
     }
-    console.log('scrolling to end');
+
     const scrollToEnd = listContainerRef.current?.scrollWidth ?? 0;
     listContainerRef.current?.scrollTo({
       top: 0,
       left: scrollToEnd + 900,
       behavior: 'smooth',
     });
-  }, [board?.lists.length, initialState.lists.length]);
+  }, [board?.lists.length, listContainerRef.current]);
 
   const handleDragEnd = async (result: DropResult) => {
     if (!board) return;
