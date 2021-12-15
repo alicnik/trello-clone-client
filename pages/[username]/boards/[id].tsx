@@ -1,5 +1,5 @@
 import { getSingleBoard } from 'utils/api/boards';
-import { Board, Card } from 'utils/api/types';
+import { Board } from 'utils/api/types';
 import {
   GetServerSidePropsContext,
   GetServerSidePropsResult,
@@ -17,6 +17,10 @@ import { useUpdateList } from 'hooks/useUpdateList';
 import { useRouter } from 'next/router';
 import { getSession, useSession } from 'next-auth/react';
 import { Session } from 'next-auth';
+import { FiPlus } from 'react-icons/fi';
+import { VscChromeClose } from 'react-icons/vsc';
+import * as Collapsible from '@radix-ui/react-collapsible';
+import { useAddList } from 'hooks/useAddList';
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
@@ -62,6 +66,7 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
 
   const boardMutation = useUpdateBoard();
   const listMutation = useUpdateList(initialState.id);
+  const listContainerRef = React.useRef<HTMLDivElement>(null);
 
   const [windowReady, setWindowReady] = React.useState(false);
 
@@ -77,6 +82,15 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
     );
     setWindowReady(true);
   }, [router, session?.accessToken]);
+
+  React.useEffect(() => {
+    const scrollWidth = listContainerRef.current?.scrollWidth ?? 0;
+    listContainerRef.current?.scrollTo({
+      top: 0,
+      left: scrollWidth + 900,
+      behavior: 'smooth',
+    });
+  }, [board?.lists.length]);
 
   const handleDragEnd = async (result: DropResult) => {
     if (!board) return;
@@ -162,25 +176,35 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
         background={board.background}
       >
         {windowReady ? (
-          <Droppable droppableId="all-lists" direction="horizontal" type="list">
-            {(provided) => (
-              <div
-                className={styles.listContainer}
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-              >
-                {board.lists.map((list, index) => (
-                  <List
-                    key={list.id}
-                    boardId={board.id}
-                    list={list}
-                    index={index}
-                  />
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
+          <div className={styles.outerContainer} ref={listContainerRef}>
+            <Droppable
+              droppableId="all-lists"
+              direction="horizontal"
+              type="list"
+            >
+              {(provided) => (
+                <div
+                  className={styles.listContainer}
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  {board.lists.map((list, index) => (
+                    <List
+                      key={list.id}
+                      boardId={board.id}
+                      list={list}
+                      index={index}
+                    />
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+            <AddListCollapsible
+              boardId={board.id}
+              listContainerRef={listContainerRef}
+            />
+          </div>
         ) : null}
       </SingleBoardLayout>
     </DragDropContext>
@@ -188,3 +212,106 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
 };
 
 export default SingleBoard;
+
+interface AddListCollapsibleProps {
+  boardId: string;
+  listContainerRef: React.RefObject<HTMLDivElement>;
+}
+
+export function AddListCollapsible({
+  boardId,
+  listContainerRef,
+}: AddListCollapsibleProps) {
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const addListButtonRef = React.useRef<HTMLDivElement>(null);
+  const [isAddingList, setIsAddingList] = React.useState(false);
+  const [newList, setNewList] = React.useState({ title: '' });
+  const [scrollToEnd, setScrollToEnd] = React.useState(false);
+  const mutation = useAddList();
+
+  const handleClickOutside = React.useCallback(
+    (e: MouseEvent) => {
+      if (!isAddingList) {
+        return;
+      }
+      const descendants = Array.from(
+        addListButtonRef.current?.querySelectorAll('*') || []
+      );
+      const isInListInputContainer = [
+        ...descendants,
+        addListButtonRef.current,
+      ].some((el) => el === e.target);
+      if (isInListInputContainer) {
+        return;
+      }
+      setIsAddingList(false);
+    },
+    [isAddingList]
+  );
+
+  React.useEffect(() => {
+    const scrollWidth = listContainerRef.current?.scrollWidth ?? 0;
+    listContainerRef.current?.scrollTo({ top: 0, left: scrollWidth + 900 });
+    setScrollToEnd(false);
+  }, [listContainerRef, scrollToEnd]);
+
+  React.useEffect(() => {
+    inputRef.current?.focus();
+  }, [isAddingList]);
+
+  React.useEffect(() => {
+    window.addEventListener('mousedown', handleClickOutside);
+    return () => window.removeEventListener('mousedown', handleClickOutside);
+  }, [handleClickOutside]);
+
+  const handleAddList = () => {
+    mutation.mutate({ boardId, newList });
+    setNewList({ title: '' });
+    setScrollToEnd(true);
+  };
+
+  return (
+    <Collapsible.Root
+      ref={addListButtonRef}
+      className={styles.addListContainer}
+      open={isAddingList}
+      onOpenChange={setIsAddingList}
+    >
+      <Collapsible.Trigger asChild>
+        {!isAddingList ? (
+          <div className={styles.addListButton}>
+            <FiPlus className={styles.plusIcon} />
+            Add a list
+          </div>
+        ) : null}
+      </Collapsible.Trigger>
+      <Collapsible.Content className={styles.collapsibleContent}>
+        {isAddingList && (
+          <>
+            <input
+              ref={inputRef}
+              className={styles.input}
+              placeholder="Enter list title..."
+              type="text"
+              value={newList.title}
+              onChange={(e) => setNewList({ title: e.target.value })}
+            />
+            <div className={styles.addCardButtonContainer}>
+              <button
+                className={styles.addCardButton}
+                disabled={!newList.title}
+                onClick={handleAddList}
+              >
+                Add list
+              </button>
+              <VscChromeClose
+                className={styles.closeIcon}
+                onClick={() => setIsAddingList(false)}
+              />
+            </div>
+          </>
+        )}
+      </Collapsible.Content>
+    </Collapsible.Root>
+  );
+}

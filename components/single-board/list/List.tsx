@@ -85,7 +85,7 @@ export function List({ boardId, list, index }: ListProps) {
                 ref={dropProvided.innerRef}
                 {...dropProvided.droppableProps}
               >
-                {list.cards.map((card, index) => (
+                {list.cards?.map((card, index) => (
                   <Card key={card.id} card={card} index={index} />
                 ))}
                 {dropProvided.placeholder}
@@ -112,18 +112,18 @@ export function List({ boardId, list, index }: ListProps) {
                 }}
               />
               <div className={styles.addCardButtonContainer}>
-              <button
-                ref={addCardButtonRef}
-                className={styles.addCardButton}
-                disabled={!cardToAdd.title}
-                onClick={handleAddCard}
-              >
-                Add card
-              </button>
-              <VscChromeClose
-                className={styles.closeIcon}
-                onClick={() => setIsAddingCard(false)}
-              />
+                <button
+                  ref={addCardButtonRef}
+                  className={styles.addCardButton}
+                  disabled={!cardToAdd.title}
+                  onClick={handleAddCard}
+                >
+                  Add card
+                </button>
+                <VscChromeClose
+                  className={styles.closeIcon}
+                  onClick={() => setIsAddingCard(false)}
+                />
               </div>
             </div>
           ) : (
