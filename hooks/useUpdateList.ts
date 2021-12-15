@@ -4,9 +4,9 @@ import { axiosClient } from 'utils/api/client';
 import { Board, Card, List } from '../utils/api/types';
 
 type MutationVariables = {
-  originListId: string;
+  originListId: number;
   updatedOriginCards: Card[];
-  destinationListId?: string;
+  destinationListId?: number;
   updatedDestinationCards?: Card[];
 };
 

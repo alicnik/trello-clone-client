@@ -1,5 +1,5 @@
 import { getSingleBoard } from 'utils/api/boards';
-import { Board } from 'utils/api/types';
+import { Board, Card } from 'utils/api/types';
 import {
   GetServerSidePropsContext,
   GetServerSidePropsResult,
@@ -8,13 +8,12 @@ import {
 import * as React from 'react';
 import { SingleBoardLayout } from 'components/single-board';
 import * as styles from 'styles/single-board.css';
-import { useMutation, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { List } from 'components/single-board';
 import axios from 'axios';
 import { useUpdateBoard } from 'hooks/useUpdateBoard';
 import { useUpdateList } from 'hooks/useUpdateList';
-import { getBackground } from 'utils';
 import { useRouter } from 'next/router';
 import { getSession, useSession } from 'next-auth/react';
 import { Session } from 'next-auth';
@@ -107,10 +106,10 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
 
     // Reorder cards
     const originListIndex = board.lists.findIndex(
-      (list) => list.id === source.droppableId
+      (list) => String(list.id) === source.droppableId
     );
     const endListIndex = board.lists.findIndex(
-      (list) => list.id === destination.droppableId
+      (list) => String(list.id) === destination.droppableId
     );
     const newLists = [...board.lists];
 
@@ -171,7 +170,12 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
                 {...provided.droppableProps}
               >
                 {board.lists.map((list, index) => (
-                  <List key={list.id} list={list} index={index} />
+                  <List
+                    key={list.id}
+                    boardId={board.id}
+                    list={list}
+                    index={index}
+                  />
                 ))}
                 {provided.placeholder}
               </div>

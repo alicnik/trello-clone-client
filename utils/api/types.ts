@@ -23,7 +23,7 @@ export interface User {
 }
 
 export interface List {
-  id: string;
+  id: number;
   title: string;
   board: Board;
   cards: Card[];
