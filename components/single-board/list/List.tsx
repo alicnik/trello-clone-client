@@ -4,6 +4,7 @@ import { Draggable, Droppable } from 'react-beautiful-dnd';
 import * as styles from './list.css';
 import { Card } from 'components/single-board';
 import { useAddCard } from 'hooks/useAddCard';
+import { VscChromeClose } from 'react-icons/vsc';
 
 interface ListProps {
   boardId: string;
@@ -14,6 +15,7 @@ interface ListProps {
 
 export function List({ boardId, list, index }: ListProps) {
   const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
+  const addCardButtonRef = React.useRef<HTMLButtonElement>(null);
   const [cardToAdd, setCardToAdd] = React.useState({
     title: '',
     board: { id: boardId },
@@ -22,20 +24,44 @@ export function List({ boardId, list, index }: ListProps) {
   const mutation = useAddCard();
   // console.log(list);
 
-  const handleAddCard = () => {
+  const handleAddCard = React.useCallback(() => {
     mutation.mutate({
       boardId,
       listId: list.id,
       newCard: cardToAdd,
     });
     setCardToAdd({ board: { id: boardId }, title: '' });
-  };
+  }, [boardId, cardToAdd, list.id, mutation]);
 
   React.useEffect(() => {
     if (isAddingCard && !cardToAdd.title) {
       textAreaRef.current?.focus();
     }
   }, [isAddingCard, cardToAdd.title]);
+
+  const handleClickOutside = React.useCallback(
+    (e: MouseEvent) => {
+      if (!isAddingCard) {
+        return;
+      }
+      if (
+        e.target === addCardButtonRef.current ||
+        e.target === textAreaRef.current
+      ) {
+        return;
+      }
+      if (cardToAdd.title) {
+        handleAddCard();
+      }
+      setIsAddingCard(false);
+    },
+    [cardToAdd.title, handleAddCard, isAddingCard]
+  );
+
+  React.useEffect(() => {
+    window.addEventListener('click', handleClickOutside);
+    return () => window.removeEventListener('click', handleClickOutside);
+  }, [handleClickOutside]);
 
   return (
     <Draggable draggableId={String(list.id)} index={index}>
@@ -67,20 +93,39 @@ export function List({ boardId, list, index }: ListProps) {
             )}
           </Droppable>
           {isAddingCard ? (
-            <>
+            <div>
               <textarea
                 ref={textAreaRef}
+                className={styles.textarea}
                 placeholder="Enter a title for this card..."
                 value={cardToAdd.title}
-                onChange={(e) =>
-                  setCardToAdd({ ...cardToAdd, title: e.target.value })
-                }
+                onKeyDown={(e) => {
+                  if (e.code === 'Enter') {
+                    e.preventDefault();
+                    if (cardToAdd.title) {
+                      handleAddCard();
+                    }
+                  }
+                }}
+                onChange={(e) => {
+                  setCardToAdd({ ...cardToAdd, title: e.currentTarget.value });
+                }}
               />
-              <button disabled={!cardToAdd.title} onClick={handleAddCard}>
+              <div className={styles.addCardButtonContainer}>
+              <button
+                ref={addCardButtonRef}
+                className={styles.addCardButton}
+                disabled={!cardToAdd.title}
+                onClick={handleAddCard}
+              >
                 Add card
               </button>
-              <button onClick={() => setIsAddingCard(false)}>X</button>
-            </>
+              <VscChromeClose
+                className={styles.closeIcon}
+                onClick={() => setIsAddingCard(false)}
+              />
+              </div>
+            </div>
           ) : (
             <button
               className={styles.addCard}

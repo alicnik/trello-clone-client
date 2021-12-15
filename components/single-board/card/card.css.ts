@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+import { style } from '@vanilla-extract/css';
 
 export const card = style({
   backgroundColor: '#fff',
@@ -10,5 +10,8 @@ export const card = style({
   padding: '0.5rem',
   fontSize: '0.8rem',
   marginBottom: '0.5rem',
+  lineHeight: '1.25rem',
+  overflow: 'hidden',
+  wordWrap: 'break-word',
+  color: '#172b4d',
 });
-

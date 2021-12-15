@@ -39,3 +39,43 @@ export const addCard = style({
     },
   },
 });
+
+export const textarea = style({
+  resize: 'vertical',
+  color: '#172b4d',
+  fontFamily: `-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif`,
+  lineHeight: '1.25rem',
+  boxShadow: '0 1px 0 #091e4240',
+  borderRadius: 3,
+  padding: '0.5rem',
+  display: 'block',
+  width: '100%',
+  marginBottom: '0.5rem',
+});
+
+export const addCardButtonContainer = style({
+  display: 'flex',
+  alignItems: 'center',
+});
+
+export const addCardButton = style({
+  border: 'none',
+  backgroundColor: '#0079bf',
+  color: '#fff',
+  padding: '0.5rem 0.75rem',
+  borderRadius: 3,
+  cursor: 'pointer',
+  marginRight: '0.75rem',
+
+  selectors: {
+    '&:hover': {
+      backgroundColor: '#026aa7',
+    },
+  },
+});
+
+export const closeIcon = style({
+  cursor: 'pointer',
+  transform: 'scale(1.5)',
+  color: '#6b778c',
+});
