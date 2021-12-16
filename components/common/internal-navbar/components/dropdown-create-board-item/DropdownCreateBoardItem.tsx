@@ -111,8 +111,10 @@ export function DropdownCreateBoardItem() {
           unsplashPhotos={unsplashPhotos}
           setUnsplashPhotos={setUnsplashPhotos}
           side="right"
+          shouldOffsetAlignment={true}
+          alignOffset={-100}
           sideOffset={8}
-          alignOffset={-135}
+          asModal={false}
         >
           <div className={styles.thumbnailContainer}>
             {suggestedUnsplashPhotos.map((value) => (

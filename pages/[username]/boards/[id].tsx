@@ -97,6 +97,7 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
       left: scrollToEnd + 900,
       behavior: 'smooth',
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [board?.lists.length, listContainerRef.current]);
 
   const handleDragEnd = async (result: DropResult) => {

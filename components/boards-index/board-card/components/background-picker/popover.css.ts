@@ -13,7 +13,7 @@ export const content = style({
   borderRadius: 3,
   padding: '1rem',
   fontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif`,
-  maxHeight: '95vh',
+  maxHeight: '80vh',
   overflow: 'hidden',
   boxShadow: '0 8px 16px -4px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%)',
 });
@@ -58,8 +58,8 @@ export const grid = style({
 });
 
 export const backgroundThumbnailLarge = style({
-  height: '100%',
-  width: '100%',
+  height: '100% !important',
+  width: '100% !important',
   borderRadius: 3,
 });
 

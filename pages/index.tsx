@@ -31,7 +31,7 @@ const Home: NextPage = () => {
 
     const observer = new IntersectionObserver(
       (entries) => setIsScrolling(!entries[0].isIntersecting),
-      { rootMargin: '-80% 0px 0px 0px' }
+      { rootMargin: '-70% 0px 0px 0px' }
     );
 
     observer.observe(intersectionRef);

@@ -16,9 +16,11 @@ interface BackgroundPickerProps {
   unsplashPhotos: UnsplashItem[];
   setUnsplashPhotos: React.Dispatch<React.SetStateAction<UnsplashItem[]>>;
   backgroundContainerStyles?: string;
+  asModal?: boolean;
   side?: 'right' | 'bottom';
   alignOffset?: number;
   sideOffset?: number;
+  shouldOffsetAlignment?: boolean;
 }
 
 export function BackgroundPicker({
@@ -30,11 +32,13 @@ export function BackgroundPicker({
   side = 'bottom',
   alignOffset = 0,
   sideOffset = -100,
+  asModal = false,
+  shouldOffsetAlignment = false,
   children,
 }: React.PropsWithChildren<BackgroundPickerProps>) {
   const [view, setView] = React.useState<'all' | 'photos' | 'colours'>('all');
   return (
-    <Popover.Root modal>
+    <Popover.Root modal={asModal}>
       <Popover.Anchor asChild>
         <div className={backgroundContainerStyles}>
           {children}
@@ -44,7 +48,19 @@ export function BackgroundPicker({
             sideOffset={sideOffset}
             align="start"
             side={side}
-            alignOffset={alignOffset}
+            alignOffset={
+              shouldOffsetAlignment
+                ? view === 'photos'
+                  ? alignOffset - 100
+                  : alignOffset
+                : 0
+            }
+            // alignOffset={view === 'photos' ? alignOffset : alignOffset}
+            onInteractOutside={(e) => {
+              if (e.type === 'dismissableLayer.focusOutside') {
+                e.preventDefault();
+              }
+            }}
           >
             <section className={popoverStyles.content}>
               {view === 'all' ? (

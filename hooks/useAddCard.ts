@@ -5,7 +5,7 @@ import { Board, Card } from '../utils/api/types';
 
 interface MutationArgs {
   boardId: string;
-  listId: number;
+  listId: string;
   newCard: { title: string; board: { id: string } };
 }
 
