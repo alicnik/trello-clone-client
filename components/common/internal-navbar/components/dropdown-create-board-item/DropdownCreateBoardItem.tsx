@@ -13,6 +13,7 @@ import { BsThreeDots } from 'react-icons/bs';
 import { createBoard } from 'utils/api';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { useNavbarContext } from '..';
 
 export interface Form {
   boardName: string;
@@ -36,7 +37,9 @@ export function DropdownCreateBoardItem() {
   ];
 
   const [form, setForm] = React.useState<Form>(() => {
-    const existingValues = localStorage.getItem('dropdown-create-board-values');
+    const existingValues = sessionStorage.getItem(
+      'dropdown-create-board-values'
+    );
     if (existingValues) {
       return JSON.parse(existingValues);
     }
@@ -45,9 +48,14 @@ export function DropdownCreateBoardItem() {
       background: suggestedUnsplashPhotos[0],
     };
   });
+  const [touched, setTouched] = React.useState(false);
+  const { closeDropdown } = useNavbarContext();
 
   React.useEffect(() => {
-    localStorage.setItem('dropdown-create-board-values', JSON.stringify(form));
+    sessionStorage.setItem(
+      'dropdown-create-board-values',
+      JSON.stringify(form)
+    );
   }, [form]);
 
   const handleCreateBoardClick = async () => {
@@ -80,7 +88,8 @@ export function DropdownCreateBoardItem() {
         pathname: `/${username}/boards/${newBoard.id}`,
         query: { username },
       });
-      localStorage.removeItem('dropdown-create-board-values');
+      closeDropdown();
+      sessionStorage.removeItem('dropdown-create-board-values');
     } catch (err) {
       console.error(err);
     }
@@ -145,8 +154,9 @@ export function DropdownCreateBoardItem() {
           className={styles.boardTitleInput}
           value={form.boardName}
           onChange={(e) => setForm({ ...form, boardName: e.target.value })}
+          onBlur={() => setTouched(true)}
         />
-        {!form.boardName && (
+        {!form.boardName && touched && (
           <p className={styles.error}>
             <span role="img" aria-label="wave" className={styles.errorEmoji}>
               👋
