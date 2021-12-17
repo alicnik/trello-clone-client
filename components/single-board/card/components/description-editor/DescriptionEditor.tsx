@@ -76,7 +76,7 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
     </div>
   ) : (
     <div onClick={() => setIsEditing(true)}>
-      <ReactMarkdown children={description} />
+      <ReactMarkdown>{description}</ReactMarkdown>
     </div>
   );
 }
