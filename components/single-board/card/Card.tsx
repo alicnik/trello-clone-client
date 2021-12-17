@@ -24,7 +24,12 @@ export function Card({ card, index }: CardProps) {
               {...provided.dragHandleProps}
             >
               {card.title}
-              {card.description && <GrTextAlignFull />}
+              {card.description && (
+                <>
+                  <br />
+                  <GrTextAlignFull />
+                </>
+              )}
             </div>
           </Dialog.Trigger>
           <Dialog.Overlay className={styles.overlay} />

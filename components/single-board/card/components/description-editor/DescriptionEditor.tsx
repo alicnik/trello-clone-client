@@ -7,18 +7,31 @@ import { Card } from 'utils/api/types';
 import { FormattingPopover } from '../formatting-popover';
 import { GrTextAlignFull } from 'react-icons/gr';
 import * as styles from './description-editor.css';
+import { useUpdateCard } from 'hooks/useUpdateCard';
 
 interface DescriptionEditorProps {
   card: Card;
 }
 
 export function DescriptionEditor({ card }: DescriptionEditorProps) {
+  const mutation = useUpdateCard({ cardId: card.id, boardId: card.board.id });
   const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
   const saveButtonRef = React.useRef<HTMLButtonElement>(null);
   const formattingButtonRef = React.useRef<HTMLButtonElement>(null);
   const [isEditing, setIsEditing] = React.useState(false);
   const [description, setDescription] = React.useState(card.description ?? '');
   const [popoverOpen, setPopoverOpen] = React.useState(false);
+
+  const parsedDescription = description
+    .replace(/(?<![-=])\n(?![-=])/g, '\n\n')
+    .replace(/\n\n\n/g, '\n\n &nbsp; \n\n');
+
+  console.log(JSON.stringify(parsedDescription));
+
+  const handleSave = React.useCallback(() => {
+    mutation.mutate({ description });
+    setIsEditing(false);
+  }, [description, mutation]);
 
   const handleClickOutside = React.useCallback(
     (e: MouseEvent) => {
@@ -44,16 +57,20 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
       ) {
         return;
       }
+      if (description !== card.description) {
+        handleSave();
+      }
       setIsEditing(false);
     },
-    [isEditing, popoverOpen]
+    [card.description, description, handleSave, isEditing, popoverOpen]
   );
 
   React.useEffect(() => {
-    if (!isEditing) {
+    if (!isEditing || !textAreaRef.current) {
       return;
     }
-    textAreaRef.current?.focus();
+    textAreaRef.current.focus();
+    textAreaRef.current.style.height = textAreaRef.current.scrollHeight + 'px';
   }, [isEditing]);
 
   React.useEffect(() => {
@@ -83,11 +100,18 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
             placeholder="Add a more detailed description..."
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            onClick={() => !isEditing && setIsEditing(true)}
+            onClick={(e) => {
+              console.log(e);
+              // !isEditing && setIsEditing(true);
+            }}
           />
           {isEditing && (
             <div className={styles.controlsContainer}>
-              <button ref={saveButtonRef} className={styles.saveButton}>
+              <button
+                ref={saveButtonRef}
+                className={styles.saveButton}
+                onClick={handleSave}
+              >
                 Save
               </button>
               <VscChromeClose
@@ -104,9 +128,24 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
       ) : (
         <div
           className={styles.markdownContainer}
-          onClick={() => setIsEditing(true)}
+          onClick={(e) => {
+            const target = e.target as HTMLElement;
+            if (target.nodeName === 'A') {
+              return;
+            }
+            setIsEditing(true);
+          }}
         >
-          <ReactMarkdown>{description}</ReactMarkdown>
+          <ReactMarkdown
+            components={{
+              ul: ({ node, ...props }) => (
+                <ul style={{ paddingLeft: '1rem' }} {...props} />
+              ),
+            }}
+            linkTarget="_blank"
+          >
+            {parsedDescription}
+          </ReactMarkdown>
         </div>
       )}
     </div>

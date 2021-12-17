@@ -31,6 +31,7 @@ export interface List {
 }
 
 export interface Card {
+  [key: string]: any;
   id: string;
   title: string;
   description: string | null;
