@@ -7,6 +7,7 @@ import { Card } from 'utils/api/types';
 import { FormattingPopover } from '../formatting-popover';
 import { GrTextAlignFull } from 'react-icons/gr';
 import * as styles from './description-editor.css';
+import * as markdownStyles from './markdown-styles.css';
 import { useUpdateCard } from 'hooks/useUpdateCard';
 
 interface DescriptionEditorProps {
@@ -138,8 +139,23 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
         >
           <ReactMarkdown
             components={{
+              h1: ({ node, ...props }) => (
+                <h1 className={markdownStyles.h1} {...props} />
+              ),
+              h2: ({ node, ...props }) => (
+                <h2 className={markdownStyles.h2} {...props} />
+              ),
+              p: ({ node, ...props }) => (
+                <p className={markdownStyles.p} {...props} />
+              ),
               ul: ({ node, ...props }) => (
-                <ul style={{ paddingLeft: '1rem' }} {...props} />
+                <ul className={markdownStyles.ul} {...props} />
+              ),
+              li: ({ node, ...props }) => (
+                <li className={markdownStyles.li} {...props} />
+              ),
+              a: ({ node, ...props }) => (
+                <a className={markdownStyles.a} {...props} />
               ),
             }}
             linkTarget="_blank"

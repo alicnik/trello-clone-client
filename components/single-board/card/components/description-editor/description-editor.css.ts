@@ -36,7 +36,7 @@ export const textArea = style({
   borderRadius: 3,
 
   selectors: {
-    '&:hover': {
+    '&:hover:not(:focus)': {
       backgroundColor: '#091e4214',
     },
     '&:focus': {
