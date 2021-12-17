@@ -5,6 +5,8 @@ import { VscChromeClose } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
 import { Card } from 'utils/api/types';
 import { FormattingPopover } from '../formatting-popover';
+import { GrTextAlignFull } from 'react-icons/gr';
+import * as styles from './description-editor.css';
 
 interface DescriptionEditorProps {
   card: Card;
@@ -56,17 +58,39 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
 
   return isEditing || !description ? (
     <div>
+      <div className={styles.titleContainer}>
+        <GrTextAlignFull className={styles.icon} />
+        <h2 className={styles.heading}>Description</h2>
+        {!isEditing && (
+          <button
+            className={styles.greyButton}
+            onClick={() => setIsEditing(true)}
+          >
+            Edit
+          </button>
+        )}
+      </div>
       <textarea
         ref={textAreaRef}
+        className={styles.textArea}
+        style={{
+          padding: isEditing ? '0.5rem' : 0,
+          backgroundColor: isEditing ? '#fff' : 'transparent',
+        }}
         placeholder="Add a more detailed description..."
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         onClick={() => !isEditing && setIsEditing(true)}
       />
       {isEditing && (
-        <div>
-          <button ref={saveButtonRef}>Save</button>
-          <VscChromeClose onClick={() => setIsEditing(false)} />
+        <div className={styles.controlsContainer}>
+          <button ref={saveButtonRef} className={styles.saveButton}>
+            Save
+          </button>
+          <VscChromeClose
+            className={styles.closeIcon}
+            onClick={() => setIsEditing(false)}
+          />
           <FormattingPopover
             ref={formattingButtonRef}
             setPopoverOpen={setPopoverOpen}

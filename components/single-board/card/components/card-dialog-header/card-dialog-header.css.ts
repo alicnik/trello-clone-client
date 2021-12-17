@@ -1,9 +1,10 @@
-import { style } from "@vanilla-extract/css";
+import { style } from '@vanilla-extract/css';
 
 export const cardDialogHeader = style({
   display: 'flex',
   justifyContent: 'space-between',
   gap: '0.5rem',
+  marginBottom: '2rem',
 });
 
 export const cardIcon = style({
