@@ -5,17 +5,19 @@ import * as styles from './popover-header.css';
 
 interface PopoverHeaderProps {
   heading: React.ReactNode;
+  style?: React.CSSProperties;
   showBackButton?: boolean;
   goBack?: () => void;
 }
 
 export function PopoverHeader({
   heading,
+  style,
   showBackButton,
   goBack,
 }: PopoverHeaderProps) {
   return (
-    <header className={styles.header}>
+    <header className={styles.header} style={style}>
       {showBackButton ? (
         <span className={styles.backButton} onClick={goBack}>
           <HiOutlineChevronLeft />

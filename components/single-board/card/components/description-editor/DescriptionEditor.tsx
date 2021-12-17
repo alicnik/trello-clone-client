@@ -49,14 +49,19 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
     [isEditing, popoverOpen]
   );
 
-  // React.useEffect(() => console.log(formattingButtonRef.current));
+  React.useEffect(() => {
+    if (!isEditing) {
+      return;
+    }
+    textAreaRef.current?.focus();
+  }, [isEditing]);
 
   React.useEffect(() => {
     window.addEventListener('click', handleClickOutside);
     return () => window.removeEventListener('click', handleClickOutside);
   }, [handleClickOutside]);
 
-  return isEditing || !description ? (
+  return (
     <div>
       <div className={styles.titleContainer}>
         <GrTextAlignFull className={styles.icon} />
@@ -70,37 +75,40 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
           </button>
         )}
       </div>
-      <textarea
-        ref={textAreaRef}
-        className={styles.textArea}
-        style={{
-          padding: isEditing ? '0.5rem' : 0,
-          backgroundColor: isEditing ? '#fff' : 'transparent',
-        }}
-        placeholder="Add a more detailed description..."
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        onClick={() => !isEditing && setIsEditing(true)}
-      />
-      {isEditing && (
-        <div className={styles.controlsContainer}>
-          <button ref={saveButtonRef} className={styles.saveButton}>
-            Save
-          </button>
-          <VscChromeClose
-            className={styles.closeIcon}
-            onClick={() => setIsEditing(false)}
+      {isEditing || !description ? (
+        <>
+          <textarea
+            ref={textAreaRef}
+            className={styles.textArea}
+            placeholder="Add a more detailed description..."
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            onClick={() => !isEditing && setIsEditing(true)}
           />
-          <FormattingPopover
-            ref={formattingButtonRef}
-            setPopoverOpen={setPopoverOpen}
-          />
+          {isEditing && (
+            <div className={styles.controlsContainer}>
+              <button ref={saveButtonRef} className={styles.saveButton}>
+                Save
+              </button>
+              <VscChromeClose
+                className={styles.closeIcon}
+                onClick={() => setIsEditing(false)}
+              />
+              <FormattingPopover
+                ref={formattingButtonRef}
+                setPopoverOpen={setPopoverOpen}
+              />
+            </div>
+          )}
+        </>
+      ) : (
+        <div
+          className={styles.markdownContainer}
+          onClick={() => setIsEditing(true)}
+        >
+          <ReactMarkdown>{description}</ReactMarkdown>
         </div>
       )}
-    </div>
-  ) : (
-    <div onClick={() => setIsEditing(true)}>
-      <ReactMarkdown>{description}</ReactMarkdown>
     </div>
   );
 }

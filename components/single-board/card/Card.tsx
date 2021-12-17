@@ -4,6 +4,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import * as styles from './card.css';
 import * as Dialog from '@radix-ui/react-dialog';
 import { CardDialogHeader, DescriptionEditor } from './components';
+import { GrTextAlignFull } from 'react-icons/gr';
 
 interface CardProps {
   card: CardI;
@@ -23,6 +24,7 @@ export function Card({ card, index }: CardProps) {
               {...provided.dragHandleProps}
             >
               {card.title}
+              {card.description && <GrTextAlignFull />}
             </div>
           </Dialog.Trigger>
           <Dialog.Overlay className={styles.overlay} />
