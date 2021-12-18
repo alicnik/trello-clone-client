@@ -77,10 +77,7 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
     if (handleClickOutsideRef.current) {
       window.removeEventListener('mousedown', handleClickOutsideRef.current);
     }
-    window.addEventListener('mousedown', (e) => {
-      console.log('running in DescriptionEditor');
-      handleClickOutside(e);
-    });
+    window.addEventListener('mousedown', handleClickOutside);
     handleClickOutsideRef.current = handleClickOutside;
     return () => {
       if (handleClickOutsideRef.current) {

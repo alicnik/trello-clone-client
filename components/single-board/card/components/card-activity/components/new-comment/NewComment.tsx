@@ -49,10 +49,7 @@ export function NewComment({ cardId, listId }: NewCommentProps) {
     if (handleClickOutsideRef.current) {
       window.removeEventListener('mousedown', handleClickOutsideRef.current);
     }
-    window.addEventListener('mousedown', (e) => {
-      console.log('running in NewComment');
-      handleClickOutside(e);
-    });
+    window.addEventListener('mousedown', handleClickOutside);
     handleClickOutsideRef.current = handleClickOutside;
     return () => {
       if (handleClickOutsideRef.current) {
