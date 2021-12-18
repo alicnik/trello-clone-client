@@ -3,7 +3,7 @@ import * as styles from './card-dialog-header.css';
 import * as Dialog from '@radix-ui/react-dialog';
 import { VscChromeClose } from 'react-icons/vsc';
 import { Card } from 'utils/api/types';
-import { useUpdateCard } from 'hooks/useUpdateCard';
+import { useUpdateCard } from 'hooks';
 
 interface CardDialogHeaderProps {
   card: Card;

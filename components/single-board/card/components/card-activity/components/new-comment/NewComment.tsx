@@ -3,7 +3,7 @@ import { useAddComment, useInitials } from 'hooks';
 
 import * as styles from './new-comment.css';
 import * as baseStyles from '../../../description-editor/description-editor.css';
-import { useBoardContext } from 'hooks/useBoardContext';
+import { useBoardContext } from 'hooks';
 import { content } from 'components/common/internal-navbar/components/navbar-item/navbar-item.css';
 
 interface NewCommentProps {

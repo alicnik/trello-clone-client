@@ -16,9 +16,7 @@ import { Board } from 'utils/api/types';
 import { AddListCollapsible, SingleBoardLayout } from 'components/single-board';
 import * as styles from 'styles/single-board.css';
 import { List } from 'components/single-board';
-import { useUpdateBoard } from 'hooks/useUpdateBoard';
-import { useUpdateList } from 'hooks/useUpdateList';
-import { BoardContextProvider } from 'hooks/useBoardContext';
+import { useUpdateBoard, useUpdateList, BoardContextProvider } from 'hooks';
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext

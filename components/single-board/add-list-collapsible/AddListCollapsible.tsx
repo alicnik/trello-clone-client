@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FiPlus } from 'react-icons/fi';
 import { VscChromeClose } from 'react-icons/vsc';
 import * as Collapsible from '@radix-ui/react-collapsible';
-import { useAddList } from 'hooks/useAddList';
+import { useAddList } from 'hooks';
 import * as styles from './add-list-collapsible.css';
 
 interface AddListCollapsibleProps {

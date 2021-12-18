@@ -8,7 +8,7 @@ import { FormattingPopover } from '../formatting-popover';
 import { GrTextAlignFull } from 'react-icons/gr';
 import * as styles from './description-editor.css';
 import * as markdownStyles from './markdown-styles.css';
-import { useUpdateCard } from 'hooks/useUpdateCard';
+import { useUpdateCard } from 'hooks';
 
 interface DescriptionEditorProps {
   card: Card;

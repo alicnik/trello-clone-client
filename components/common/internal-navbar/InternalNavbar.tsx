@@ -8,7 +8,7 @@ import * as styles from './internal-navbar.css';
 import { DropdownBoardsContent } from './components';
 import { DropdownCreateBoardItem } from './components/dropdown-create-board-item';
 import { DropdownAccountItem } from './components/dropdown-account-item';
-import { useInitials } from 'hooks/useInitals';
+import { useInitials } from 'hooks';
 
 interface InternalNavbarProps {
   username: string;

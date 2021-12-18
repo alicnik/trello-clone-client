@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useFavouriteBoard } from 'hooks/useFavouriteBoard';
+import { useFavouriteBoard } from 'hooks';
 import { HiOutlineStar, HiStar } from 'react-icons/hi';
 import type { Board } from 'utils/api/types';
 import * as styles from './favourite-star.css';
