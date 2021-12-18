@@ -7,7 +7,7 @@ export interface Board {
   created: Date;
   owner: Pick<User, 'username' | 'emailAddress' | 'id' | 'cardMemberships'>;
   lists: List[];
-  cards: [];
+  cards: Card[];
   starredBy: User[];
 }
 
@@ -55,7 +55,7 @@ export interface Comment {
   id: string;
   body: string;
   created: Date;
-  author: User;
-  parentCard: Card;
-  linkedCards: Card[];
+  author?: User | null;
+  parentCard?: Card | null;
+  linkedCards?: Card[];
 }

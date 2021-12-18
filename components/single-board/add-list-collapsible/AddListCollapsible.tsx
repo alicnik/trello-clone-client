@@ -16,6 +16,8 @@ export function AddListCollapsible({
 }: AddListCollapsibleProps) {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const addListButtonRef = React.useRef<HTMLDivElement>(null);
+  const handleClickOutsideRef = React.useRef<(e: MouseEvent) => void>();
+
   const [isAddingList, setIsAddingList] = React.useState(false);
   const [newList, setNewList] = React.useState({ title: '' });
   const [scrollToEnd, setScrollToEnd] = React.useState(false);
@@ -23,6 +25,7 @@ export function AddListCollapsible({
 
   const handleClickOutside = React.useCallback(
     (e: MouseEvent) => {
+      // console.log('running in AddListCollapsible')
       if (!isAddingList) {
         return;
       }
@@ -52,8 +55,17 @@ export function AddListCollapsible({
   }, [isAddingList]);
 
   React.useEffect(() => {
+    if (handleClickOutsideRef.current) {
+      window.removeEventListener('mousedown', handleClickOutsideRef.current);
+    }
     window.addEventListener('mousedown', handleClickOutside);
-    return () => window.removeEventListener('mousedown', handleClickOutside);
+    handleClickOutsideRef.current = handleClickOutside;
+    return () => {
+      if (handleClickOutsideRef.current) {
+        window.removeEventListener('mousedown', handleClickOutsideRef.current);
+      }
+      window.removeEventListener('mousedown', handleClickOutside);
+    };
   }, [handleClickOutside]);
 
   const handleAddList = () => {

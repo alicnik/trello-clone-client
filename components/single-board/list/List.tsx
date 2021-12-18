@@ -12,6 +12,7 @@ interface ListProps {
 }
 
 export function List({ boardId, list, index }: ListProps) {
+  const addCardButtonRef = React.useRef<HTMLButtonElement>(null);
   const [isAddingCard, setIsAddingCard] = React.useState(false);
 
   return (
@@ -40,7 +41,12 @@ export function List({ boardId, list, index }: ListProps) {
                 {...dropProvided.droppableProps}
               >
                 {list.cards?.map((card, index) => (
-                  <Card key={card.id} card={card} index={index} />
+                  <Card
+                    key={card.id}
+                    card={card}
+                    listId={list.id}
+                    index={index}
+                  />
                 ))}
                 {dropProvided.placeholder}
               </div>
@@ -56,7 +62,11 @@ export function List({ boardId, list, index }: ListProps) {
           ) : (
             <button
               className={styles.addCard}
-              onClick={() => setIsAddingCard(true)}
+              ref={addCardButtonRef}
+              onClick={() => {
+                console.log('click');
+                setIsAddingCard(true);
+              }}
             >
               + Add a card
             </button>

@@ -17,6 +17,8 @@ export function ListTitle({
   dragProvided,
 }: ListTitleProps) {
   const inputRef = React.useRef<HTMLInputElement>(null);
+  const handleClickOutsideRef = React.useRef<(e: MouseEvent) => void>();
+
   const titleMutation = useUpdateListTitle({ boardId, listId });
   const [isEditingTitle, setIsEditingTitle] = React.useState(false);
   const [newTitle, setNewTitle] = React.useState(title);
@@ -28,6 +30,7 @@ export function ListTitle({
 
   const handleClickOutside = React.useCallback(
     (e: MouseEvent) => {
+      // console.log('running in ListTitle');
       if (!isEditingTitle) {
         return;
       }
@@ -40,8 +43,17 @@ export function ListTitle({
   );
 
   React.useEffect(() => {
-    window.addEventListener('click', handleClickOutside);
-    return () => window.removeEventListener('click', handleClickOutside);
+    if (handleClickOutsideRef.current) {
+      window.removeEventListener('mousedown', handleClickOutsideRef.current);
+    }
+    window.addEventListener('mousedown', handleClickOutside);
+    handleClickOutsideRef.current = handleClickOutside;
+    return () => {
+      if (handleClickOutsideRef.current) {
+        window.removeEventListener('mousedown', handleClickOutsideRef.current);
+      }
+      window.removeEventListener('mousedown', handleClickOutside);
+    };
   }, [handleClickOutside]);
 
   React.useEffect(() => {

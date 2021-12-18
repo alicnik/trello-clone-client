@@ -18,6 +18,7 @@ export function AddCardSection({
 }: AddCardSectionProps) {
   const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
   const addCardButtonRef = React.useRef<HTMLButtonElement>(null);
+  const handleClickOutsideRef = React.useRef<(e: MouseEvent) => void>();
   const [cardToAdd, setCardToAdd] = React.useState({
     title: '',
     board: { id: boardId },
@@ -41,6 +42,7 @@ export function AddCardSection({
 
   const handleClickOutside = React.useCallback(
     (e: MouseEvent) => {
+      console.log('running in AddCardSection');
       if (!isAddingCard) {
         return;
       }
@@ -59,8 +61,17 @@ export function AddCardSection({
   );
 
   React.useEffect(() => {
-    window.addEventListener('click', handleClickOutside);
-    return () => window.removeEventListener('click', handleClickOutside);
+    if (handleClickOutsideRef.current) {
+      window.removeEventListener('mousedown', handleClickOutsideRef.current);
+    }
+    window.addEventListener('mousedown', handleClickOutside);
+    handleClickOutsideRef.current = handleClickOutside;
+    return () => {
+      if (handleClickOutsideRef.current) {
+        window.removeEventListener('mousedown', handleClickOutsideRef.current);
+      }
+      window.removeEventListener('mousedown', handleClickOutside);
+    };
   }, [handleClickOutside]);
 
   return (

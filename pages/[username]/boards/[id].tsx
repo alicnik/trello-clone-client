@@ -18,6 +18,7 @@ import * as styles from 'styles/single-board.css';
 import { List } from 'components/single-board';
 import { useUpdateBoard } from 'hooks/useUpdateBoard';
 import { useUpdateList } from 'hooks/useUpdateList';
+import { BoardContextProvider } from 'hooks/useBoardContext';
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
@@ -80,6 +81,8 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
     );
     setWindowReady(true);
   }, [router, session?.accessToken]);
+
+  // console.log(board);
 
   React.useEffect(() => {
     if (
@@ -184,35 +187,37 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
         background={board.background}
       >
         {windowReady ? (
-          <div className={styles.outerContainer} ref={listContainerRef}>
-            <Droppable
-              droppableId="all-lists"
-              direction="horizontal"
-              type="list"
-            >
-              {(provided) => (
-                <div
-                  className={styles.listContainer}
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                >
-                  {board.lists.map((list, index) => (
-                    <List
-                      key={list.id}
-                      boardId={board.id}
-                      list={list}
-                      index={index}
-                    />
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-            <AddListCollapsible
-              boardId={board.id}
-              listContainerRef={listContainerRef}
-            />
-          </div>
+          <BoardContextProvider boardId={board.id}>
+            <div className={styles.outerContainer} ref={listContainerRef}>
+              <Droppable
+                droppableId="all-lists"
+                direction="horizontal"
+                type="list"
+              >
+                {(provided) => (
+                  <div
+                    className={styles.listContainer}
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                  >
+                    {board.lists.map((list, index) => (
+                      <List
+                        key={list.id}
+                        boardId={board.id}
+                        list={list}
+                        index={index}
+                      />
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+              <AddListCollapsible
+                boardId={board.id}
+                listContainerRef={listContainerRef}
+              />
+            </div>
+          </BoardContextProvider>
         ) : null}
       </SingleBoardLayout>
     </DragDropContext>

@@ -8,6 +8,7 @@ export const form = style({
   backgroundColor: '#FFF',
   borderRadius: 3,
   padding: '1.5rem 3rem',
+  minWidth: 345,
   maxWidth: 400,
   boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
   margin: '0 auto',

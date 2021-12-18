@@ -8,6 +8,7 @@ import * as styles from './internal-navbar.css';
 import { DropdownBoardsContent } from './components';
 import { DropdownCreateBoardItem } from './components/dropdown-create-board-item';
 import { DropdownAccountItem } from './components/dropdown-account-item';
+import { useInitials } from 'hooks/useInitals';
 
 interface InternalNavbarProps {
   username: string;
@@ -18,7 +19,7 @@ export function InternalNavbar({
   username,
   colour = 'translucent',
 }: InternalNavbarProps) {
-  const router = useRouter();
+  const initials = useInitials();
 
   return (
     <header
@@ -52,7 +53,7 @@ export function InternalNavbar({
         <div className={styles.rightNav}>
           <input type="search" />
           <NavbarItem
-            title="AN"
+            title={initials ?? 'YOU'}
             label="Account"
             withChevron={false}
             className={styles.userButton}

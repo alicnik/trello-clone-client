@@ -18,6 +18,7 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
   const mutation = useUpdateCard({ cardId: card.id, boardId: card.board.id });
   const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
   const saveButtonRef = React.useRef<HTMLButtonElement>(null);
+  const handleClickOutsideRef = React.useRef<(e: MouseEvent) => void>();
   const formattingButtonRef = React.useRef<HTMLButtonElement>(null);
   const [isEditing, setIsEditing] = React.useState(false);
   const [description, setDescription] = React.useState(card.description ?? '');
@@ -26,8 +27,6 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
   const parsedDescription = description
     .replace(/(?<![-=])\n(?![-=])/g, '\n\n')
     .replace(/\n\n\n/g, '\n\n &nbsp; \n\n');
-
-  console.log(JSON.stringify(parsedDescription));
 
   const handleSave = React.useCallback(() => {
     mutation.mutate({ description });
@@ -75,8 +74,20 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
   }, [isEditing]);
 
   React.useEffect(() => {
-    window.addEventListener('click', handleClickOutside);
-    return () => window.removeEventListener('click', handleClickOutside);
+    if (handleClickOutsideRef.current) {
+      window.removeEventListener('mousedown', handleClickOutsideRef.current);
+    }
+    window.addEventListener('mousedown', (e) => {
+      console.log('running in DescriptionEditor');
+      handleClickOutside(e);
+    });
+    handleClickOutsideRef.current = handleClickOutside;
+    return () => {
+      if (handleClickOutsideRef.current) {
+        window.removeEventListener('mousedown', handleClickOutsideRef.current);
+      }
+      window.removeEventListener('mousedown', handleClickOutside);
+    };
   }, [handleClickOutside]);
 
   return (
@@ -101,10 +112,7 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
             placeholder="Add a more detailed description..."
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            onClick={(e) => {
-              console.log(e);
-              // !isEditing && setIsEditing(true);
-            }}
+            onClick={(e) => !isEditing && setIsEditing(true)}
           />
           {isEditing && (
             <div className={styles.controlsContainer}>

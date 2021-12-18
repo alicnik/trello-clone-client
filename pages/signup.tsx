@@ -6,12 +6,13 @@ import { login, register } from 'utils/api';
 import { TextInput } from 'components/common';
 import { AuthLayout } from 'components/signup-login';
 import * as styles from '../styles/signup-login.css';
-import { setToken } from 'utils/api/lib';
 
 const SignUp: NextPage = () => {
   const router = useRouter();
   const [form, setForm] = React.useState({
     username: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
   });
@@ -30,8 +31,6 @@ const SignUp: NextPage = () => {
       const res = await register(form);
       const username = res.data.username;
       const loginRes = await login({ username, password: form.password });
-      const token = loginRes.data.access_token;
-      setToken(token);
       router.push(`/${username}/boards`);
     } catch (err) {
       console.error(err);
@@ -50,6 +49,24 @@ const SignUp: NextPage = () => {
           value={form.username}
           onChange={handleChange}
           autoComplete="username"
+        />
+        <TextInput
+          type="text"
+          name="firstName"
+          placeholder="Enter first name"
+          className={styles.input}
+          value={form.firstName}
+          onChange={handleChange}
+          autoComplete="given-name"
+        />
+        <TextInput
+          type="text"
+          name="lastName"
+          placeholder="Enter last name"
+          className={styles.input}
+          value={form.lastName}
+          onChange={handleChange}
+          autoComplete="family-name"
         />
         <TextInput
           type="email"

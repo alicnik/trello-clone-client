@@ -3,15 +3,20 @@ import { Card as CardI } from 'utils/api/types';
 import { Draggable } from 'react-beautiful-dnd';
 import * as styles from './card.css';
 import * as Dialog from '@radix-ui/react-dialog';
-import { CardDialogHeader, DescriptionEditor } from './components';
+import {
+  CardActivity,
+  CardDialogHeader,
+  DescriptionEditor,
+} from './components';
 import { GrTextAlignFull } from 'react-icons/gr';
 
 interface CardProps {
   card: CardI;
+  listId: string
   index: number;
 }
 
-export function Card({ card, index }: CardProps) {
+export function Card({ card, listId, index }: CardProps) {
   return (
     <Draggable draggableId={card.id} index={index}>
       {(provided) => (
@@ -40,6 +45,7 @@ export function Card({ card, index }: CardProps) {
           >
             <CardDialogHeader card={card} />
             <DescriptionEditor card={card} />
+            <CardActivity card={card} listId={listId} />
           </Dialog.Content>
         </Dialog.Root>
       )}
