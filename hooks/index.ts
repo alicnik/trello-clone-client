@@ -4,7 +4,7 @@ export * from './useFavouriteBoard';
 export * from './useUpdateBoard';
 export * from './useUpdateList';
 export * from './useUpdateListTitle';
-export * from './useInitals';
+export * from './useCustomSession';
 export * from './useAddComment';
 export * from './useBoardContext';
 export * from './useUpdateCard';

@@ -18,6 +18,7 @@ export const commentContainer = style({
 export const icon = style({
   marginRight: '1.25rem',
   transform: 'scale(1.4) translateX(2px)',
+  color: '#42536e',
 });
 
 export const headingMargin = style({

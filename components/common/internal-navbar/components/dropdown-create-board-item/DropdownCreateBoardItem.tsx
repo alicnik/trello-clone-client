@@ -14,6 +14,7 @@ import { createBoard } from 'utils/api';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useNavbarContext } from '..';
+import { useCustomSession } from 'hooks';
 
 export interface Form {
   boardName: string;
@@ -22,7 +23,7 @@ export interface Form {
 
 export function DropdownCreateBoardItem() {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { accessToken } = useCustomSession();
   const [unsplashPhotos, setUnsplashPhotos] =
     React.useState<UnsplashItem[]>(unsplashData);
   const suggestedUnsplashPhotos = unsplashPhotos
@@ -72,7 +73,7 @@ export function DropdownCreateBoardItem() {
             background: fullImgUrl,
             backgroundThumbnail: form.background,
           },
-          session?.accessToken as string
+          accessToken
         );
       } else {
         newBoard = await createBoard(
@@ -80,7 +81,7 @@ export function DropdownCreateBoardItem() {
             ...form,
             backgroundThumbnail: form.background,
           },
-          session?.accessToken as string
+          accessToken
         );
       }
       const username = router.query.username;

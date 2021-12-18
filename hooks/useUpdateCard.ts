@@ -2,6 +2,7 @@ import { useSession } from 'next-auth/react';
 import { useMutation, useQueryClient } from 'react-query';
 import { axiosClient } from 'utils/api/client';
 import { Board, Card, List } from 'utils/api/types';
+import { useCustomSession } from './useCustomSession';
 
 interface HookArgs {
   cardId: string;
@@ -11,7 +12,7 @@ interface HookArgs {
 type CardUpdate = Partial<Pick<Card, 'title' | 'description'>>;
 
 export function useUpdateCard({ cardId, boardId }: HookArgs) {
-  const { data: session } = useSession();
+  const { accessToken } = useCustomSession();
   const queryCache = useQueryClient();
 
   return useMutation(
@@ -19,7 +20,7 @@ export function useUpdateCard({ cardId, boardId }: HookArgs) {
       return axiosClient
         .patch<Board>(`/lists/cards/${cardId}`, updatedCard, {
           headers: {
-            Authorization: `Bearer ${session?.accessToken}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         })
         .then((res) => res.data);

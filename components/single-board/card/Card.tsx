@@ -36,7 +36,7 @@ export function Card({ card, listId, index }: CardProps) {
                   <GrTextAlignFull className={styles.descriptionIcon} />
                 </>
               )}
-              {card.comments.length > 0 && (
+              {card.comments && card.comments.length > 0 && (
                 <>
                   {card.description ? null : <br />}
                   <span className={styles.commentsIconContainer}>

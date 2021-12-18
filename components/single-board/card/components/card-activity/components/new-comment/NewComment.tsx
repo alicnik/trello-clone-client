@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { useAddComment, useClickOutside, useInitials } from 'hooks';
-
+import { useAddComment, useClickOutside, useCustomSession } from 'hooks';
 import * as styles from './new-comment.css';
 import * as baseStyles from '../../../description-editor/description-editor.css';
 import { useBoardContext } from 'hooks';
-import { content } from 'components/common/internal-navbar/components/navbar-item/navbar-item.css';
 
 interface NewCommentProps {
   cardId: string;
@@ -12,7 +10,7 @@ interface NewCommentProps {
 }
 
 export function NewComment({ cardId, listId }: NewCommentProps) {
-  const initials = useInitials();
+  const { initials } = useCustomSession();
   const boardId = useBoardContext();
   const mutation = useAddComment(cardId, listId, boardId);
 

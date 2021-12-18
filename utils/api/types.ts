@@ -40,7 +40,7 @@ export interface Card {
   boardList: List;
   members: User[];
   labels: Label[];
-  comments: Comment[];
+  comments: Comment[] | null;
   linkedComments: Comment[];
 }
 

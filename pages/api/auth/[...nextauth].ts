@@ -46,8 +46,17 @@ export default NextAuth({
     },
 
     async session({ session, token }) {
+      const customUser: {
+        firstName: string;
+        lastName: string;
+        username: string;
+      } = { ...(token.user as any) };
       session.accessToken = token.accessToken;
-      session.user = token.user as DefaultSession['user'];
+      session.user = {
+        name: customUser.firstName,
+        email: customUser.lastName,
+        image: customUser.username,
+      };
       session.expires = String(token.exp);
       return session;
     },

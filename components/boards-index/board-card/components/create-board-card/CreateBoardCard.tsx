@@ -13,10 +13,11 @@ import { useSession } from 'next-auth/react';
 import * as Popover from '@radix-ui/react-popover';
 import * as popoverStyles from '../background-picker/popover.css';
 import { BsThreeDots } from 'react-icons/bs';
+import { useCustomSession } from 'hooks';
 
 export function CreateBoardCard() {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { accessToken } = useCustomSession();
   const [unsplashPhotos, setUnsplashPhotos] =
     React.useState<UnsplashItem[]>(unsplashData);
   const suggestedBackgrounds = unsplashPhotos
@@ -51,7 +52,7 @@ export function CreateBoardCard() {
             background: fullImgUrl,
             backgroundThumbnail: form.background,
           },
-          session?.accessToken as string
+          accessToken
         );
       } else {
         newBoard = await createBoard(
@@ -59,7 +60,7 @@ export function CreateBoardCard() {
             ...form,
             backgroundThumbnail: form.background,
           },
-          session?.accessToken as string
+          accessToken
         );
       }
       const username = router.query.username;

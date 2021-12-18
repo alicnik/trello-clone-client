@@ -16,7 +16,12 @@ import { Board } from 'utils/api/types';
 import { AddListCollapsible, SingleBoardLayout } from 'components/single-board';
 import * as styles from 'styles/single-board.css';
 import { List } from 'components/single-board';
-import { useUpdateBoard, useUpdateList, BoardContextProvider } from 'hooks';
+import {
+  useUpdateBoard,
+  useUpdateList,
+  BoardContextProvider,
+  useCustomSession,
+} from 'hooks';
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
@@ -48,14 +53,14 @@ interface SingleBoardProps {
 
 const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { accessToken, status } = useCustomSession();
   const { data: board, isLoading } = useQuery(
     ['boards', initialState.id],
     () => {
-      if (!session || status === 'loading') {
+      if (status === 'loading' || !accessToken) {
         return;
       }
-      return getSingleBoard(initialState.id, session?.accessToken as string);
+      return getSingleBoard(initialState.id, accessToken);
     },
     { initialData: initialState }
   );
@@ -75,10 +80,10 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
     axios.post(
       `http://localhost:8080/api/v1/${username}/boards/${boardId}`,
       null,
-      { headers: { Authorization: `Bearer ${session?.accessToken}` } }
+      { headers: { Authorization: `Bearer ${accessToken}` } }
     );
     setWindowReady(true);
-  }, [router, session?.accessToken]);
+  }, [router, accessToken]);
 
   // console.log(board);
 

@@ -2,6 +2,7 @@ import { useSession } from 'next-auth/react';
 import { useMutation, useQueryClient } from 'react-query';
 import { axiosClient } from 'utils/api/client';
 import { Board, List } from 'utils/api/types';
+import { useCustomSession } from './useCustomSession';
 
 interface HookArgs {
   boardId: string;
@@ -9,8 +10,8 @@ interface HookArgs {
 }
 
 export function useUpdateListTitle({ boardId, listId }: HookArgs) {
+  const { accessToken } = useCustomSession();
   const queryCache = useQueryClient();
-  const { data: session } = useSession();
 
   return useMutation(
     ({ title }: { title: string }) => {
@@ -18,7 +19,7 @@ export function useUpdateListTitle({ boardId, listId }: HookArgs) {
         .patch<Board>(
           `/boards/lists/${listId}`,
           { title },
-          { headers: { Authorization: `Bearer ${session?.accessToken}` } }
+          { headers: { Authorization: `Bearer ${accessToken}` } }
         )
         .then((res) => res.data);
     },

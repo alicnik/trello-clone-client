@@ -22,6 +22,7 @@
     "@wellyshen/use-web-animations": "^0.9.1",
     "axios": "^0.24.0",
     "clsx": "^1.1.1",
+    "javascript-time-ago": "^2.3.10",
     "next": "11.1.2",
     "next-auth": "^4.0.2",
     "react": "17.0.2",

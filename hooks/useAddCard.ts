@@ -2,6 +2,7 @@ import { useSession } from 'next-auth/react';
 import { useMutation, useQueryClient } from 'react-query';
 import { axiosClient } from 'utils/api/client';
 import { Board, Card } from '../utils/api/types';
+import { useCustomSession } from './useCustomSession';
 
 interface MutationArgs {
   boardId: string;
@@ -10,13 +11,13 @@ interface MutationArgs {
 }
 
 export function useAddCard() {
-  const { data: session } = useSession();
+  const { accessToken } = useCustomSession();
   const queryCache = useQueryClient();
   return useMutation(
     ({ listId, newCard }: MutationArgs) =>
       axiosClient
         .post<Board>(`/lists/${listId}/cards`, newCard, {
-          headers: { Authorization: `Bearer ${session?.accessToken}` },
+          headers: { Authorization: `Bearer ${accessToken}` },
         })
         .then((res) => res.data),
     {

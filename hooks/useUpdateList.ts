@@ -2,6 +2,7 @@ import { useSession } from 'next-auth/react';
 import { useMutation, useQueryClient } from 'react-query';
 import { axiosClient } from 'utils/api/client';
 import { Board, Card, List } from '../utils/api/types';
+import { useCustomSession } from './useCustomSession';
 
 type MutationVariables = {
   originListId: string;
@@ -11,7 +12,7 @@ type MutationVariables = {
 };
 
 export function useUpdateList(boardId: string) {
-  const { data: session } = useSession();
+  const { accessToken } = useCustomSession();
   const queryCache = useQueryClient();
   return useMutation(
     ({ originListId, updatedOriginCards }: MutationVariables) =>
@@ -19,7 +20,7 @@ export function useUpdateList(boardId: string) {
         .put<Board>(
           `/boards/${boardId}/lists/${originListId}/cards`,
           updatedOriginCards,
-          { headers: { Authorization: `Bearer ${session?.accessToken}` } }
+          { headers: { Authorization: `Bearer ${accessToken}` } }
         )
         .then((res) => res.data),
     {

@@ -8,6 +8,7 @@ import { BoardsSidebar, BoardCardList } from 'components/boards-index';
 import { useQuery } from 'react-query';
 import Head from 'next/head';
 import { getSession, useSession } from 'next-auth/react';
+import { useCustomSession } from 'hooks';
 
 type BoardProps = { initialData: User };
 
@@ -16,6 +17,7 @@ export const getServerSideProps: GetServerSideProps<BoardProps> = async (
 ) => {
   const username = context.params?.username as string;
   const session = await getSession(context);
+  console.log(session);
   try {
     const initialData = await getSingleUser(
       username,
@@ -31,15 +33,13 @@ export const getServerSideProps: GetServerSideProps<BoardProps> = async (
 };
 
 const Boards: NextPage<BoardProps> = ({ initialData }) => {
-  const { data: session, status } = useSession();
+  const { status, accessToken } = useCustomSession();
+  console.log(status, accessToken);
   const { data: user } = useQuery(
     ['users', initialData.username],
     () => {
-      if (status === 'loading' || !session) return;
-      return getSingleUser(
-        initialData.username,
-        session?.accessToken as string
-      );
+      if (status === 'loading' || !accessToken) return;
+      return getSingleUser(initialData.username, accessToken as string);
     },
     { initialData }
   );

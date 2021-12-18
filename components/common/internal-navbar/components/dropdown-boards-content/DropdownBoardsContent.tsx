@@ -1,3 +1,4 @@
+import { useCustomSession } from 'hooks';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
@@ -9,13 +10,10 @@ interface DropdownBoardsContentProps {
 }
 
 export function DropdownBoardsContent({ type }: DropdownBoardsContentProps) {
-  const {
-    query: { username },
-  } = useRouter();
-  const { data: session, status } = useSession();
+  const { username, accessToken, status } = useCustomSession();
   const { data: user } = useQuery(['users', username], () => {
-    if (status === 'loading' || !session) return;
-    return getSingleUser(username as string, session?.accessToken as string);
+    if (status === 'loading') return;
+    return getSingleUser(username, accessToken);
   });
 
   if (!user) return null;

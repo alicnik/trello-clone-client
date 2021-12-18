@@ -1,10 +1,10 @@
-import { useSession } from 'next-auth/react';
 import { useMutation, useQueryClient } from 'react-query';
 import { Board, Card, List } from 'utils/api';
 import { axiosClient } from 'utils/api/client';
+import { useCustomSession } from './useCustomSession';
 
 export function useAddComment(cardId: string, listId: string, boardId: string) {
-  const { data: session } = useSession();
+  const { accessToken } = useCustomSession();
   const queryCache = useQueryClient();
 
   return useMutation(
@@ -12,7 +12,7 @@ export function useAddComment(cardId: string, listId: string, boardId: string) {
       console.log('mutating');
       return axiosClient
         .post<Board>(`/cards/${cardId}/comments`, comment, {
-          headers: { Authorization: `Bearer ${session?.accessToken}` },
+          headers: { Authorization: `Bearer ${accessToken}` },
         })
         .then((res) => res.data);
     },
