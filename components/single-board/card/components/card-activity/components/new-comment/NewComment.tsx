@@ -47,9 +47,7 @@ export function NewComment({ cardId, listId }: NewCommentProps) {
 
   React.useEffect(() => {
     if (!comment || !textAreaRef.current) return;
-    textAreaRef.current.style.height = String(
-      textAreaRef.current?.scrollHeight
-    );
+    textAreaRef.current.style.height = String(textAreaRef.current.scrollHeight);
   }, [comment]);
 
   return (
@@ -67,7 +65,7 @@ export function NewComment({ cardId, listId }: NewCommentProps) {
           className={styles.textArea}
           style={{ padding: isAddingComment ? 0 : '0.75rem 0.75rem 0' }}
           value={comment}
-          onClick={() => setIsAddingComment(true)}
+          onFocus={() => setIsAddingComment(true)}
           onChange={(e) => setComment(e.target.value)}
         />
         <div className={styles.controls}>
