@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useAddComment, useInitials } from 'hooks';
+import { useAddComment, useClickOutside, useInitials } from 'hooks';
 
 import * as styles from './new-comment.css';
 import * as baseStyles from '../../../description-editor/description-editor.css';
@@ -20,7 +20,6 @@ export function NewComment({ cardId, listId }: NewCommentProps) {
   const [isAddingComment, setIsAddingComment] = React.useState(false);
   const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
   const saveButtonRef = React.useRef<HTMLButtonElement>(null);
-  const handleClickOutsideRef = React.useRef<(e: MouseEvent) => void>();
 
   const handleAddComment = () => {
     mutation.mutate({ body: comment });
@@ -44,20 +43,7 @@ export function NewComment({ cardId, listId }: NewCommentProps) {
     },
     [isAddingComment]
   );
-
-  React.useEffect(() => {
-    if (handleClickOutsideRef.current) {
-      window.removeEventListener('mousedown', handleClickOutsideRef.current);
-    }
-    window.addEventListener('mousedown', handleClickOutside);
-    handleClickOutsideRef.current = handleClickOutside;
-    return () => {
-      if (handleClickOutsideRef.current) {
-        window.removeEventListener('mousedown', handleClickOutsideRef.current);
-      }
-      window.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [handleClickOutside]);
+  useClickOutside(handleClickOutside);
 
   React.useEffect(() => {
     if (!comment || !textAreaRef.current) return;

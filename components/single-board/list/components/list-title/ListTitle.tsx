@@ -1,4 +1,4 @@
-import { useUpdateListTitle } from 'hooks';
+import { useClickOutside, useUpdateListTitle } from 'hooks';
 import * as React from 'react';
 import { DraggableProvided } from 'react-beautiful-dnd';
 import * as styles from '../../list.css';
@@ -17,7 +17,6 @@ export function ListTitle({
   dragProvided,
 }: ListTitleProps) {
   const inputRef = React.useRef<HTMLInputElement>(null);
-  const handleClickOutsideRef = React.useRef<(e: MouseEvent) => void>();
 
   const titleMutation = useUpdateListTitle({ boardId, listId });
   const [isEditingTitle, setIsEditingTitle] = React.useState(false);
@@ -41,20 +40,8 @@ export function ListTitle({
     },
     [isEditingTitle]
   );
+  useClickOutside(handleClickOutside);
 
-  React.useEffect(() => {
-    if (handleClickOutsideRef.current) {
-      window.removeEventListener('mousedown', handleClickOutsideRef.current);
-    }
-    window.addEventListener('mousedown', handleClickOutside);
-    handleClickOutsideRef.current = handleClickOutside;
-    return () => {
-      if (handleClickOutsideRef.current) {
-        window.removeEventListener('mousedown', handleClickOutsideRef.current);
-      }
-      window.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [handleClickOutside]);
 
   React.useEffect(() => {
     if (!isEditingTitle) {

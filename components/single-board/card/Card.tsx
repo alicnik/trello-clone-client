@@ -9,10 +9,11 @@ import {
   DescriptionEditor,
 } from './components';
 import { GrTextAlignFull } from 'react-icons/gr';
+import { FaRegComment } from 'react-icons/fa';
 
 interface CardProps {
   card: CardI;
-  listId: string
+  listId: string;
   index: number;
 }
 
@@ -32,7 +33,16 @@ export function Card({ card, listId, index }: CardProps) {
               {card.description && (
                 <>
                   <br />
-                  <GrTextAlignFull />
+                  <GrTextAlignFull className={styles.descriptionIcon} />
+                </>
+              )}
+              {card.comments.length > 0 && (
+                <>
+                  {card.description ? null : <br />}
+                  <span className={styles.commentsIconContainer}>
+                    <FaRegComment className={styles.commentsIcon} />{' '}
+                    <span>{String(card.comments.length)}</span>
+                  </span>
                 </>
               )}
             </div>

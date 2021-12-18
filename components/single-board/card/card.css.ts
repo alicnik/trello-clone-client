@@ -57,3 +57,23 @@ export const content = style({
     },
   },
 });
+
+export const descriptionIcon = style({
+  marginLeft: '0.1rem',
+  marginRight: '0.75rem',
+  color: '#5e6c84',
+});
+
+export const commentsIcon = style({
+  transform: 'scale(1.2)',
+});
+
+export const commentsIconContainer = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: 3,
+  fontSize: '0.7rem',
+  color: '#5e6c84',
+  transform: 'translateY(-1px)',
+  marginLeft: '0.15rem',
+});

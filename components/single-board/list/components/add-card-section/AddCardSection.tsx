@@ -1,4 +1,4 @@
-import { useAddCard } from 'hooks';
+import { useAddCard, useClickOutside } from 'hooks';
 import * as React from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
 import * as styles from '../../list.css';
@@ -18,7 +18,6 @@ export function AddCardSection({
 }: AddCardSectionProps) {
   const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
   const addCardButtonRef = React.useRef<HTMLButtonElement>(null);
-  const handleClickOutsideRef = React.useRef<(e: MouseEvent) => void>();
   const [cardToAdd, setCardToAdd] = React.useState({
     title: '',
     board: { id: boardId },
@@ -59,20 +58,8 @@ export function AddCardSection({
     },
     [cardToAdd.title, handleAddCard, isAddingCard, setIsAddingCard]
   );
+  useClickOutside(handleClickOutside);
 
-  React.useEffect(() => {
-    if (handleClickOutsideRef.current) {
-      window.removeEventListener('mousedown', handleClickOutsideRef.current);
-    }
-    window.addEventListener('mousedown', handleClickOutside);
-    handleClickOutsideRef.current = handleClickOutside;
-    return () => {
-      if (handleClickOutsideRef.current) {
-        window.removeEventListener('mousedown', handleClickOutsideRef.current);
-      }
-      window.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [handleClickOutside]);
 
   return (
     <div>

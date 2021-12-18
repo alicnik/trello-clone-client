@@ -8,7 +8,7 @@ import { FormattingPopover } from '../formatting-popover';
 import { GrTextAlignFull } from 'react-icons/gr';
 import * as styles from './description-editor.css';
 import * as markdownStyles from './markdown-styles.css';
-import { useUpdateCard } from 'hooks';
+import { useClickOutside, useUpdateCard } from 'hooks';
 
 interface DescriptionEditorProps {
   card: Card;
@@ -18,7 +18,6 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
   const mutation = useUpdateCard({ cardId: card.id, boardId: card.board.id });
   const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
   const saveButtonRef = React.useRef<HTMLButtonElement>(null);
-  const handleClickOutsideRef = React.useRef<(e: MouseEvent) => void>();
   const formattingButtonRef = React.useRef<HTMLButtonElement>(null);
   const [isEditing, setIsEditing] = React.useState(false);
   const [description, setDescription] = React.useState(card.description ?? '');
@@ -64,6 +63,7 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
     },
     [card.description, description, handleSave, isEditing, popoverOpen]
   );
+  useClickOutside(handleClickOutside);
 
   React.useEffect(() => {
     if (!isEditing || !textAreaRef.current) {
@@ -72,20 +72,6 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
     textAreaRef.current.focus();
     textAreaRef.current.style.height = textAreaRef.current.scrollHeight + 'px';
   }, [isEditing]);
-
-  React.useEffect(() => {
-    if (handleClickOutsideRef.current) {
-      window.removeEventListener('mousedown', handleClickOutsideRef.current);
-    }
-    window.addEventListener('mousedown', handleClickOutside);
-    handleClickOutsideRef.current = handleClickOutside;
-    return () => {
-      if (handleClickOutsideRef.current) {
-        window.removeEventListener('mousedown', handleClickOutsideRef.current);
-      }
-      window.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [handleClickOutside]);
 
   return (
     <div>

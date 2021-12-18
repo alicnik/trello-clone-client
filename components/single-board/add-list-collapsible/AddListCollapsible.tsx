@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FiPlus } from 'react-icons/fi';
 import { VscChromeClose } from 'react-icons/vsc';
 import * as Collapsible from '@radix-ui/react-collapsible';
-import { useAddList } from 'hooks';
+import { useAddList, useClickOutside } from 'hooks';
 import * as styles from './add-list-collapsible.css';
 
 interface AddListCollapsibleProps {
@@ -16,7 +16,6 @@ export function AddListCollapsible({
 }: AddListCollapsibleProps) {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const addListButtonRef = React.useRef<HTMLDivElement>(null);
-  const handleClickOutsideRef = React.useRef<(e: MouseEvent) => void>();
 
   const [isAddingList, setIsAddingList] = React.useState(false);
   const [newList, setNewList] = React.useState({ title: '' });
@@ -43,6 +42,8 @@ export function AddListCollapsible({
     },
     [isAddingList]
   );
+  useClickOutside(handleClickOutside);
+
 
   React.useEffect(() => {
     const scrollWidth = listContainerRef.current?.scrollWidth ?? 0;
@@ -53,20 +54,6 @@ export function AddListCollapsible({
   React.useEffect(() => {
     inputRef.current?.focus();
   }, [isAddingList]);
-
-  React.useEffect(() => {
-    if (handleClickOutsideRef.current) {
-      window.removeEventListener('mousedown', handleClickOutsideRef.current);
-    }
-    window.addEventListener('mousedown', handleClickOutside);
-    handleClickOutsideRef.current = handleClickOutside;
-    return () => {
-      if (handleClickOutsideRef.current) {
-        window.removeEventListener('mousedown', handleClickOutsideRef.current);
-      }
-      window.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [handleClickOutside]);
 
   const handleAddList = () => {
     mutation.mutate({ boardId, newList });
