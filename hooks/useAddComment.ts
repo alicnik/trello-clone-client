@@ -9,7 +9,6 @@ export function useAddComment(cardId: string, listId: string, boardId: string) {
 
   return useMutation(
     (comment: { body: string }) => {
-      console.log('mutating');
       return axiosClient
         .post<Board>(`/cards/${cardId}/comments`, comment, {
           headers: { Authorization: `Bearer ${accessToken}` },
@@ -18,19 +17,17 @@ export function useAddComment(cardId: string, listId: string, boardId: string) {
     },
     {
       onMutate: (comment) => {
-        console.log('onMutate');
         queryCache.setQueryData(['boards', boardId], (currentBoard: any) => {
           const currentCard = currentBoard.cards.find(
             (c: Card) => c.id === cardId
           );
           if (!currentCard) throw new Error('No current card');
-          console.log('currentCard', currentCard);
           const newLists = currentBoard.lists.map((currentList: List) => {
             if (currentList.id === listId) {
               const cardToUpdate = currentList.cards.find(
                 (c) => c.id === cardId
               );
-              cardToUpdate?.comments.push({
+              cardToUpdate?.comments?.push({
                 ...comment,
                 id: 'temp',
                 created: new Date(),

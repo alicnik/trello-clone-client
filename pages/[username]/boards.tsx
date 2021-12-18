@@ -17,7 +17,7 @@ export const getServerSideProps: GetServerSideProps<BoardProps> = async (
 ) => {
   const username = context.params?.username as string;
   const session = await getSession(context);
-  console.log(session);
+
   try {
     const initialData = await getSingleUser(
       username,
@@ -34,7 +34,6 @@ export const getServerSideProps: GetServerSideProps<BoardProps> = async (
 
 const Boards: NextPage<BoardProps> = ({ initialData }) => {
   const { status, accessToken } = useCustomSession();
-  console.log(status, accessToken);
   const { data: user } = useQuery(
     ['users', initialData.username],
     () => {

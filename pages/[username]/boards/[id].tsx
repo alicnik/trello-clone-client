@@ -85,7 +85,6 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
     setWindowReady(true);
   }, [router, accessToken]);
 
-  // console.log(board);
 
   React.useEffect(() => {
     if (

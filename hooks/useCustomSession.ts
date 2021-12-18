@@ -5,8 +5,6 @@ export function useCustomSession() {
   const session = useSession();
   const router = useRouter();
 
-  console.log(session);
-
   // @ts-ignore
   const accessToken = session.data.accessToken as string;
   const firstName = session.data?.user?.name as string;

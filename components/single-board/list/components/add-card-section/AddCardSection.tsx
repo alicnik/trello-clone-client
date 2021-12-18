@@ -41,7 +41,6 @@ export function AddCardSection({
 
   const handleClickOutside = React.useCallback(
     (e: MouseEvent) => {
-      console.log('running in AddCardSection');
       if (!isAddingCard) {
         return;
       }
@@ -59,7 +58,6 @@ export function AddCardSection({
     [cardToAdd.title, handleAddCard, isAddingCard, setIsAddingCard]
   );
   useClickOutside(handleClickOutside);
-
 
   return (
     <div>

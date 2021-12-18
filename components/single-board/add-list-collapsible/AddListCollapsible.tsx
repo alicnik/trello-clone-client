@@ -24,7 +24,6 @@ export function AddListCollapsible({
 
   const handleClickOutside = React.useCallback(
     (e: MouseEvent) => {
-      // console.log('running in AddListCollapsible')
       if (!isAddingList) {
         return;
       }
@@ -43,7 +42,6 @@ export function AddListCollapsible({
     [isAddingList]
   );
   useClickOutside(handleClickOutside);
-
 
   React.useEffect(() => {
     const scrollWidth = listContainerRef.current?.scrollWidth ?? 0;

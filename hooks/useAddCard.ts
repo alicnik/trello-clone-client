@@ -22,7 +22,6 @@ export function useAddCard() {
         .then((res) => res.data),
     {
       onError: (err) => console.error(err),
-      onSettled: () => console.log('Settled'),
       onMutate: ({ boardId, listId, newCard }) => {
         queryCache.setQueryData(['boards', boardId], (previousBoard: any) => {
           const newLists = previousBoard.lists.map((currentList: any) => {

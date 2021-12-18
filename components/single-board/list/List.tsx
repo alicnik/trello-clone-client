@@ -63,10 +63,7 @@ export function List({ boardId, list, index }: ListProps) {
             <button
               className={styles.addCard}
               ref={addCardButtonRef}
-              onClick={() => {
-                console.log('click');
-                setIsAddingCard(true);
-              }}
+              onClick={() => setIsAddingCard(true)}
             >
               + Add a card
             </button>

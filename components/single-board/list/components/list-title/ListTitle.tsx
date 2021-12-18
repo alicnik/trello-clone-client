@@ -29,7 +29,6 @@ export function ListTitle({
 
   const handleClickOutside = React.useCallback(
     (e: MouseEvent) => {
-      // console.log('running in ListTitle');
       if (!isEditingTitle) {
         return;
       }
