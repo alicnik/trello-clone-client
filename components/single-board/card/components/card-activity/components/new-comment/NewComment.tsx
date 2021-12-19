@@ -4,7 +4,6 @@ import * as styles from './new-comment.css';
 import * as baseStyles from '../../../description-editor/description-editor.css';
 import { useBoardContext } from 'hooks';
 import * as Collapsible from '@radix-ui/react-collapsible';
-import { keyframes, style } from '@vanilla-extract/css';
 
 interface NewCommentProps {
   cardId: string;
@@ -102,63 +101,6 @@ export function NewComment({ cardId, listId }: NewCommentProps) {
           </button>
         </Collapsible.Content>
       </Collapsible.Root>
-      {/* <div
-        className={styles.textAreaContainer}
-        style={{
-          padding: isAddingComment ? '0.75rem 0.75rem 3.3rem' : 0,
-        }}
-      >
-        <textarea
-          ref={textAreaRef}
-          placeholder="Write a comment..."
-          className={styles.textArea}
-          style={{ padding: isAddingComment ? 0 : '0.75rem 0.75rem 0' }}
-          value={comment}
-          onFocus={() => setIsAddingComment(true)}
-          onChange={(e) => setComment(e.target.value)}
-        />
-        <div className={styles.controls}>
-          <button
-            ref={saveButtonRef}
-            className={baseStyles.saveButton}
-            onClick={(e) => {
-              e.stopPropagation();
-              handleAddComment();
-            }}
-          >
-            Save
-          </button>
-        </div>
-      </div> */}
     </section>
   );
 }
-
-// export function CommentEditor() {
-//   const [open, setOpen] = React.useState(false)
-
-//   return <Collapsible.Root>
-//     <textarea
-//           ref={textAreaRef}
-//           placeholder="Write a comment..."
-//           className={styles.textArea}
-//           style={{ padding: isAddingComment ? 0 : '0.75rem 0.75rem 0' }}
-//           value={comment}
-//           onFocus={() => setIsAddingComment(true)}
-//           onChange={(e) => setComment(e.target.value)}
-//         />
-//   <Collapsible.Content asChild>
-//   <div className={styles.controls}>
-//           <button
-//             ref={saveButtonRef}
-//             className={baseStyles.saveButton}
-//             onClick={(e) => {
-//               e.stopPropagation();
-//               handleAddComment();
-//             }}
-//           >
-//             Save
-//           </button>
-//         </div>
-//     </Collapsible.Content></Collapsible.Root>
-// }
