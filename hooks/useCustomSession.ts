@@ -6,7 +6,7 @@ export function useCustomSession() {
   const router = useRouter();
 
   // @ts-ignore
-  const accessToken = session.data.accessToken as string;
+  const accessToken = session.data?.accessToken as string;
   const firstName = session.data?.user?.name as string;
   const lastName = session.data?.user?.email as string;
   const username = session.data?.user?.image as string;

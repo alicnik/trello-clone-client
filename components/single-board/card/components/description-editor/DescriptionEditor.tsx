@@ -94,6 +94,14 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
             className={styles.textArea}
             placeholder="Add a more detailed description..."
             value={description}
+            onKeyDown={(e) => {
+              if (e.code === 'Enter') {
+                e.preventDefault();
+                if (description) {
+                  handleSave();
+                }
+              }
+            }}
             onChange={(e) => setDescription(e.target.value)}
             onClick={(e) => !isEditing && setIsEditing(true)}
           />

@@ -99,4 +99,5 @@ export const greyButton = style([
 
 export const markdownContainer = style({
   marginLeft: '2.3rem',
+  fontSize: '0.9rem',
 });

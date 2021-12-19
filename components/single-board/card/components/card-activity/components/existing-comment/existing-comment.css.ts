@@ -3,7 +3,7 @@ import { style } from '@vanilla-extract/css';
 export const container = style({
   display: 'flex',
   alignItems: 'flex-start',
-  marginTop: '2rem',
+  marginTop: '1.5rem',
   width: '100%',
 });
 
@@ -52,4 +52,23 @@ export const commentBody = style({
   padding: '0.5rem 0.75rem',
   boxShadow: '0 1px 2px -1px #091e4240, 0 0 0 1px #091e4214',
   borderRadius: 3,
+  fontSize: '0.875rem',
+  marginBottom: '0.4rem',
+});
+
+export const commentControls = style({
+  fontSize: '0.7rem',
+  color: '#5e6c84',
+  paddingLeft: '0.5rem',
+});
+
+export const controlLink = style({
+  textDecoration: 'underline',
+  cursor: 'pointer',
+
+  selectors: {
+    '&:hover': {
+      color: '#172b4d',
+    },
+  },
 });

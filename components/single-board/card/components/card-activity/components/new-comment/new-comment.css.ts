@@ -1,8 +1,9 @@
-import { style } from '@vanilla-extract/css';
+import { keyframes, style } from '@vanilla-extract/css';
 
 export const commentContainer = style({
   display: 'flex',
   alignItems: 'flex-start',
+  marginBottom: '2rem',
 });
 
 export const icon = style({
@@ -54,20 +55,31 @@ export const textArea = style({
   width: '100%',
   border: 'none',
   resize: 'none',
-  lineHeight: 0.8,
   outline: 'none',
   fontFamily: 'inherit',
+  lineHeight: '1.5rem',
   color: 'inherit',
-
-  selectors: {
-    '&:focus': {
-      lineHeight: 1.1,
-    },
-  },
+  padding: '0.5rem 0.75rem 0.4rem',
 });
 
-export const controls = style({
-  position: 'absolute',
-  top: 46,
-  left: 12,
+const open = keyframes({
+  from: { height: 0 },
+  to: { height: 'var(--radix-collapsible-content-height)' },
+});
+
+const close = keyframes({
+  from: { height: 'var(--radix-collapsible-content-height)' },
+  to: { height: 0 },
+});
+
+export const contentStyles = style({
+  padding: '0 0 0.75rem 0.75rem',
+
+  selectors: {
+    '&[data-state="open"]': { animation: `${open} 60ms ease-out` },
+    '&[data-state="closed"]': {
+      paddingTop: '1.5rem',
+      animation: `${close} 10ms ease-out`,
+    },
+  },
 });
