@@ -70,8 +70,12 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
       return;
     }
     textAreaRef.current.focus();
+    textAreaRef.current.setSelectionRange(
+      description.length,
+      description.length
+    );
     textAreaRef.current.style.height = textAreaRef.current.scrollHeight + 'px';
-  }, [isEditing]);
+  }, [description.length, isEditing]);
 
   return (
     <div>

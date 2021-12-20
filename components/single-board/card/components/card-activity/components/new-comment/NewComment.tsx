@@ -99,6 +99,7 @@ export function NewComment({ cardId, listId }: NewCommentProps) {
           <button
             ref={saveButtonRef}
             className={baseStyles.saveButton}
+            disabled={!comment}
             onClick={(e) => {
               e.stopPropagation();
               handleAddComment();

@@ -22,8 +22,13 @@ export function CardActivity({ card, listId }: CardActivityProps) {
         <button className={baseStyles.greyButton}>Show details</button>
       </header>
       <NewComment cardId={card.id} listId={listId} />
-      {card.comments?.reverse().map((comment) => (
-        <ExistingComment key={comment.id} comment={comment} />
+      {card.comments?.map((comment) => (
+        <ExistingComment
+          key={comment.id}
+          comment={comment}
+          cardId={card.id}
+          listId={listId}
+        />
       ))}
     </div>
   );

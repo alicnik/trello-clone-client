@@ -35,8 +35,15 @@ const contentShow = keyframes({
 export const overlay = style({
   backgroundColor: 'rgba(0, 0, 0, 0.44)',
   position: 'fixed',
-  inset: 0,
+  top: 0,
+  right: 0,
+  left: 0,
+  bottom: 0,
   animation: `${overlayShow} 100ms cubic-bezier(0.16, 1, 0.3, 1)`,
+  overflowY: 'auto',
+  display: 'grid',
+  placeItems: 'center',
+  padding: '30rem 0 20rem',
 });
 
 export const content = style({
@@ -44,14 +51,9 @@ export const content = style({
   borderRadius: 3,
   boxShadow:
     'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
-  position: 'fixed',
-  top: '15vh',
-  left: '50%',
-  transform: 'translateX(-50%)',
   width: '90vw',
   maxWidth: 550,
   minHeight: 500,
-  maxHeight: '85vh',
   padding: '1rem 1.25rem 1.5rem',
   animation: `${contentShow} 100ms cubic-bezier(0.16, 1, 0.3, 1)`,
   fontFamily:

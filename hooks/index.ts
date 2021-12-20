@@ -9,3 +9,4 @@ export * from './useAddComment';
 export * from './useBoardContext';
 export * from './useUpdateCard';
 export * from './useClickOutside';
+export * from './useUpdateComment';

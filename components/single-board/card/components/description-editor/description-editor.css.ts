@@ -73,6 +73,11 @@ export const saveButton = style([
       '&:hover': {
         backgroundColor: '#026aa7',
       },
+      '&[disabled]': {
+        color: '#a5adba',
+        backgroundColor: '#091e420a',
+        cursor: 'not-allowed',
+      },
     },
   },
 ]);

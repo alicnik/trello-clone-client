@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { keyframes, style } from '@vanilla-extract/css';
 
 export const container = style({
   display: 'flex',
@@ -60,6 +60,7 @@ export const commentControls = style({
   fontSize: '0.7rem',
   color: '#5e6c84',
   paddingLeft: '0.5rem',
+  marginTop: '0.4rem',
 });
 
 export const controlLink = style({
@@ -71,4 +72,68 @@ export const controlLink = style({
       color: '#172b4d',
     },
   },
+});
+
+export const collapsibleBackground = style({
+  backgroundColor: '#fff',
+  borderRadius: 3,
+  width: '100%',
+  padding: '0.5rem 0.75rem',
+});
+
+export const textArea = style({
+  font: 'inherit',
+  color: 'inherit',
+  resize: 'none',
+  border: 'none',
+  width: '100%',
+  fontSize: '0.9rem',
+  lineHeight: '1.4rem',
+  outline: 'none',
+  background: 'transparent',
+});
+
+export const isEmptyMessage = style({
+  margin: '0.3rem 0 0.2rem',
+  color: '#5e6c84',
+  fontSize: '0.875rem',
+});
+
+const open = keyframes({
+  from: { height: 0, opacity: 0 },
+  to: { height: 'var(--radix-collapsible-content-height)', opacity: 1 },
+});
+
+const close = keyframes({
+  from: { height: 'var(--radix-collapsible-content-height)', opacity: 1 },
+  to: { height: 0, opacity: 0 },
+});
+
+export const collapsibleContent = style({
+  marginTop: '0.4rem',
+
+  selectors: {
+    '&[data-state="open"]': { animation: `${open} 80ms ease-out` },
+    '&[data-state="closed"]': { animation: `${close} 80ms ease-out` },
+  },
+});
+
+// CSS TRANSITIONS
+
+export const fadeInEnter = style({
+  opacity: 0,
+  transform: 'translateY(-10px)',
+});
+
+export const fadeInActive = style({
+  opacity: 1,
+  transform: 'translateY(0)',
+});
+
+export const fadeOutExit = style({
+  opacity: 1,
+});
+
+export const fadeOutActive = style({
+  opacity: 0,
 });

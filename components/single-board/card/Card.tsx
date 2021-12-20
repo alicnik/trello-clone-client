@@ -47,16 +47,19 @@ export function Card({ card, listId, index }: CardProps) {
               )}
             </div>
           </Dialog.Trigger>
-          <Dialog.Overlay className={styles.overlay} />
-          <Dialog.Content
-            aria-label={card.title}
-            className={styles.content}
-            onOpenAutoFocus={(e) => e.preventDefault()}
-          >
-            <CardDialogHeader card={card} />
-            <DescriptionEditor card={card} />
-            <CardActivity card={card} listId={listId} />
-          </Dialog.Content>
+          <Dialog.Portal>
+            <Dialog.Overlay className={styles.overlay}>
+              <Dialog.Content
+                aria-label={card.title}
+                className={styles.content}
+                onOpenAutoFocus={(e) => e.preventDefault()}
+              >
+                <CardDialogHeader card={card} />
+                <DescriptionEditor card={card} />
+                <CardActivity card={card} listId={listId} />
+              </Dialog.Content>
+            </Dialog.Overlay>
+          </Dialog.Portal>
         </Dialog.Root>
       )}
     </Draggable>
