@@ -12,6 +12,7 @@ export const overlay = style({
   position: 'fixed',
   inset: 0,
   animation: `${overlayShow} 150ms cubic-bezier(0.16, 1, 0.3, 1)`,
+  zIndex: 100,
 });
 
 export const content = style({
@@ -27,6 +28,7 @@ export const content = style({
   maxWidth: '450px',
   maxHeight: '85vh',
   padding: '0.5rem',
+  zIndex: 110,
 });
 
 export const dialogContentContainer = style({
@@ -160,5 +162,3 @@ export const buttonDisabled = style({
 });
 
 // BACKGROUND PICKER DIALOG
-
-

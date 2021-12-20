@@ -63,17 +63,6 @@ export const commentControls = style({
   marginTop: '0.4rem',
 });
 
-export const controlLink = style({
-  textDecoration: 'underline',
-  cursor: 'pointer',
-
-  selectors: {
-    '&:hover': {
-      color: '#172b4d',
-    },
-  },
-});
-
 export const collapsibleBackground = style({
   backgroundColor: '#fff',
   borderRadius: 3,
@@ -99,6 +88,17 @@ export const isEmptyMessage = style({
   fontSize: '0.875rem',
 });
 
+export const controlLink = style({
+  textDecoration: 'underline',
+  cursor: 'pointer',
+
+  selectors: {
+    '&:hover': {
+      color: '#172b4d',
+    },
+  },
+});
+
 const open = keyframes({
   from: { height: 0, opacity: 0 },
   to: { height: 'var(--radix-collapsible-content-height)', opacity: 1 },
@@ -116,24 +116,4 @@ export const collapsibleContent = style({
     '&[data-state="open"]': { animation: `${open} 80ms ease-out` },
     '&[data-state="closed"]': { animation: `${close} 80ms ease-out` },
   },
-});
-
-// CSS TRANSITIONS
-
-export const fadeInEnter = style({
-  opacity: 0,
-  transform: 'translateY(-10px)',
-});
-
-export const fadeInActive = style({
-  opacity: 1,
-  transform: 'translateY(0)',
-});
-
-export const fadeOutExit = style({
-  opacity: 1,
-});
-
-export const fadeOutActive = style({
-  opacity: 0,
 });

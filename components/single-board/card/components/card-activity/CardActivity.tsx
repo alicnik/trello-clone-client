@@ -4,7 +4,7 @@ import { Card } from 'utils/api';
 import * as styles from './card-activity.css';
 import * as baseStyles from '../description-editor/description-editor.css';
 import clsx from 'clsx';
-import { ExistingComment, NewComment } from './components';
+import { CardDetails, ExistingComment, NewComment } from './components';
 
 interface CardActivityProps {
   card: Card;
@@ -12,6 +12,7 @@ interface CardActivityProps {
 }
 
 export function CardActivity({ card, listId }: CardActivityProps) {
+  const [showDetails, setShowDetails] = React.useState(false);
   const orderedComments =
     card.comments?.sort((commentA, commentB) => {
       if (commentA.created > commentB.created) {
@@ -27,7 +28,12 @@ export function CardActivity({ card, listId }: CardActivityProps) {
         <h2 className={clsx(baseStyles.heading, styles.headingMargin)}>
           Activity
         </h2>
-        <button className={baseStyles.greyButton}>Show details</button>
+        <button
+          className={baseStyles.greyButton}
+          onClick={() => setShowDetails(!showDetails)}
+        >
+          Show details
+        </button>
       </header>
       <NewComment cardId={card.id} listId={listId} />
       {orderedComments.map((comment) => (
@@ -38,6 +44,9 @@ export function CardActivity({ card, listId }: CardActivityProps) {
           listId={listId}
         />
       ))}
+      {showDetails && (
+        <CardDetails listName={card.boardList.title} dateAdded={card.created} />
+      )}
     </div>
   );
 }

@@ -42,6 +42,7 @@ export interface Card {
   labels: Label[];
   comments: Comment[] | null;
   linkedComments: Comment[];
+  created: Date;
 }
 
 export interface Label {

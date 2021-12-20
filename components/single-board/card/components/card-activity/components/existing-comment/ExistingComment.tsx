@@ -7,6 +7,9 @@ import en from 'javascript-time-ago/locale/en.json';
 import * as Collapsible from '@radix-ui/react-collapsible';
 import { VscChromeClose } from 'react-icons/vsc';
 import * as baseStyles from '../../../description-editor/description-editor.css';
+import * as Popover from '@radix-ui/react-popover';
+import { PopoverHeader } from 'components/boards-index/board-card/components/background-picker/components';
+import { DeletePopover } from './components';
 
 TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-GB');
@@ -95,6 +98,7 @@ export function ExistingComment({
             onKeyDown={(e) => {
               if (e.code === 'Enter' && (!!e.metaKey || !!e.ctrlKey)) {
                 e.preventDefault();
+                handleUpdate();
               }
             }}
           />
@@ -133,7 +137,12 @@ export function ExistingComment({
                 >
                   Edit
                 </span>{' '}
-                - <span className={styles.controlLink}>Delete</span>
+                -{' '}
+                <DeletePopover
+                  commentId={comment.id}
+                  cardId={cardId}
+                  listId={listId}
+                />
               </div>
             )
           : null}

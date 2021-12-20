@@ -3,7 +3,7 @@ import { style } from '@vanilla-extract/css';
 export const titleContainer = style({
   display: 'flex',
   alignItems: 'center',
-  marginBottom: '1rem',
+  marginBottom: '0.75rem',
   height: 34,
 });
 

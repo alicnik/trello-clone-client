@@ -10,3 +10,4 @@ export * from './useBoardContext';
 export * from './useUpdateCard';
 export * from './useClickOutside';
 export * from './useUpdateComment';
+export * from './useDeleteComment';
