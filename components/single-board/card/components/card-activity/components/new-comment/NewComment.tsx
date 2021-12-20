@@ -24,7 +24,7 @@ export function NewComment({ cardId, listId }: NewCommentProps) {
     mutation.mutate({ body: comment });
     setComment('');
     textAreaRef.current?.blur();
-    saveButtonRef.current?.blur();
+    // saveButtonRef.current?.blur();
     setIsAddingComment(false);
   }, [comment, mutation]);
 
@@ -53,20 +53,19 @@ export function NewComment({ cardId, listId }: NewCommentProps) {
   useClickOutside(handleClickOutside);
 
   React.useEffect(() => {
-    if (!comment || !textAreaRef.current) return;
-    textAreaRef.current.style.height = String(textAreaRef.current.scrollHeight);
-  }, [comment]);
-
-  React.useEffect(() => {
     if (!textAreaRef.current) {
       return;
     }
+    // Recalculate textarea height/rows depending on number of line breaks
     if (!comment) {
       textAreaRef.current.rows = 1;
       return;
     }
+    // Reset height to 0 before using scrollHeight as otherwise scrollHeight does
+    // not update when content decreases in number of lines
     textAreaRef.current.style.height = '0';
     textAreaRef.current.rows = (textAreaRef.current.scrollHeight - 38) / 24 + 1;
+    // Reset height to auto once scrollHeight calculation is done to ensure expected UI
     textAreaRef.current.style.height = 'auto';
   }, [comment]);
 
@@ -88,6 +87,12 @@ export function NewComment({ cardId, listId }: NewCommentProps) {
             onClick={(e) => isAddingComment && e.preventDefault()}
             onChange={(e) => setComment(e.target.value)}
             onFocus={() => setIsAddingComment(true)}
+            onKeyDown={(e) => {
+              if (e.code === 'Enter' && (!!e.metaKey || !!e.ctrlKey)) {
+                e.preventDefault();
+                handleAddComment();
+              }
+            }}
           />
         </Collapsible.Trigger>
         <Collapsible.Content className={styles.contentStyles}>

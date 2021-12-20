@@ -10,6 +10,7 @@ interface CardDialogHeaderProps {
 }
 
 export function CardDialogHeader({ card }: CardDialogHeaderProps) {
+  console.log('card', card);
   const mutation = useUpdateCard({ cardId: card.id, boardId: card.board.id });
   const [newTitle, setNewTitle] = React.useState(card.title);
 

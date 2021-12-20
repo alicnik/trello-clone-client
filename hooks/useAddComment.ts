@@ -18,6 +18,7 @@ export function useAddComment(cardId: string, listId: string, boardId: string) {
     {
       onMutate: (comment) => {
         queryCache.setQueryData(['boards', boardId], (currentBoard: any) => {
+          console.log('currentBoard', currentBoard);
           const currentCard = currentBoard.cards.find(
             (c: Card) => c.id === cardId
           );

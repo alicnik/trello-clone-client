@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { IdProvider } from '@radix-ui/react-id';
 import { SessionProvider } from 'next-auth/react';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 import '../styles/globals.css';
 
@@ -14,6 +15,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         <IdProvider>
           <Component {...pageProps} />
         </IdProvider>
+        {/* <ReactQueryDevtools /> */}
       </QueryClientProvider>
     </SessionProvider>
   );

@@ -158,6 +158,12 @@ export function DropdownCreateBoardItem() {
           value={form.boardName}
           onChange={(e) => setForm({ ...form, boardName: e.target.value })}
           onBlur={() => setTouched(true)}
+          onKeyDown={(e) => {
+            if (e.code === 'Enter') {
+              e.preventDefault();
+              handleCreateBoardClick();
+            }
+          }}
         />
         {!form.boardName && touched && (
           <p className={styles.error}>

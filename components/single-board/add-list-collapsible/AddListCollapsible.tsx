@@ -84,6 +84,12 @@ export function AddListCollapsible({
               type="text"
               value={newList.title}
               onChange={(e) => setNewList({ title: e.target.value })}
+              onKeyDown={(e) => {
+                if (e.code === 'Enter') {
+                  e.preventDefault();
+                  handleAddList();
+                }
+              }}
             />
             <div className={styles.addCardButtonContainer}>
               <button

@@ -8,7 +8,7 @@ import { ExistingComment, NewComment } from './components';
 
 interface CardActivityProps {
   card: Card;
-  listId: string
+  listId: string;
 }
 
 export function CardActivity({ card, listId }: CardActivityProps) {
@@ -21,8 +21,8 @@ export function CardActivity({ card, listId }: CardActivityProps) {
         </h2>
         <button className={baseStyles.greyButton}>Show details</button>
       </header>
-      <NewComment cardId={card.id} listId={listId}/>
-      {card.comments.map((comment) => (
+      <NewComment cardId={card.id} listId={listId} />
+      {card.comments?.reverse().map((comment) => (
         <ExistingComment key={comment.id} comment={comment} />
       ))}
     </div>

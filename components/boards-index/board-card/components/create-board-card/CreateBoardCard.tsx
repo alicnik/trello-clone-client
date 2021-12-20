@@ -108,6 +108,12 @@ export function CreateBoardCard() {
                 aria-label="Add board title"
                 value={form.boardName}
                 onChange={handleTitleChange}
+                onKeyDown={(e) => {
+                  if (e.code === 'Enter') {
+                    e.preventDefault();
+                    handleCreateBoardClick();
+                  }
+                }}
               />
               <DialogPrimitive.Close className={dialogStyles.closeIcon} asChild>
                 <span>

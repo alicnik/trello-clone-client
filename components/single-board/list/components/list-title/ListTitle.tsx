@@ -41,7 +41,6 @@ export function ListTitle({
   );
   useClickOutside(handleClickOutside);
 
-
   React.useEffect(() => {
     if (!isEditingTitle) {
       return;
