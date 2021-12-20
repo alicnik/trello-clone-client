@@ -55,6 +55,7 @@ export interface Comment {
   id: string;
   body: string;
   created: Date;
+  modified: Date;
   author?: User | null;
   parentCard: Card;
   linkedCards?: Card[];

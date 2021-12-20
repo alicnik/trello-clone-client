@@ -12,6 +12,14 @@ interface CardActivityProps {
 }
 
 export function CardActivity({ card, listId }: CardActivityProps) {
+  const orderedComments =
+    card.comments?.sort((commentA, commentB) => {
+      if (commentA.created > commentB.created) {
+        return -1;
+      }
+      return 1;
+    }) ?? [];
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -22,7 +30,7 @@ export function CardActivity({ card, listId }: CardActivityProps) {
         <button className={baseStyles.greyButton}>Show details</button>
       </header>
       <NewComment cardId={card.id} listId={listId} />
-      {card.comments?.map((comment) => (
+      {orderedComments.map((comment) => (
         <ExistingComment
           key={comment.id}
           comment={comment}

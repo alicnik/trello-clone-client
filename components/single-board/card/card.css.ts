@@ -36,14 +36,13 @@ export const overlay = style({
   backgroundColor: 'rgba(0, 0, 0, 0.44)',
   position: 'fixed',
   top: 0,
-  right: 0,
   left: 0,
-  bottom: 0,
+  height: '100%',
+  width: '100%',
+  justifyContent: 'center',
   animation: `${overlayShow} 100ms cubic-bezier(0.16, 1, 0.3, 1)`,
   overflowY: 'auto',
-  display: 'grid',
-  placeItems: 'center',
-  padding: '30rem 0 20rem',
+  display: 'flex',
 });
 
 export const content = style({
@@ -59,6 +58,8 @@ export const content = style({
   fontFamily:
     '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif',
   color: '#172b4d',
+  margin: '8rem 0 4rem',
+  height: 'min-content',
 
   selectors: {
     '&:focus': {

@@ -29,8 +29,6 @@ export function ExistingComment({
   const [commentBody, setCommentBody] = React.useState(comment.body);
   const textAreaRef = React.useRef<HTMLTextAreaElement | null>(null);
 
-  console.log(comment);
-
   const mutation = useUpdateComment(comment.id, cardId, listId);
 
   const handleUpdate = () => {
@@ -50,7 +48,6 @@ export function ExistingComment({
     // Reset height to 0 before using scrollHeight as otherwise scrollHeight does
     // not update when content decreases in number of lines
     textAreaRef.current.style.height = '0';
-    console.dir(textAreaRef.current.scrollHeight / 18);
     textAreaRef.current.rows = textAreaRef.current.scrollHeight / 18;
     // Reset height to auto once scrollHeight calculation is done to ensure expected UI
     textAreaRef.current.style.height = 'auto';
@@ -69,7 +66,8 @@ export function ExistingComment({
         <div className={styles.metaInfoContainer}>
           <span className={styles.fullName}>{firstName + ' ' + lastName}</span>
           <span className={styles.creationDate}>
-            {timeAgo.format(new Date(comment.created))}
+            {timeAgo.format(new Date(comment.created))}{' '}
+            {comment.created !== comment.modified && '(edited)'}
           </span>
         </div>
         <Collapsible.Root

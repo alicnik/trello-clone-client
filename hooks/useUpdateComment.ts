@@ -54,7 +54,9 @@ export function useUpdateComment(
           return currentBoard;
         });
       },
-      onSuccess: (updatedBoard) => console.log(updatedBoard),
+      onSuccess: (updatedBoard) => {
+        queryCache.setQueryData(['boards', updatedBoard.id], updatedBoard);
+      },
     }
   );
 }
