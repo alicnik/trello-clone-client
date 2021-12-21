@@ -6,6 +6,7 @@ import { login, register } from 'utils/api';
 import { TextInput } from 'components/common';
 import { AuthLayout } from 'components/signup-login';
 import * as styles from '../styles/signup-login.css';
+import { signIn } from 'next-auth/react';
 
 const SignUp: NextPage = () => {
   const router = useRouter();
@@ -13,9 +14,14 @@ const SignUp: NextPage = () => {
     username: '',
     firstName: '',
     lastName: '',
-    email: '',
+    emailAddress: '',
     password: '',
   });
+
+  React.useEffect(() => {
+    const emailAddress = sessionStorage.getItem('signup-email') ?? '';
+    setForm((form) => ({ ...form, emailAddress }));
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -30,8 +36,12 @@ const SignUp: NextPage = () => {
     try {
       const res = await register(form);
       const username = res.data.username;
-      const loginRes = await login({ username, password: form.password });
-      router.push(`/${username}/boards`);
+      const loginDetails = { username, password: form.password };
+      signIn('credentials', {
+        ...loginDetails,
+        callbackUrl: `/${form.username}/boards`,
+      });
+      sessionStorage.removeItem('signup-email');
     } catch (err) {
       console.error(err);
     }
@@ -70,10 +80,10 @@ const SignUp: NextPage = () => {
         />
         <TextInput
           type="email"
-          name="email"
+          name="emailAddress"
           placeholder="Enter email"
           className={styles.input}
-          value={form.email}
+          value={form.emailAddress}
           onChange={handleChange}
           autoComplete="email"
         />
@@ -94,7 +104,7 @@ const SignUp: NextPage = () => {
           type="submit"
           value="Continue"
           className={styles.button}
-          disabled={!emailRegexp.test(form.email)}
+          disabled={!emailRegexp.test(form.emailAddress)}
         />
         <hr className={styles.hr} />
         <Link href="/login">

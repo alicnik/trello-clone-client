@@ -16,7 +16,7 @@ type BaseProps = Partial<
 
 interface TextInputProps extends BaseProps {
   placeholder: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
   autoComplete?: string;
 }
@@ -33,6 +33,7 @@ export function TextInput({
     <input
       name={name}
       className={clsx(styles.input, className)}
+      value={value}
       onChange={onChange}
       autoComplete={autoComplete}
       {...props}

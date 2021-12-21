@@ -46,6 +46,12 @@ export const listSubHeading = style({
   fontSize: '0.85rem',
 });
 
+export const icons = style({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+});
+
 export const closeIcon = style({
   cursor: 'pointer',
   padding: '0.6rem',

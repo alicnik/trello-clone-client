@@ -42,7 +42,7 @@ export const Button = ({
     <button
       className={clsx(classes, styles.buttonNoLink, className)}
       type={type}
-      disabled={true}
+      disabled={disabled}
     >
       {children}
     </button>

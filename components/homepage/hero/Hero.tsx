@@ -14,7 +14,9 @@ export const Hero = ({ setIntersectionRef }: HeroProps) => {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const input = e.currentTarget.elements[0] as HTMLInputElement;
-    localStorage.setItem('signup-email', input.value);
+    if (input.value) {
+      sessionStorage.setItem('signup-email', input.value);
+    }
     router.push('/signup');
   }
 
@@ -36,11 +38,13 @@ export const Hero = ({ setIntersectionRef }: HeroProps) => {
               placeholder="Email"
               defaultValue={
                 typeof window !== 'undefined'
-                  ? window.localStorage.getItem('signup-email') ?? ''
+                  ? window.sessionStorage.getItem('signup-email') ?? ''
                   : ''
               }
             />
-            <Button variant="filled">Sign up—it&apos;s free!</Button>
+            <Button type="submit" variant="filled">
+              Sign up—it&apos;s free!
+            </Button>
           </form>
         </div>
         <div className={styles.imageContainer}>

@@ -49,7 +49,7 @@ export function CardDialogHeader({ card }: CardDialogHeaderProps) {
         />
         <p className={styles.listSubHeading}>in list {card.boardList.title}</p>
       </div>
-      <div>
+      <div className={styles.icons}>
         <Dialog.Close asChild>
           <span>
             <VscChromeClose className={styles.closeIcon} />

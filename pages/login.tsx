@@ -4,7 +4,6 @@ import type { NextPage } from 'next';
 import Link from 'next/link';
 import * as styles from 'styles/signup-login.css';
 import { TextInput } from 'components/common';
-import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
 
 const Login: NextPage = () => {
