@@ -3,6 +3,7 @@ import * as Popover from '@radix-ui/react-popover';
 import * as styles from './list-title-popover.css';
 import { PopoverHeader } from 'components/boards-index/board-card/components/background-picker/components';
 import { useDeleteList } from 'hooks';
+import { DeleteConfirmation } from 'components/common';
 
 interface ListTitlePopoverProps {
   listId: string;
@@ -30,9 +31,14 @@ export function ListTitlePopover({ listId }: ListTitlePopoverProps) {
           }}
         />
         <div className={styles.container}>
-          <p className={styles.option} onClick={handleDeleteList}>
-            Delete this list
-          </p>
+          <DeleteConfirmation
+            headingText="Delete list?"
+            bodyText="Deleting a list is forever. There is no undo."
+            buttonText="Delete list"
+            side="right"
+            trigger={<p className={styles.option}>Delete this list</p>}
+            onDelete={handleDeleteList}
+          />
         </div>
       </Popover.Content>
     </Popover.Root>
