@@ -1,15 +1,13 @@
 import * as React from 'react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { login, register } from 'utils/api';
+import { register } from 'utils/api';
 import { TextInput } from 'components/common';
 import { AuthLayout } from 'components/signup-login';
 import * as styles from '../styles/signup-login.css';
 import { signIn } from 'next-auth/react';
 
 const SignUp: NextPage = () => {
-  const router = useRouter();
   const [form, setForm] = React.useState({
     username: '',
     firstName: '',
