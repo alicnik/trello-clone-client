@@ -1,7 +1,8 @@
 import { useClickOutside, useUpdateListTitle } from 'hooks';
 import * as React from 'react';
 import { DraggableProvided } from 'react-beautiful-dnd';
-import * as styles from '../../list.css';
+import { ListTitlePopover } from './list-title-popover';
+import * as styles from './list-title.css';
 
 interface ListTitleProps {
   title: string;
@@ -48,33 +49,38 @@ export function ListTitle({
     inputRef.current?.select();
   }, [isEditingTitle]);
 
-  return isEditingTitle ? (
-    <input
-      ref={inputRef}
-      type="text"
-      className={styles.titleInput}
-      value={newTitle}
-      onChange={(e) => {
-        if (!e.target.value) {
-          return setNewTitle(title);
-        }
-        setNewTitle(e.target.value);
-      }}
-      onKeyDown={(e) => {
-        if (e.code === 'Enter') {
-          e.preventDefault();
-          handleUpdateTitle();
-        }
-      }}
-      onBlur={handleUpdateTitle}
-    />
-  ) : (
-    <h2
-      className={styles.listTitle}
-      onClick={() => setIsEditingTitle(true)}
-      {...dragProvided.dragHandleProps}
-    >
-      {title}
-    </h2>
+  return (
+    <div className={styles.container}>
+      {isEditingTitle ? (
+        <input
+          ref={inputRef}
+          type="text"
+          className={styles.input}
+          value={newTitle}
+          onChange={(e) => {
+            if (!e.target.value) {
+              return setNewTitle(title);
+            }
+            setNewTitle(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            if (e.code === 'Enter') {
+              e.preventDefault();
+              handleUpdateTitle();
+            }
+          }}
+          onBlur={handleUpdateTitle}
+        />
+      ) : (
+        <h2
+          className={styles.heading}
+          onClick={() => setIsEditingTitle(true)}
+          {...dragProvided.dragHandleProps}
+        >
+          {title}
+        </h2>
+      )}
+      <ListTitlePopover listId={listId} />
+    </div>
   );
 }

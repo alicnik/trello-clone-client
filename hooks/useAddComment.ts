@@ -18,19 +18,20 @@ export function useAddComment(cardId: string, listId: string, boardId: string) {
     {
       onMutate: (comment) => {
         queryCache.setQueryData(['boards', boardId], (currentBoard: any) => {
-          const currentCard = currentBoard.cards.find(
-            (c: Card) => c.id === cardId
-          );
+          const allCards = currentBoard.lists.map((l: List) => l.cards).flat();
+          const currentCard = allCards.find((c: Card) => c.id === cardId);
           if (!currentCard) throw new Error('No current card');
           const newLists = currentBoard.lists.map((currentList: List) => {
             if (currentList.id === listId) {
               const cardToUpdate = currentList.cards.find(
                 (c) => c.id === cardId
               );
+              const date = new Date();
               cardToUpdate?.comments?.push({
                 ...comment,
                 id: 'temp',
-                created: new Date(),
+                created: date,
+                modified: date,
                 parentCard: cardToUpdate,
               });
             }

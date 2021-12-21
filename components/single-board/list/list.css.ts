@@ -12,20 +12,6 @@ export const list = style({
   marginRight: '1rem',
 });
 
-export const listTitle = style({
-  color: 'rgb(23, 43, 77)',
-  fontSize: '0.8rem',
-  fontWeight: 600,
-  padding: '0.4rem',
-});
-
-export const titleInput = style({
-  color: 'rgb(23, 43, 77)',
-  fontSize: '0.8rem',
-  fontWeight: 600,
-  padding: '0.27rem 0.3rem',
-});
-
 export const cardsContainer = style({
   flexGrow: 1,
 });
