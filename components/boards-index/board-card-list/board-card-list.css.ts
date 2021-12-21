@@ -5,7 +5,8 @@ export const boardListWrapper = style({
 });
 
 export const boardListContainer = style({
-  display: 'flex',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(4, 1fr)',
   gap: '1rem',
 });
 

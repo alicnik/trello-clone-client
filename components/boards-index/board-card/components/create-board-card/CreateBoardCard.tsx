@@ -9,7 +9,6 @@ import { createBoard } from 'utils/api/boards';
 import { useRouter } from 'next/router';
 import { getBackground } from 'utils';
 import { BackgroundPicker } from '../background-picker/BackgroundPicker';
-import { useSession } from 'next-auth/react';
 import * as Popover from '@radix-ui/react-popover';
 import * as popoverStyles from '../background-picker/popover.css';
 import { BsThreeDots } from 'react-icons/bs';
@@ -33,12 +32,13 @@ export function CreateBoardCard() {
     boardName: '',
     background: suggestedBackgrounds[0] ?? 'rgba(0, 0, 0, 0)',
   });
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, boardName: e.target.value });
   };
 
-  const handleCreateBoardClick = async () => {
+  const handleCreateBoard = async () => {
     let newBoard;
     try {
       if (form.background.includes('unsplash')) {
@@ -63,12 +63,15 @@ export function CreateBoardCard() {
           accessToken
         );
       }
+
       const username = router.query.username;
+      setIsLoading(false);
       router.push({
         pathname: `/${username}/boards/${newBoard.id}`,
         query: { username },
       });
     } catch (err) {
+      setIsLoading(false);
       console.error(err);
     }
   };
@@ -111,7 +114,9 @@ export function CreateBoardCard() {
                 onKeyDown={(e) => {
                   if (e.code === 'Enter') {
                     e.preventDefault();
-                    handleCreateBoardClick();
+                    console.log('Setting loading in keydown...');
+                    setIsLoading(true);
+                    handleCreateBoard();
                   }
                 }}
               />
@@ -154,8 +159,12 @@ export function CreateBoardCard() {
             dialogStyles.createBoardButton,
             !form.boardName && dialogStyles.buttonDisabled
           )}
-          onClick={handleCreateBoardClick}
-          disabled={!form.boardName}
+          onClick={() => {
+            console.log('Setting loading...');
+            setIsLoading(true);
+            handleCreateBoard();
+          }}
+          disabled={!form.boardName || isLoading}
         >
           Create board
         </button>

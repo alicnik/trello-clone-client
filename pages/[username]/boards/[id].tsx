@@ -7,7 +7,7 @@ import {
 import { useQuery } from 'react-query';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { useRouter } from 'next/router';
-import { getSession, useSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 import { Session } from 'next-auth';
 import axios from 'axios';
 
@@ -84,7 +84,6 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
     );
     setWindowReady(true);
   }, [router, accessToken]);
-
 
   React.useEffect(() => {
     if (

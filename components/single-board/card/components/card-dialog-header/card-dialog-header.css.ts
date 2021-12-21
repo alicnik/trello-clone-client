@@ -17,7 +17,8 @@ export const cardIcon = style({
 });
 
 export const titleContainer = style({
-  marginRight: 'auto',
+  marginRight: '1rem',
+  flex: 1,
 });
 
 export const cardDialogTitle = style({
@@ -29,6 +30,7 @@ export const cardDialogTitle = style({
   fontSize: '1.25rem',
   fontWeight: 600,
   padding: '0.5rem 0.5rem 0.25rem',
+  width: '100%',
 
   selectors: {
     '&:focus': {
