@@ -61,3 +61,19 @@ export const closeIcon = style({
     },
   },
 });
+
+export const deleteIcon = style({
+  cursor: 'pointer',
+  padding: '0.675rem',
+  borderRadius: '50%',
+  color: '#42526e',
+  transition: 'background-color 85ms',
+  height: 37,
+  width: 37,
+
+  selectors: {
+    '&:hover': {
+      backgroundColor: '#091e4214',
+    },
+  },
+});
