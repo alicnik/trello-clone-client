@@ -56,7 +56,7 @@ const Boards: NextPage<BoardProps> = ({ initialData }) => {
   return (
     <>
       <Head>
-        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="icon" type="image/png" href="/images/favicon.png" />
         <title>Boards | Trello</title>
       </Head>
       <InternalNavbar username={user.username} colour="blue" />

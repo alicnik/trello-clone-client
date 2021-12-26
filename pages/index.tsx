@@ -42,7 +42,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="icon" type="image/png" href="/images/favicon.png" />
       </Head>
       <Navbar isScrolling={isScrolling} />
       <Hero setIntersectionRef={setIntersectionRef} />

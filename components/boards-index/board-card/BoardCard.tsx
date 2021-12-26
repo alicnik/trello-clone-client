@@ -31,12 +31,7 @@ export function BoardCard({ initialBoard, isFavourite }: BoardCardProps) {
   }
 
   return (
-    <Link
-      key={board.id}
-      href={`/${username}/boards/${board.id}`}
-      prefetch={false}
-      passHref
-    >
+    <Link href={`/${username}/boards/${board.id}`} prefetch={false} passHref>
       <div
         className={styles.boardCard}
         style={getBackground(board.backgroundThumbnail)}
