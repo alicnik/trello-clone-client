@@ -1,6 +1,7 @@
 import NextAuth, { DefaultSession } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import axios from 'axios';
+import { axiosClient } from 'utils/api/client';
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -9,8 +10,8 @@ export default NextAuth({
       name: 'Credentials',
       credentials: { username: {}, password: {} },
       authorize: async (credentials) => {
-        const data = await axios
-          .post('http://localhost:8080/api/v1/login', {
+        const data = await axiosClient
+          .post('/login', {
             username: credentials?.username,
             password: credentials?.password,
           })
