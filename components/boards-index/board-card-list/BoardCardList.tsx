@@ -24,17 +24,9 @@ export function BoardCardList({
           <HiOutlineStar /> Starred Boards
         </h2>
         <div className={styles.boardListContainer}>
-          {boards
-            .filter((board) => {
-              return board.starredBy.some((u) => u.id === userId);
-            })
-            .map((board) => (
-              <BoardCard
-                key={board.id}
-                initialBoard={board}
-                isFavourite={true}
-              />
-            ))}
+          {boards.slice(0, 4).map((board) => (
+            <BoardCard key={board.id} initialBoard={board} isFavourite={true} />
+          ))}
         </div>
       </div>
     );

@@ -7,7 +7,7 @@ import { InternalNavbar } from 'components/common';
 import { BoardsSidebar, BoardCardList } from 'components/boards-index';
 import { useQuery } from 'react-query';
 import Head from 'next/head';
-import { getSession, useSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 import { useCustomSession } from 'hooks';
 
 type BoardProps = { initialData: User };
@@ -42,16 +42,16 @@ const Boards: NextPage<BoardProps> = ({ initialData }) => {
     },
     { initialData }
   );
+  // console.count('rendering');
+  // console.log('with data:', user);
 
   if (!user || !user?.boards) {
     return <h2>Loading...</h2>;
   }
 
-  const hasFavourites = user.boards.some((board) =>
-    board.starredBy.some((u) => u.id === user.id)
-  );
+  const hasFavourites = user.starredBoards && user.starredBoards.length > 0;
 
-  const hasRecentlyViewed = user.recentBoards.length > 0;
+  const hasRecentlyViewed = user.recentBoards && user.recentBoards.length > 0;
 
   return (
     <>
@@ -64,14 +64,14 @@ const Boards: NextPage<BoardProps> = ({ initialData }) => {
         <div className={styles.container}>
           <BoardsSidebar username={user.username} />
           <section className={styles.boards}>
-            {hasFavourites ? (
+            {hasFavourites && (
               <BoardCardList
-                boards={user.boards.slice(0, 4)}
+                boards={user.starredBoards}
                 userId={user.id}
                 isStarredList={true}
               />
-            ) : null}
-            {hasRecentlyViewed ? (
+            )}
+            {hasRecentlyViewed && (
               <div style={{ marginBottom: '4rem' }}>
                 <h2 className={styles.boardCardTitle}>
                   <AiOutlineClockCircle /> Recently viewed
@@ -82,7 +82,7 @@ const Boards: NextPage<BoardProps> = ({ initialData }) => {
                   showCreateCard={false}
                 />
               </div>
-            ) : null}
+            )}
             <div>
               <h2 className={styles.boardCardTitle}>
                 <span className={styles.personalBoardsIcon}>P</span> Personal
