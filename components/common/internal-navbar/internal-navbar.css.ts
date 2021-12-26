@@ -20,6 +20,7 @@ export const navbar = style({
   display: 'flex',
   width: '100%',
   justifyContent: 'space-between',
+  paddingRight: '1rem',
 });
 export const list = style({
   display: 'flex',

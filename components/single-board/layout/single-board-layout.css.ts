@@ -9,9 +9,3 @@ export const container = style({
 export const innerContainer = style({
   height: '100%',
 });
-
-export const boardNav = style({
-  padding: '0.5rem',
-  height: 35,
-  backgroundColor: '#0000003d',
-});

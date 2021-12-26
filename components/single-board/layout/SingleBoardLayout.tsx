@@ -2,15 +2,17 @@ import Head from 'next/head';
 import { InternalNavbar } from 'components/common';
 import * as styles from './single-board-layout.css';
 import { getBackground } from 'utils';
+import { TitleBar } from '../title-bar';
+import type { Board } from 'utils/api/types';
 
 interface SingleBoardLayoutProps {
-  boardName: string;
+  board: Board;
   username: string;
   background: string;
 }
 
 export function SingleBoardLayout({
-  boardName,
+  board,
   username,
   background,
   children,
@@ -18,13 +20,13 @@ export function SingleBoardLayout({
   return (
     <>
       <Head>
-        <title>{`${boardName} | Trello`}</title>
+        <title>{`${board.boardName} | Trello`}</title>
         <link rel="icon" type="image/png" sizes="64x64" href={favicon} />
       </Head>
       <main className={styles.container} style={getBackground(background)}>
         <InternalNavbar username={username} />
         <div className={styles.innerContainer}>
-          <div className={styles.boardNav}>{boardName}</div>
+          <TitleBar board={board} />
           {children}
         </div>
       </main>

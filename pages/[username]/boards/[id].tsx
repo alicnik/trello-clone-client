@@ -183,7 +183,7 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <SingleBoardLayout
-        boardName={board.boardName}
+        board={board}
         username={board.owner.username}
         background={board.background}
       >

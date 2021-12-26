@@ -16,7 +16,6 @@ interface BoardCardProps {
 }
 
 export function BoardCard({ initialBoard, isFavourite }: BoardCardProps) {
-  const router = useRouter();
   const { username, accessToken, status } = useCustomSession();
   const { data: board } = useQuery(
     ['boards', initialBoard.id],

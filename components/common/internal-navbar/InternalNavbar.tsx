@@ -51,7 +51,7 @@ export function InternalNavbar({
           </NavbarItem>
         </ul>
         <div className={styles.rightNav}>
-          <input type="search" />
+          {/* <input type="search" />  */}
           <NavbarItem
             title={initials ?? 'YOU'}
             label="Account"
