@@ -1,8 +1,6 @@
 import * as React from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { removeToken } from 'utils/api/lib';
 import { NavbarItem } from './components/navbar-item';
 import * as styles from './internal-navbar.css';
 import { DropdownBoardsContent } from './components';

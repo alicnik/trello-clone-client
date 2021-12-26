@@ -3,6 +3,7 @@ import { useCustomSession, useUpdateBoard } from 'hooks';
 import { Board } from 'utils/api';
 import * as styles from './title-bar.css';
 import { FavouriteStar } from 'components/common';
+import { TitleBarPopover } from './title-bar-popover';
 
 interface TitleBarProps {
   board: Board;
@@ -28,12 +29,12 @@ export function TitleBar({ board }: TitleBarProps) {
         onChange={(e) => setBoardName(e.target.value)}
         onBlur={handleUpdateBoardName}
       />
-
       <FavouriteStar
         board={board}
         className={styles.starContainer}
         isFavourite={board.starredBy.some((u) => u.username === username)}
       />
+      <TitleBarPopover boardId={board.id} />
     </div>
   );
 }

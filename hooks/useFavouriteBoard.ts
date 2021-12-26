@@ -5,7 +5,7 @@ import { Board } from '../utils/api/types';
 import { useCustomSession } from './useCustomSession';
 
 export function useFavouriteBoard() {
-  const { accessToken } = useCustomSession();
+  const { accessToken, username } = useCustomSession();
   const queryCache = useQueryClient();
 
   return useMutation(
@@ -21,7 +21,7 @@ export function useFavouriteBoard() {
       },
       onSuccess: (updatedBoard) => {
         queryCache.setQueryData(['boards', updatedBoard.id], updatedBoard);
-        queryCache.invalidateQueries(['users', updatedBoard.owner.username]);
+        queryCache.invalidateQueries(['users', username]);
       },
     }
   );

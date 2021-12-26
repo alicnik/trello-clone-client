@@ -175,6 +175,8 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
     return;
   };
 
+  // console.log('board', board);
+
   if (isLoading || !board) {
     return <h2>Loading...</h2>;
   }

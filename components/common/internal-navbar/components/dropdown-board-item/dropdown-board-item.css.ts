@@ -7,6 +7,7 @@ export const dropdownItem = style({
   margin: '0.5rem 0',
   gap: '0.5rem',
   cursor: 'pointer',
+  paddingRight: 4,
 });
 
 export const boardName = style({
