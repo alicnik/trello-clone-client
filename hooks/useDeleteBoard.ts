@@ -4,13 +4,13 @@ import { Board, User } from 'utils/api';
 import { axiosClient } from 'utils/api/client';
 import { useCustomSession } from './useCustomSession';
 
-export function useDeleteBoard() {
+export function useDeleteBoard(boardId: string) {
   const { accessToken, username } = useCustomSession();
   const queryCache = useQueryClient();
   const router = useRouter();
 
   return useMutation(
-    (boardId: string) => {
+    () => {
       return axiosClient
         .delete<User>(`/boards/${boardId}`, {
           headers: { Authorization: `Bearer ${accessToken}` },
@@ -18,7 +18,11 @@ export function useDeleteBoard() {
         .then((res) => res.data);
     },
     {
+      onMutate: () => {
+        queryCache.invalidateQueries(['boards', boardId]);
+      },
       onSuccess: () => {
+        queryCache.invalidateQueries(['users', username]);
         router.push(`/${username}/boards`);
       },
     }

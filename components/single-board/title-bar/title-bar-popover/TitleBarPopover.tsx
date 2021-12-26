@@ -10,10 +10,10 @@ interface TitleBarPopoverProps {
 }
 
 export function TitleBarPopover({ boardId }: TitleBarPopoverProps) {
-  const mutation = useDeleteBoard();
+  const mutation = useDeleteBoard(boardId);
 
   const handleDeleteBoard = () => {
-    mutation.mutate(boardId);
+    mutation.mutate();
   };
   return (
     <Popover.Root>
