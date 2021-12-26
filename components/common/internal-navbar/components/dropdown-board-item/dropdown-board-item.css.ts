@@ -21,7 +21,7 @@ export const boardName = style({
 });
 
 export const favourite = style({
-  transform: 'scale(1.2)',
+  transform: 'scale(1.1)',
   marginTop: 3,
 });
 
