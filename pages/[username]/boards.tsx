@@ -42,8 +42,6 @@ const Boards: NextPage<BoardProps> = ({ initialData }) => {
     },
     { initialData }
   );
-  // console.count('rendering');
-  // console.log('with data:', user);
 
   if (!user || !user?.boards) {
     return <h2>Loading...</h2>;

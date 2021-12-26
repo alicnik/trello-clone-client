@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import * as Popover from '@radix-ui/react-popover';
 import * as styles from './navbar-item.css';
 import { VscChromeClose } from 'react-icons/vsc';
 import { HiOutlineChevronDown } from 'react-icons/hi';
@@ -31,8 +31,8 @@ export function NavbarItem({
 
   return (
     <NavbarContext.Provider value={{ closeDropdown: () => setOpen(false) }}>
-      <DropdownMenu.Root modal={false} open={open}>
-        <DropdownMenu.Trigger asChild>
+      <Popover.Root modal={false} open={open}>
+        <Popover.Trigger asChild>
           <li
             className={clsx(styles.listItem, className)}
             ref={triggerRef}
@@ -49,8 +49,8 @@ export function NavbarItem({
               <HiOutlineChevronDown className={styles.downChevron} />
             )}
           </li>
-        </DropdownMenu.Trigger>
-        <DropdownMenu.Content
+        </Popover.Trigger>
+        <Popover.Content
           className={styles.content}
           sideOffset={15}
           align="start"
@@ -67,16 +67,14 @@ export function NavbarItem({
           }}
         >
           <header className={styles.labelContainer}>
-            <DropdownMenu.Label className={styles.label}>
-              {label}
-            </DropdownMenu.Label>
+            <div className={styles.label}>{label}</div>
             <span className={styles.closeButton} onClick={() => setOpen(false)}>
               <VscChromeClose />
             </span>
           </header>
           {children}
-        </DropdownMenu.Content>
-      </DropdownMenu.Root>
+        </Popover.Content>
+      </Popover.Root>
     </NavbarContext.Provider>
   );
 }

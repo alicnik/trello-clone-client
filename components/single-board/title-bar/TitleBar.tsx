@@ -16,7 +16,6 @@ export function TitleBar({ board }: TitleBarProps) {
   const mutation = useUpdateBoard();
 
   const handleUpdateBoardName = () => {
-    console.log(boardName);
     mutation.mutate({ ...board, boardName });
   };
 

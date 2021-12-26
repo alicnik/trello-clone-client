@@ -11,7 +11,6 @@ import { getBackground } from 'utils';
 import clsx from 'clsx';
 import { BsThreeDots } from 'react-icons/bs';
 import { createBoard } from 'utils/api';
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useNavbarContext } from '..';
 import { useCustomSession } from 'hooks';
@@ -23,6 +22,7 @@ export interface Form {
 
 export function DropdownCreateBoardItem() {
   const router = useRouter();
+  const inputRef = React.useRef<HTMLInputElement>(null);
   const { accessToken } = useCustomSession();
   const [unsplashPhotos, setUnsplashPhotos] =
     React.useState<UnsplashItem[]>(unsplashData);
@@ -97,91 +97,90 @@ export function DropdownCreateBoardItem() {
   };
 
   return (
-    <DropdownMenu.Item>
-      <div>
-        <div
-          className={styles.boardPreview}
-          style={getBackground(form.background)}
-        >
-          <div className={styles.previewOverlay} />
-        </div>
-        <p className={styles.subheading}>Background</p>
-        <BackgroundPicker
-          form={form}
-          setForm={setForm}
-          unsplashPhotos={unsplashPhotos}
-          setUnsplashPhotos={setUnsplashPhotos}
-          side="right"
-          shouldOffsetAlignment={true}
-          alignOffset={-100}
-          sideOffset={8}
-          asModal={false}
-        >
-          <div className={styles.thumbnailContainer}>
-            {suggestedUnsplashPhotos.map((value) => (
-              <Thumbnail
-                key={value}
-                background={value}
-                thumbnailStyles={styles.unsplashThumbnail}
-                form={form}
-                setForm={setForm}
-              />
-            ))}
-          </div>
-          <div className={styles.thumbnailContainer}>
-            {suggestedColourBackgrounds.map((value) => (
-              <Thumbnail
-                key={value}
-                background={value}
-                thumbnailStyles={styles.colourThumbnail}
-                form={form}
-                setForm={setForm}
-              />
-            ))}
-            <Popover.Trigger asChild>
-              <button className={styles.colourThumbnail}>
-                <BsThreeDots className={styles.ellipsisIcon} />
-              </button>
-            </Popover.Trigger>
-          </div>
-        </BackgroundPicker>
-
-        <label
-          htmlFor="board-title"
-          className={clsx(styles.subheading, styles.boardTitleLabel)}
-        >
-          Board title
-        </label>
-        <input
-          type="text"
-          className={styles.boardTitleInput}
-          value={form.boardName}
-          onChange={(e) => setForm({ ...form, boardName: e.target.value })}
-          onBlur={() => setTouched(true)}
-          onKeyDown={(e) => {
-            if (e.code === 'Enter') {
-              e.preventDefault();
-              handleCreateBoardClick();
-            }
-          }}
-        />
-        {!form.boardName && touched && (
-          <p className={styles.error}>
-            <span role="img" aria-label="wave" className={styles.errorEmoji}>
-              👋
-            </span>{' '}
-            Board title is required
-          </p>
-        )}
-        <input
-          type="submit"
-          value="Create"
-          className={styles.submitButton}
-          disabled={!form.boardName}
-          onClick={handleCreateBoardClick}
-        />
+    <div>
+      <div
+        className={styles.boardPreview}
+        style={getBackground(form.background)}
+      >
+        <div className={styles.previewOverlay} />
       </div>
-    </DropdownMenu.Item>
+      <p className={styles.subheading}>Background</p>
+      <BackgroundPicker
+        form={form}
+        setForm={setForm}
+        unsplashPhotos={unsplashPhotos}
+        setUnsplashPhotos={setUnsplashPhotos}
+        side="right"
+        shouldOffsetAlignment={true}
+        alignOffset={-100}
+        sideOffset={8}
+        asModal={false}
+      >
+        <div className={styles.thumbnailContainer}>
+          {suggestedUnsplashPhotos.map((value) => (
+            <Thumbnail
+              key={value}
+              background={value}
+              thumbnailStyles={styles.unsplashThumbnail}
+              form={form}
+              setForm={setForm}
+            />
+          ))}
+        </div>
+        <div className={styles.thumbnailContainer}>
+          {suggestedColourBackgrounds.map((value) => (
+            <Thumbnail
+              key={value}
+              background={value}
+              thumbnailStyles={styles.colourThumbnail}
+              form={form}
+              setForm={setForm}
+            />
+          ))}
+          <Popover.Trigger asChild>
+            <button className={styles.colourThumbnail}>
+              <BsThreeDots className={styles.ellipsisIcon} />
+            </button>
+          </Popover.Trigger>
+        </div>
+      </BackgroundPicker>
+
+      <label
+        htmlFor="board-title"
+        className={clsx(styles.subheading, styles.boardTitleLabel)}
+      >
+        Board title
+      </label>
+      <input
+        type="text"
+        ref={inputRef}
+        className={styles.boardTitleInput}
+        value={form.boardName}
+        onChange={(e) => setForm({ ...form, boardName: e.target.value })}
+        onBlur={() => setTouched(true)}
+        onKeyDown={(e) => {
+          if (e.code === 'Enter') {
+            e.preventDefault();
+            handleCreateBoardClick();
+          }
+        }}
+      />
+      {!form.boardName && touched && (
+        <p className={styles.error}>
+          <span role="img" aria-label="wave" className={styles.errorEmoji}>
+            👋
+          </span>{' '}
+          Board title is required
+        </p>
+      )}
+      <input
+        type="submit"
+        value="Create"
+        className={styles.submitButton}
+        disabled={!form.boardName}
+        onClick={handleCreateBoardClick}
+      />
+    </div>
   );
 }
 

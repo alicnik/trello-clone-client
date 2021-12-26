@@ -17,6 +17,7 @@ export function ColoursView({ form, setForm, setView }: ColoursViewProps) {
         heading="Colours"
         showBackButton={true}
         goBack={() => setView('all')}
+        style={{ marginBottom: '1rem' }}
       />{' '}
       <div className={popoverStyles.grid}>
         {colours.map((colour) => (

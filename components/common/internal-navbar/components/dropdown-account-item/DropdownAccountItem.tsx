@@ -7,12 +7,10 @@ export function DropdownAccountItem() {
     signOut({ callbackUrl: '/' });
   };
   return (
-    <DropdownMenu.Item>
-      <div className={styles.container}>
-        <p className={styles.logOut} onClick={handleLogout}>
-          Log out
-        </p>
-      </div>
-    </DropdownMenu.Item>
+    <div className={styles.container}>
+      <p className={styles.logOut} onClick={handleLogout}>
+        Log out
+      </p>
+    </div>
   );
 }

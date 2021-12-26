@@ -19,7 +19,6 @@ export function useUpdateComment(
           headers: { Authorization: `Bearer ${accessToken}` },
         })
         .then((res) => {
-          console.log(res.data);
           return res.data;
         });
     },

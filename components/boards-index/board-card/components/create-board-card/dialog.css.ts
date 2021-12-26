@@ -153,6 +153,7 @@ export const createBoardButton = style({
   fontWeight: 400,
   padding: '0.5rem 0.75rem',
   borderRadius: 3,
+  minWidth: 113,
 });
 
 export const buttonDisabled = style({
@@ -161,4 +162,11 @@ export const buttonDisabled = style({
   cursor: 'not-allowed',
 });
 
-// BACKGROUND PICKER DIALOG
+const spin = keyframes({
+  '0%': { transform: 'rotate(0deg)' },
+  '100%': { transform: 'rotate(360deg)' },
+});
+
+export const spinner = style({
+  animation: `1.6s infinite ${spin} ease-in-out`,
+});

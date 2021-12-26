@@ -13,6 +13,7 @@ import * as Popover from '@radix-ui/react-popover';
 import * as popoverStyles from '../background-picker/popover.css';
 import { BsThreeDots } from 'react-icons/bs';
 import { useCustomSession } from 'hooks';
+import { FaSpinner } from 'react-icons/fa';
 
 export function CreateBoardCard() {
   const router = useRouter();
@@ -39,6 +40,7 @@ export function CreateBoardCard() {
   };
 
   const handleCreateBoard = async () => {
+    setIsLoading(true);
     let newBoard;
     try {
       if (form.background.includes('unsplash')) {
@@ -65,7 +67,6 @@ export function CreateBoardCard() {
       }
 
       const username = router.query.username;
-      setIsLoading(false);
       router.push({
         pathname: `/${username}/boards/${newBoard.id}`,
         query: { username },
@@ -114,7 +115,6 @@ export function CreateBoardCard() {
                 onKeyDown={(e) => {
                   if (e.code === 'Enter') {
                     e.preventDefault();
-                    console.log('Setting loading in keydown...');
                     setIsLoading(true);
                     handleCreateBoard();
                   }
@@ -161,13 +161,16 @@ export function CreateBoardCard() {
             !form.boardName && dialogStyles.buttonDisabled
           )}
           onClick={() => {
-            console.log('Setting loading...');
             setIsLoading(true);
             handleCreateBoard();
           }}
           disabled={!form.boardName || isLoading}
         >
-          Create board
+          {isLoading ? (
+            <FaSpinner className={dialogStyles.spinner} />
+          ) : (
+            'Create board'
+          )}
         </button>
       </DialogPrimitive.Content>
     </DialogPrimitive.Root>

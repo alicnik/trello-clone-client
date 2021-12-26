@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Link from 'next/link';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { FavouriteStar } from 'components/common';
 import { getBackground } from 'utils';
 import { Board, User } from 'utils/api';
@@ -22,18 +21,16 @@ export function DropdownBoardItem({ board, user }: DropdownboardItemProps) {
 
   return (
     <Link href={`/${username}/boards/${board.id}`} passHref>
-      <DropdownMenu.Item
+      <div
         className={styles.dropdownItem}
         onMouseEnter={() => setIsMouseOver(true)}
         onMouseLeave={() => setIsMouseOver(false)}
       >
-        {/* <div> */}
         <div
           className={styles.boardThumbnail}
           style={getBackground(board.backgroundThumbnail)}
         />
         <p className={styles.boardName}>{board.boardName}</p>
-        {/* </div> */}
         {isFavourite || isMouseOver ? (
           <FavouriteStar
             board={queryBoard ? { ...board, ...queryBoard } : board}
@@ -41,7 +38,7 @@ export function DropdownBoardItem({ board, user }: DropdownboardItemProps) {
             className={styles.favourite}
           />
         ) : null}
-      </DropdownMenu.Item>
+      </div>
     </Link>
   );
 }
