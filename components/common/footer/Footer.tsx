@@ -28,10 +28,10 @@ export function FooterLinks({ style }: { style?: React.CSSProperties }) {
   return (
     <ul className={styles.list} style={style}>
       <li>
-        <Link href="/templates">Templates</Link>
+        <Link href="#">Templates</Link>
       </li>
       <li>
-        <Link href="/pricing">Pricing</Link>
+        <Link href="#">Pricing</Link>
       </li>
       <li>
         <Link href="#">Apps</Link>
@@ -46,19 +46,19 @@ export function FooterLinks({ style }: { style?: React.CSSProperties }) {
         <Link href="#">Developers</Link>
       </li>
       <li>
-        <Link href="/about">About</Link>
+        <Link href="#">About</Link>
       </li>
       <li>
         <Link href="#">Help</Link>
       </li>
       <li>
-        <Link href="/legal">Legal</Link>
+        <Link href="#">Legal</Link>
       </li>
       <li>
         <Link href="#">Cookie Settings</Link>
       </li>
       <li>
-        <Link href="/privacy">Privacy</Link>
+        <Link href="#">Privacy</Link>
       </li>
     </ul>
   );

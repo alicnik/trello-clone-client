@@ -31,7 +31,7 @@ export function BoardsSidebar({ username }: BoardsSidebarProps) {
           </Link>
         </li>
         <li>
-          <Link href="/templates" passHref>
+          <Link href="#" passHref>
             <a className={styles.navLink} onClick={(e) => e.preventDefault()}>
               <HiOutlineTemplate /> <span>Templates</span>
             </a>
