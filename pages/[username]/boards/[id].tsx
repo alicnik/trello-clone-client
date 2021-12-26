@@ -22,6 +22,7 @@ import {
   BoardContextProvider,
   useCustomSession,
 } from 'hooks';
+import { axiosClient } from 'utils/api/client';
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
@@ -77,11 +78,9 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
       username: string;
       id: string;
     };
-    axios.post(
-      `http://localhost:8080/api/v1/${username}/boards/${boardId}`,
-      null,
-      { headers: { Authorization: `Bearer ${accessToken}` } }
-    );
+    axiosClient.post(`/${username}/boards/${boardId}`, null, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
     setWindowReady(true);
   }, [router, accessToken]);
 
