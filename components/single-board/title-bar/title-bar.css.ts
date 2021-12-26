@@ -17,8 +17,9 @@ export const input = style({
   padding: '0 0.5rem',
   borderRadius: 3,
   width: 114,
-  backgroundColor: 'transparent',
+  backgroundColor: 'rgba(255, 255, 255, 0.2)',
   cursor: 'pointer',
+  color: '#fff',
 
   selectors: {
     '&:hover': {
@@ -26,6 +27,7 @@ export const input = style({
     },
     '&:focus': {
       backgroundColor: '#fff',
+      color: '#172b4d',
     },
   },
 });
@@ -36,10 +38,13 @@ export const starContainer = style({
   padding: '0.4rem',
   boxSizing: 'content-box',
   borderRadius: 3,
-  backgroundColor: '#00000014',
+  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+  transform: 'scale(1.1)',
+  color: '#fff',
 
   selectors: {
     '&:hover': {
+      transform: 'scale(1.1)',
       color: '#f2d600',
     },
   },

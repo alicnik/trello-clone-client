@@ -133,6 +133,7 @@ export function CreateBoardCard() {
             unsplashPhotos={unsplashPhotos}
             setUnsplashPhotos={setUnsplashPhotos}
             backgroundContainerStyles={dialogStyles.backgroundChoices}
+            asModal={true}
           >
             {suggestedBackgrounds.map((value) => {
               return (

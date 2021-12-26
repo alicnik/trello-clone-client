@@ -10,6 +10,7 @@ export const heading = style({
   fontSize: '0.95rem',
   fontWeight: 600,
   padding: '0.4rem',
+  flex: 1,
 });
 
 export const input = style({

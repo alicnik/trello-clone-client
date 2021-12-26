@@ -10,4 +10,15 @@ const nextConfig = {
   },
 };
 
-module.exports = withVanillaExtract(nextConfig);
+module.exports = {
+  ...withVanillaExtract(nextConfig),
+  async redirects() {
+    return [
+      {
+        source: '/:username',
+        destination: '/:username/boards',
+        permanent: true,
+      },
+    ];
+  },
+};

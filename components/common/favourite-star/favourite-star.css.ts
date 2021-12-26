@@ -5,11 +5,12 @@ export const star = style({
 
   selectors: {
     '&:hover': {
-      transform: 'scale(1.05)',
+      transform: 'scale(1.1)',
     },
   },
 });
 
 export const favouriteStar = style({
-  color: 'gold',
+  color: 'gold !important',
+  transform: 'scale(1.1)',
 });
