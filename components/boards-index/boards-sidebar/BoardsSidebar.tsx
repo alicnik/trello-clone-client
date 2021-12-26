@@ -40,7 +40,7 @@ export function BoardsSidebar({ username }: BoardsSidebarProps) {
         <li>
           <Link
             href={{
-              pathname: '/[username]',
+              pathname: '/[username]/boards',
               query: { username },
             }}
             passHref
