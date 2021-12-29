@@ -12,7 +12,7 @@ interface CardActivityProps {
 }
 
 export function CardActivity({ card, listId }: CardActivityProps) {
-  const [showDetails, setShowDetails] = React.useState(false);
+  const [isShowDetails, setIsShowDetails] = React.useState(false);
   const orderedComments =
     card.comments?.sort((commentA, commentB) => {
       if (commentA.created > commentB.created) {
@@ -30,9 +30,9 @@ export function CardActivity({ card, listId }: CardActivityProps) {
         </h2>
         <button
           className={baseStyles.greyButton}
-          onClick={() => setShowDetails(!showDetails)}
+          onClick={() => setIsShowDetails(!isShowDetails)}
         >
-          Show details
+          {isShowDetails ? 'Hide details' : 'Show details'}
         </button>
       </header>
       <NewComment cardId={card.id} listId={listId} />
@@ -44,7 +44,7 @@ export function CardActivity({ card, listId }: CardActivityProps) {
           listId={listId}
         />
       ))}
-      {showDetails && (
+      {isShowDetails && (
         <CardDetails listName={card.boardList.title} dateAdded={card.created} />
       )}
     </div>

@@ -14,7 +14,7 @@ const FormattingPopover = React.forwardRef<
   FormattingPopoverProps
 >(({ setPopoverOpen }, ref) => {
   return (
-    <Popover.Root>
+    <Popover.Root modal={true}>
       <Popover.Trigger
         ref={ref}
         className={parentStyles.greyButton}
@@ -25,7 +25,10 @@ const FormattingPopover = React.forwardRef<
       <Popover.Content
         className={styles.content}
         side="right"
+        align="center"
         sideOffset={-130}
+        avoidCollisions
+        id="formatting-popover-content"
       >
         <PopoverHeader
           heading="Formatting help"

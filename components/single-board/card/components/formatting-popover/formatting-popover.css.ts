@@ -2,11 +2,13 @@ import { style } from '@vanilla-extract/css';
 
 export const content = style({
   maxWidth: 300,
+  overflowY: 'auto',
   backgroundColor: '#fff',
   boxShadow: '0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214',
   borderRadius: 3,
   lineHeight: '1.25rem',
   padding: '0.65rem',
+  maxHeight: '50vw',
   fontFamily:
     '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif',
 });
