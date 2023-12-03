@@ -18,23 +18,26 @@ export function BoardsSidebar({ username }: BoardsSidebarProps) {
     <aside className={styles.aside}>
       <ul className={styles.list}>
         <li>
-          <Link href={`/${username}/boards`} passHref>
-            <a
-              className={styles.navLink}
-              style={{
-                color: isOnBoardsPath ? '#0079BF' : undefined,
-                backgroundColor: isOnBoardsPath ? '#E4F0F6' : undefined,
-              }}
-            >
-              <FaTrello /> <span>Boards</span>
-            </a>
+          <Link
+            href={`/${username}/boards`}
+            passHref
+            className={styles.navLink}
+            style={{
+              color: isOnBoardsPath ? '#0079BF' : undefined,
+              backgroundColor: isOnBoardsPath ? '#E4F0F6' : undefined,
+            }}
+          >
+            <FaTrello /> <span>Boards</span>
           </Link>
         </li>
         <li>
-          <Link href="#" passHref>
-            <a className={styles.navLink} onClick={(e) => e.preventDefault()}>
-              <HiOutlineTemplate /> <span>Templates</span>
-            </a>
+          <Link
+            href="#"
+            passHref
+            className={styles.navLink}
+            onClick={(e) => e.preventDefault()}
+          >
+            <HiOutlineTemplate /> <span>Templates</span>
           </Link>
         </li>
         <li>
@@ -44,10 +47,9 @@ export function BoardsSidebar({ username }: BoardsSidebarProps) {
               query: { username },
             }}
             passHref
+            className={styles.navLink}
           >
-            <a className={styles.navLink}>
-              <VscPulse /> <span>Home</span>
-            </a>
+            <VscPulse /> <span>Home</span>
           </Link>
         </li>
       </ul>

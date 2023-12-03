@@ -64,8 +64,8 @@ const Login: NextPage = () => {
         />
         <input type="submit" value="Continue" className={styles.button} />
         <hr className={styles.hr} />
-        <Link href="/signup">
-          <a className={styles.link}>Sign up for an account</a>
+        <Link href="/signup" className={styles.link}>
+          Sign up for an account
         </Link>
       </form>
     </AuthLayout>

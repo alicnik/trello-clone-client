@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import * as React from 'react';
 import * as styles from './footer.css';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 interface FooterWrapperProps {
   style?: React.CSSProperties;

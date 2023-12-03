@@ -13,10 +13,8 @@ export const Navbar = ({ isScrolling }: NavbarProps) => {
   return (
     <header className={clsx(styles.header, isScrolling && styles.overlay)}>
       <nav className={styles.nav}>
-        <Link href="/">
-          <a className={styles.logo}>
-            <Logo />
-          </a>
+        <Link href="/" className={styles.logo} passHref>
+          <Logo />
         </Link>
         <Button variant="link" to="/login">
           Log in

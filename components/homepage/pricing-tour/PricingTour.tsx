@@ -1,5 +1,5 @@
 import { Button } from 'components/common';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import * as styles from './pricing-tour.css';
 
 export const PricingTour = () => {

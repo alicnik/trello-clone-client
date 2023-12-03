@@ -105,8 +105,8 @@ const SignUp: NextPage = () => {
           disabled={!emailRegexp.test(form.emailAddress)}
         />
         <hr className={styles.hr} />
-        <Link href="/login">
-          <a className={styles.link}>Already have an account? Log In</a>
+        <Link href="/login" className={styles.link}>
+          Already have an account? Log In
         </Link>
       </form>
     </AuthLayout>

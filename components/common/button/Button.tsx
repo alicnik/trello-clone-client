@@ -32,8 +32,8 @@ export const Button = ({
 
   if (to) {
     return (
-      <Link href={to}>
-        <a className={clsx(classes, className)}>{children}</a>
+      <Link href={to} className={clsx(classes, className)}>
+        {children}
       </Link>
     );
   }
