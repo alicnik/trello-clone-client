@@ -1,9 +1,7 @@
 import * as React from 'react';
 import * as styles from './learn-more-expandable.css';
 
-export const LearnMoreExpandable = ({
-  children,
-}: React.PropsWithChildren<React.ReactNode>) => {
+export const LearnMoreExpandable = ({ children }: React.PropsWithChildren) => {
   return (
     <details className={styles.details}>
       <summary className={styles.summary}>Learn more</summary>

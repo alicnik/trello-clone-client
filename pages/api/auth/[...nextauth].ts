@@ -1,4 +1,4 @@
-import NextAuth, { DefaultSession } from 'next-auth';
+import NextAuth, { DefaultSession, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import axios from 'axios';
 import { axiosClient } from 'utils/api/client';
@@ -38,7 +38,9 @@ export default NextAuth({
     async jwt(args) {
       const { user, token } = args;
       if (user) {
-        const { access_token, ...userDetails } = user;
+        const { access_token, ...userDetails } = user as User & {
+          access_token: string;
+        };
         token.accessToken = access_token;
         token.user = userDetails;
       }
@@ -52,7 +54,7 @@ export default NextAuth({
         lastName: string;
         username: string;
       } = { ...(token.user as any) };
-      session.accessToken = token.accessToken;
+      session.accessToken = token.accessToken as string;
       session.user = {
         name: customUser.firstName,
         email: customUser.lastName,

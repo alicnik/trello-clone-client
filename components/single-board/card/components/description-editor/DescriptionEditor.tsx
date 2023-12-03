@@ -161,7 +161,6 @@ export function DescriptionEditor({ card }: DescriptionEditorProps) {
                 <a className={markdownStyles.a} {...props} />
               ),
             }}
-            linkTarget="_blank"
           >
             {parsedDescription}
           </ReactMarkdown>
