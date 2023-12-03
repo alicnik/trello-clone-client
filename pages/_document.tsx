@@ -5,10 +5,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link
-            rel="preconnect"
-            href="https://salty-mountain-66760.herokuapp.com"
-          />
+          <link rel="preconnect" href="https://trello-clone-server.fly.dev" />
         </Head>
         <body>
           <Main />
