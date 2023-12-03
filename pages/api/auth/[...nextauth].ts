@@ -18,8 +18,9 @@ export default NextAuth({
           .then((res) => {
             return res.data;
           })
-          .catch((err) => console.error(err));
+          .catch((err) => console.error('Error during authorize call', err));
         if (!data.access_token) {
+          console.error('No access token', data);
           return null;
         }
         return data;
