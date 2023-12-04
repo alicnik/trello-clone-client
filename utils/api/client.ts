@@ -5,7 +5,7 @@ const baseURL =
     : 'http://localhost:8080/api/v1';
 
 type Path = `/${string}`;
-type Body = Record<string, any>;
+type Body = Record<string, any> | null;
 
 export const apiClient = {
   get: async <TData>(
