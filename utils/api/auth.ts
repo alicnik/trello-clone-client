@@ -1,4 +1,3 @@
-import { AxiosResponse } from 'axios';
 import { apiClient } from './client';
 // import { getToken, setToken } from './lib';
 import { User } from './types';
