@@ -1,7 +1,7 @@
 import { useBoardContext, useCustomSession } from 'hooks';
 import { useMutation, useQueryClient } from 'react-query';
 import { Board, Card, List, Comment } from 'utils/api/types';
-import { axiosClient } from 'utils/api/client';
+import { apiClient } from 'utils/api/client';
 
 export function useDeleteComment(cardId: string, listId: string) {
   const queryCache = useQueryClient();
@@ -10,7 +10,7 @@ export function useDeleteComment(cardId: string, listId: string) {
 
   return useMutation(
     (commentId: string) => {
-      return axiosClient
+      return apiClient
         .delete<Board>(`/cards/comments/${commentId}`, {
           headers: { Authorization: `Bearer ${accessToken}` },
         })

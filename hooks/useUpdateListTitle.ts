@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 import { useMutation, useQueryClient } from 'react-query';
-import { axiosClient } from 'utils/api/client';
+import { apiClient } from 'utils/api/client';
 import { Board, List } from 'utils/api/types';
 import { useCustomSession } from './useCustomSession';
 
@@ -15,7 +15,7 @@ export function useUpdateListTitle({ boardId, listId }: HookArgs) {
 
   return useMutation(
     ({ title }: { title: string }) => {
-      return axiosClient
+      return apiClient
         .patch<Board>(
           `/boards/lists/${listId}`,
           { title },

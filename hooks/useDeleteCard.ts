@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from 'react-query';
 import { Board, Card, List } from 'utils/api';
-import { axiosClient } from 'utils/api/client';
+import { apiClient } from 'utils/api/client';
 import { useBoardContext } from './useBoardContext';
 import { useCustomSession } from './useCustomSession';
 
@@ -11,7 +11,7 @@ export function useDeleteCard() {
 
   return useMutation(
     (cardId: string) => {
-      return axiosClient
+      return apiClient
         .delete<Board>(`/lists/cards/${cardId}`, {
           headers: { Authorization: `Bearer ${accessToken}` },
         })

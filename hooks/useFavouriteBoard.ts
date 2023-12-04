@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 import { useMutation, useQueryClient } from 'react-query';
-import { axiosClient } from 'utils/api/client';
+import { apiClient } from 'utils/api/client';
 import { Board } from '../utils/api/types';
 import { useCustomSession } from './useCustomSession';
 
@@ -10,7 +10,7 @@ export function useFavouriteBoard() {
 
   return useMutation(
     (updatedBoard: Board) =>
-      axiosClient
+      apiClient
         .post<Board>(`/boards/${updatedBoard.id}`, updatedBoard, {
           headers: { Authorization: `Bearer ${accessToken}` },
         })

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from 'react-query';
 import { Board, Card, List } from 'utils/api';
-import { axiosClient } from 'utils/api/client';
+import { apiClient } from 'utils/api/client';
 import { useCustomSession } from './useCustomSession';
 
 export function useAddComment(cardId: string, listId: string, boardId: string) {
@@ -9,7 +9,7 @@ export function useAddComment(cardId: string, listId: string, boardId: string) {
 
   return useMutation(
     (comment: { body: string }) => {
-      return axiosClient
+      return apiClient
         .post<Board>(`/cards/${cardId}/comments`, comment, {
           headers: { Authorization: `Bearer ${accessToken}` },
         })

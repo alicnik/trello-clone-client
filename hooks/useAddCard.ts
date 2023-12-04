@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 import { useMutation, useQueryClient } from 'react-query';
-import { axiosClient } from 'utils/api/client';
+import { apiClient } from 'utils/api/client';
 import { Board, Card } from '../utils/api/types';
 import { useCustomSession } from './useCustomSession';
 
@@ -15,7 +15,7 @@ export function useAddCard() {
   const queryCache = useQueryClient();
   return useMutation(
     ({ listId, newCard }: MutationArgs) =>
-      axiosClient
+      apiClient
         .post<Board>(`/lists/${listId}/cards`, newCard, {
           headers: { Authorization: `Bearer ${accessToken}` },
         })

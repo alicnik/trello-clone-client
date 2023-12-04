@@ -1,4 +1,4 @@
-import { axiosClient } from './client';
+import { apiClient } from './client';
 // import { getToken } from './lib';
 import { Board } from './types';
 
@@ -6,7 +6,7 @@ export async function getUserBoards(
   username: string,
   token: string
 ): Promise<Board[]> {
-  const res = await axiosClient.get<Board[]>(`/${username}/boards`, {
+  const res = await apiClient.get<Board[]>(`/${username}/boards`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -18,7 +18,7 @@ export async function getSingleBoard(
   boardId: string,
   token: string
 ): Promise<Board> {
-  const res = await axiosClient.get<Board>(`/boards/${boardId}`, {
+  const res = await apiClient.get<Board>(`/boards/${boardId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -34,7 +34,7 @@ export async function createBoard(
   },
   token: string
 ) {
-  const res = await axiosClient.post<Board>('/boards', newBoardDetails, {
+  const res = await apiClient.post<Board>('/boards', newBoardDetails, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

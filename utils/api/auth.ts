@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { axiosClient } from './client';
+import { apiClient } from './client';
 // import { getToken, setToken } from './lib';
 import { User } from './types';
 
@@ -34,22 +34,17 @@ export interface UserResponse {
 }
 
 export function login(userDetails: LoginRequest) {
-  return axiosClient
-    .post<LoginRequest, AxiosResponse<LoginResponse>>('/login', userDetails)
-    .then((res) => {
-      return res;
-    });
+  return apiClient.post<LoginResponse>('/login', userDetails).then((res) => {
+    return res;
+  });
 }
 
 export function register(newUserDetails: RegisterRequest) {
-  return axiosClient.post<RegisterRequest, AxiosResponse<RegisterResponse>>(
-    '/register',
-    newUserDetails
-  );
+  return apiClient.post<RegisterResponse>('/register', newUserDetails);
 }
 
 export function getSingleUser(username: string, token?: string) {
-  return axiosClient
+  return apiClient
     .get<User>(`/users/${username}`, {
       headers: {
         Authorization: `Bearer ${token}`,

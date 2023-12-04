@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from 'react-query';
-import { axiosClient } from 'utils/api/client';
+import { apiClient } from 'utils/api/client';
 import { Board, List } from 'utils/api/types';
 import { useBoardContext } from './useBoardContext';
 import { useCustomSession } from './useCustomSession';
@@ -11,8 +11,8 @@ export function useDeleteList() {
 
   return useMutation(
     (listId: string) => {
-      return axiosClient
-        .delete<Board>(`lists/${listId}`, {
+      return apiClient
+        .delete<Board>(`/lists/${listId}`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
