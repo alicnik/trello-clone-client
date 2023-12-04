@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 import { useMutation, useQueryClient } from 'react-query';
-import { axiosClient } from 'utils/api/client';
+import { apiClient } from 'utils/api/client';
 import { Board, Card, List } from 'utils/api/types';
 import { useCustomSession } from './useCustomSession';
 
@@ -17,7 +17,7 @@ export function useUpdateCard({ cardId, boardId }: HookArgs) {
 
   return useMutation(
     (updatedCard: CardUpdate) => {
-      return axiosClient
+      return apiClient
         .patch<Board>(`/lists/cards/${cardId}`, updatedCard, {
           headers: {
             Authorization: `Bearer ${accessToken}`,

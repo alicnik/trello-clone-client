@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useMutation, useQueryClient } from 'react-query';
 import { Board, User } from 'utils/api';
-import { axiosClient } from 'utils/api/client';
+import { apiClient } from 'utils/api/client';
 import { useCustomSession } from './useCustomSession';
 
 export function useDeleteBoard(boardId: string) {
@@ -11,7 +11,7 @@ export function useDeleteBoard(boardId: string) {
 
   return useMutation(
     () => {
-      return axiosClient
+      return apiClient
         .delete<User>(`/boards/${boardId}`, {
           headers: { Authorization: `Bearer ${accessToken}` },
         })

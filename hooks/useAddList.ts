@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from 'react-query';
-import { axiosClient } from 'utils/api/client';
+import { apiClient } from 'utils/api/client';
 import { useCustomSession } from './useCustomSession';
+import { Board } from 'utils/api';
 
 interface MutationArgs {
   boardId: String;
@@ -13,8 +14,8 @@ export function useAddList() {
 
   return useMutation(
     ({ boardId, newList }: MutationArgs) => {
-      return axiosClient
-        .post(`/boards/${boardId}/lists`, newList, {
+      return apiClient
+        .post<Board>(`/boards/${boardId}/lists`, newList, {
           headers: { Authorization: `Bearer ${accessToken}` },
         })
         .then((res) => res.data);

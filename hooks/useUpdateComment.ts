@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from 'react-query';
 import { useCustomSession, useBoardContext } from 'hooks';
-import { axiosClient } from 'utils/api/client';
+import { apiClient } from 'utils/api/client';
 import { Board, Card, List, Comment } from 'utils/api/types';
 
 export function useUpdateComment(
@@ -14,7 +14,7 @@ export function useUpdateComment(
 
   return useMutation(
     (updatedComment: { body: string }) => {
-      return axiosClient
+      return apiClient
         .put<Board>(`/cards/comments/${commentId}`, updatedComment, {
           headers: { Authorization: `Bearer ${accessToken}` },
         })

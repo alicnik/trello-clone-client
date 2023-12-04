@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 import { useMutation, useQueryClient } from 'react-query';
-import { axiosClient } from 'utils/api/client';
+import { apiClient } from 'utils/api/client';
 import { Board, Card, List } from '../utils/api/types';
 import { useCustomSession } from './useCustomSession';
 
@@ -16,7 +16,7 @@ export function useUpdateList(boardId: string) {
   const queryCache = useQueryClient();
   return useMutation(
     ({ originListId, updatedOriginCards }: MutationVariables) =>
-      axiosClient
+      apiClient
         .put<Board>(
           `/boards/${boardId}/lists/${originListId}/cards`,
           updatedOriginCards,

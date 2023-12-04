@@ -22,7 +22,7 @@ import {
   BoardContextProvider,
   useCustomSession,
 } from 'hooks';
-import { axiosClient } from 'utils/api/client';
+import { apiClient } from 'utils/api/client';
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
@@ -79,7 +79,7 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
       username: string;
       id: string;
     };
-    axiosClient.post(`/${username}/boards/${boardId}`, null, {
+    apiClient.post(`/${username}/boards/${boardId}`, null, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
     setWindowReady(true);

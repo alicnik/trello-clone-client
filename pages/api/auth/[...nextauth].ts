@@ -1,7 +1,6 @@
 import NextAuth, { DefaultSession, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import axios from 'axios';
-import { axiosClient } from 'utils/api/client';
+import { apiClient } from 'utils/api/client';
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -10,8 +9,8 @@ export default NextAuth({
       name: 'Credentials',
       credentials: { username: {}, password: {} },
       authorize: async (credentials) => {
-        const data = await axiosClient
-          .post('/login', {
+        const data = await apiClient
+          .post<User & { access_token: string }>('/login', {
             username: credentials?.username,
             password: credentials?.password,
           })
@@ -19,7 +18,7 @@ export default NextAuth({
             return res.data;
           })
           .catch((err) => console.error('Error during authorize call', err));
-        if (!data.access_token) {
+        if (!data?.access_token) {
           console.error('No access token', data);
           return null;
         }
