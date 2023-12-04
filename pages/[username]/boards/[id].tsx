@@ -9,7 +9,6 @@ import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/react';
 import { Session } from 'next-auth';
-import axios from 'axios';
 
 import { getSingleBoard } from 'utils/api/boards';
 import { Board } from 'utils/api/types';
