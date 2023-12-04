@@ -11,17 +11,18 @@ export const apiClient = {
   get: async <TData>(
     path: Path,
     options: RequestInit = {}
-  ): Promise<{ data: TData }> => {
+  ): Promise<{ data: TData; ok: boolean }> => {
     const res = await fetch(baseURL!.concat(path), options);
     return {
       data: await res.json(),
+      ok: res.ok,
     };
   },
   post: async <TData>(
     path: Path,
     body: Body,
     options: RequestInit = {}
-  ): Promise<{ data: TData }> => {
+  ): Promise<{ data: TData; ok: boolean }> => {
     const res = await fetch(baseURL!.concat(path), {
       method: 'POST',
       body: JSON.stringify(body),
@@ -36,13 +37,14 @@ export const apiClient = {
     }
     return {
       data: await res.json(),
+      ok: res.ok,
     };
   },
   put: async <TData>(
     path: Path,
     body: Body,
     options: RequestInit = {}
-  ): Promise<{ data: TData }> => {
+  ): Promise<{ data: TData; ok: boolean }> => {
     const res = await fetch(baseURL!.concat(path), {
       method: 'PUT',
       body: JSON.stringify(body),
@@ -57,13 +59,14 @@ export const apiClient = {
     }
     return {
       data: await res.json(),
+      ok: res.ok,
     };
   },
   patch: async <TData>(
     path: Path,
     body: Body,
     options: RequestInit = {}
-  ): Promise<{ data: TData }> => {
+  ): Promise<{ data: TData; ok: boolean }> => {
     const res = await fetch(baseURL!.concat(path), {
       method: 'PATCH',
       body: JSON.stringify(body),
@@ -78,13 +81,14 @@ export const apiClient = {
     }
     return {
       data: await res.json(),
+      ok: res.ok,
     };
   },
   delete: async <TData>(
     path: Path,
     body: Body,
     options: RequestInit = {}
-  ): Promise<{ data: TData }> => {
+  ): Promise<{ data: TData; ok: boolean }> => {
     const res = await fetch(baseURL!.concat(path), {
       method: 'DELETE',
       body: JSON.stringify(body),
@@ -99,6 +103,7 @@ export const apiClient = {
     }
     return {
       data: await res.json(),
+      ok: res.ok,
     };
   },
 };

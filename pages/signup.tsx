@@ -6,8 +6,10 @@ import { TextInput } from 'components/common';
 import { AuthLayout } from 'components/signup-login';
 import * as styles from '../styles/signup-login.css';
 import { signIn } from 'next-auth/react';
+import { useIsSubmitting } from 'hooks';
 
 const SignUp: NextPage = () => {
+  const [isSubmitting, setIsSubmitting] = useIsSubmitting();
   const [form, setForm] = React.useState({
     username: '',
     firstName: '',
@@ -32,7 +34,11 @@ const SignUp: NextPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      setIsSubmitting(true);
       const res = await register(form);
+      if (!res.ok) {
+        throw new Error('Something went wrong with registering');
+      }
       const username = res.data.username;
       const loginDetails = { username, password: form.password };
       signIn('credentials', {
@@ -42,6 +48,7 @@ const SignUp: NextPage = () => {
       sessionStorage.removeItem('signup-email');
     } catch (err) {
       console.error(err);
+      setIsSubmitting(false);
     }
   };
 
@@ -102,7 +109,7 @@ const SignUp: NextPage = () => {
           type="submit"
           value="Continue"
           className={styles.button}
-          disabled={!emailRegexp.test(form.emailAddress)}
+          disabled={!emailRegexp.test(form.emailAddress) || isSubmitting}
         />
         <hr className={styles.hr} />
         <Link href="/login" className={styles.link}>

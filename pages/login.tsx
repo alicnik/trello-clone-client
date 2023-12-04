@@ -5,6 +5,7 @@ import Link from 'next/link';
 import * as styles from 'styles/signup-login.css';
 import { TextInput } from 'components/common';
 import { signIn } from 'next-auth/react';
+import { useIsSubmitting } from 'hooks';
 
 const Login: NextPage = () => {
   const [form, setForm] = React.useState({
@@ -12,6 +13,7 @@ const Login: NextPage = () => {
     password: '',
   });
   const [missingUsername, setMissingUsername] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = useIsSubmitting();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -27,13 +29,15 @@ const Login: NextPage = () => {
       return;
     }
     e.preventDefault();
+    setIsSubmitting(true);
     try {
-      signIn('credentials', {
+      await signIn('credentials', {
         ...form,
         callbackUrl: `/${form.username}/boards`,
       });
     } catch (err) {
       console.error(err);
+      setIsSubmitting(false);
     }
   };
 
@@ -62,7 +66,12 @@ const Login: NextPage = () => {
           onChange={handleChange}
           autoComplete="email"
         />
-        <input type="submit" value="Continue" className={styles.button} />
+        <input
+          type="submit"
+          value="Continue"
+          className={styles.button}
+          disabled={isSubmitting}
+        />
         <hr className={styles.hr} />
         <Link href="/signup" className={styles.link}>
           Sign up for an account
