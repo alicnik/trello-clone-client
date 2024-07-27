@@ -7,6 +7,16 @@ const baseURL =
 type Path = `/${string}`;
 type Body = Record<string, any> | null;
 
+async function safeJson(res: Response) {
+  try {
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error('Error parsing JSON', { err });
+    return null;
+  }
+}
+
 export const apiClient = {
   get: async <TData>(
     path: Path,
@@ -14,7 +24,7 @@ export const apiClient = {
   ): Promise<{ data: TData; ok: boolean }> => {
     const res = await fetch(baseURL!.concat(path), options);
     return {
-      data: await res.json(),
+      data: await safeJson(res),
       ok: res.ok,
     };
   },
@@ -36,7 +46,7 @@ export const apiClient = {
       console.error('Error fetching', path);
     }
     return {
-      data: await res.json(),
+      data: await safeJson(res),
       ok: res.ok,
     };
   },
@@ -58,7 +68,7 @@ export const apiClient = {
       console.error('Error fetching', path);
     }
     return {
-      data: await res.json(),
+      data: await safeJson(res),
       ok: res.ok,
     };
   },
@@ -80,18 +90,16 @@ export const apiClient = {
       console.error('Error fetching', path);
     }
     return {
-      data: await res.json(),
+      data: await safeJson(res),
       ok: res.ok,
     };
   },
   delete: async <TData>(
     path: Path,
-    body: Body,
     options: RequestInit = {}
   ): Promise<{ data: TData; ok: boolean }> => {
     const res = await fetch(baseURL!.concat(path), {
       method: 'DELETE',
-      body: JSON.stringify(body),
       ...options,
       headers: {
         'Content-Type': 'application/json',
@@ -102,7 +110,7 @@ export const apiClient = {
       console.error('Error fetching', path);
     }
     return {
-      data: await res.json(),
+      data: await safeJson(res),
       ok: res.ok,
     };
   },

@@ -74,14 +74,18 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
 
   React.useEffect(() => {
     if (!isInitialRender.current) return;
-    const { username, id: boardId } = router.query as {
-      username: string;
-      id: string;
-    };
-    apiClient.post(`/${username}/boards/${boardId}`, null, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
-    setWindowReady(true);
+    async function addToRecentlyViewedBoards() {
+      const { username, id: boardId } = router.query as {
+        username: string;
+        id: string;
+      };
+      await apiClient.post(`/${username}/boards/${boardId}`, null, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      setWindowReady(true);
+    }
+
+    addToRecentlyViewedBoards();
   }, [router, accessToken]);
 
   React.useEffect(() => {
@@ -101,7 +105,7 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
       behavior: 'smooth',
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [board?.lists.length, listContainerRef.current]);
+  }, [board?.lists?.length, listContainerRef.current]);
 
   const handleDragEnd = async (result: DropResult) => {
     if (!board) return;
@@ -178,12 +182,12 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
   if (isLoading || !board) {
     return <h2>Loading...</h2>;
   }
-
+  console.log({ board });
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <SingleBoardLayout
         board={board}
-        username={board.owner.username}
+        username={board.owner?.username}
         background={board.background}
       >
         {windowReady ? (

@@ -8,7 +8,6 @@ export function useDeleteList() {
   const boardId = useBoardContext();
   const { accessToken } = useCustomSession();
   const queryCache = useQueryClient();
-
   return useMutation(
     (listId: string) => {
       return apiClient
