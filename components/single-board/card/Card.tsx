@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Card as CardI } from 'utils/api/types';
-import { Draggable } from 'react-beautiful-dnd';
+import { Draggable } from '@adaptabletools/react-beautiful-dnd';
 import * as styles from './card.css';
 import * as Dialog from '@radix-ui/react-dialog';
 import {

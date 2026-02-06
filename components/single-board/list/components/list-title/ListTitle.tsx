@@ -1,6 +1,6 @@
 import { useClickOutside, useUpdateListTitle } from 'hooks';
 import * as React from 'react';
-import { DraggableProvided } from 'react-beautiful-dnd';
+import { DraggableProvided } from '@adaptabletools/react-beautiful-dnd';
 import { ListTitlePopover } from './list-title-popover';
 import * as styles from './list-title.css';
 

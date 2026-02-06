@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { List as ListI } from 'utils/api/types';
-import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { Draggable, Droppable } from '@adaptabletools/react-beautiful-dnd';
 import * as styles from './list.css';
 import { Card } from 'components/single-board';
 import { AddCardSection, ListTitle } from './components';

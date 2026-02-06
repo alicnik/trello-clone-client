@@ -5,7 +5,7 @@ import {
   NextPage,
 } from 'next';
 import { useQuery } from '@tanstack/react-query';
-import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, DropResult } from '@adaptabletools/react-beautiful-dnd';
 import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/react';
 import { Session } from 'next-auth';
