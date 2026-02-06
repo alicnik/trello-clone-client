@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useCustomSession, useBoardContext } from 'hooks';
 import { apiClient } from 'utils/api/client';
 import { Board, Card, List, Comment } from 'utils/api/types';

@@ -5,7 +5,7 @@ import { getBackground } from 'utils';
 import { Board, User } from 'utils/api';
 import * as styles from './dropdown-board-item.css';
 import { useCustomSession } from 'hooks';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface DropdownboardItemProps {
   board: Board;

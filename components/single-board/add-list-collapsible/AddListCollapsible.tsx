@@ -7,7 +7,7 @@ import * as styles from './add-list-collapsible.css';
 
 interface AddListCollapsibleProps {
   boardId: string;
-  listContainerRef: React.RefObject<HTMLDivElement>;
+  listContainerRef: React.RefObject<HTMLDivElement | null>;
 }
 
 export function AddListCollapsible({
@@ -28,7 +28,7 @@ export function AddListCollapsible({
         return;
       }
       const descendants = Array.from(
-        addListButtonRef.current?.querySelectorAll('*') || []
+        addListButtonRef.current?.querySelectorAll('*') || [],
       );
       const isInListInputContainer = [
         ...descendants,
@@ -39,7 +39,7 @@ export function AddListCollapsible({
       }
       setIsAddingList(false);
     },
-    [isAddingList]
+    [isAddingList],
   );
   useClickOutside(handleClickOutside);
 

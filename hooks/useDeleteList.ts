@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiClient } from 'utils/api/client';
 import { Board, List } from 'utils/api/types';
 import { useBoardContext } from './useBoardContext';
@@ -8,8 +8,8 @@ export function useDeleteList() {
   const boardId = useBoardContext();
   const { accessToken } = useCustomSession();
   const queryCache = useQueryClient();
-  return useMutation(
-    (listId: string) => {
+  return useMutation({
+    mutationFn: (listId: string) => {
       return apiClient
         .delete<Board>(`/lists/${listId}`, {
           headers: {
@@ -18,18 +18,16 @@ export function useDeleteList() {
         })
         .then((res) => res.data);
     },
-    {
-      onMutate: (listId: string) => {
-        queryCache.setQueryData(['boards', boardId], (currentBoard: any) => {
-          const newLists = currentBoard.lists.filter(
-            (l: List) => l.id !== listId
-          );
-          return { ...currentBoard, lists: newLists };
-        });
-      },
-      onSuccess: (updatedBoard) => {
-        queryCache.setQueryData(['boards', boardId], updatedBoard);
-      },
-    }
-  );
+    onMutate: (listId: string) => {
+      queryCache.setQueryData(['boards', boardId], (currentBoard: any) => {
+        const newLists = currentBoard.lists.filter(
+          (l: List) => l.id !== listId,
+        );
+        return { ...currentBoard, lists: newLists };
+      });
+    },
+    onSuccess: (updatedBoard) => {
+      queryCache.setQueryData(['boards', boardId], updatedBoard);
+    },
+  });
 }

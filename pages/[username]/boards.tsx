@@ -5,7 +5,7 @@ import * as styles from '../../styles/boards-index.css';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { InternalNavbar } from 'components/common';
 import { BoardsSidebar, BoardCardList } from 'components/boards-index';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import Head from 'next/head';
 import { getSession } from 'next-auth/react';
 import { useCustomSession } from 'hooks';
@@ -13,7 +13,7 @@ import { useCustomSession } from 'hooks';
 type BoardProps = { initialData: User };
 
 export const getServerSideProps: GetServerSideProps<BoardProps> = async (
-  context
+  context,
 ) => {
   const username = context.params?.username as string;
   const session = await getSession(context);
@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps<BoardProps> = async (
   try {
     const initialData = await getSingleUser(
       username,
-      session?.accessToken as string
+      session?.accessToken as string,
     );
     return { props: { initialData, session } };
   } catch (err) {
@@ -34,14 +34,14 @@ export const getServerSideProps: GetServerSideProps<BoardProps> = async (
 
 const Boards: NextPage<BoardProps> = ({ initialData }) => {
   const { status, accessToken } = useCustomSession();
-  const { data: user } = useQuery(
-    ['users', initialData.username],
-    () => {
+  const { data: user } = useQuery({
+    queryKey: ['users', initialData.username],
+    queryFn: () => {
       if (status === 'loading' || !accessToken) return;
       return getSingleUser(initialData.username, accessToken as string);
     },
-    { initialData }
-  );
+    initialData,
+  });
 
   if (!user || !user?.boards) {
     return <h2>Loading...</h2>;

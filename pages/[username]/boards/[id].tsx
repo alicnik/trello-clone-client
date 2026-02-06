@@ -4,7 +4,7 @@ import {
   GetServerSidePropsResult,
   NextPage,
 } from 'next';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/react';
@@ -24,13 +24,13 @@ import {
 import { apiClient } from 'utils/api/client';
 
 export async function getServerSideProps(
-  context: GetServerSidePropsContext
+  context: GetServerSidePropsContext,
 ): Promise<GetServerSidePropsResult<SingleBoardProps>> {
   const session = await getSession(context);
   try {
     const data = await getSingleBoard(
       context.params?.id as string,
-      session?.accessToken as string
+      session?.accessToken as string,
     );
     return {
       props: {
@@ -54,16 +54,16 @@ interface SingleBoardProps {
 const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
   const router = useRouter();
   const { accessToken, status } = useCustomSession();
-  const { data: board, isLoading } = useQuery(
-    ['boards', initialState.id],
-    () => {
+  const { data: board, isLoading } = useQuery({
+    queryKey: ['boards', initialState.id],
+    queryFn: () => {
       if (status === 'loading' || !accessToken) {
         return;
       }
       return getSingleBoard(initialState.id, accessToken);
     },
-    { initialData: initialState }
-  );
+    initialData: initialState,
+  });
 
   const boardMutation = useUpdateBoard();
   const listMutation = useUpdateList(initialState.id);
@@ -135,10 +135,10 @@ const SingleBoard: NextPage<SingleBoardProps> = ({ initialState }) => {
 
     // Reorder cards
     const originListIndex = board.lists.findIndex(
-      (list) => String(list.id) === source.droppableId
+      (list) => String(list.id) === source.droppableId,
     );
     const endListIndex = board.lists.findIndex(
-      (list) => String(list.id) === destination.droppableId
+      (list) => String(list.id) === destination.droppableId,
     );
     const newLists = [...board.lists];
 

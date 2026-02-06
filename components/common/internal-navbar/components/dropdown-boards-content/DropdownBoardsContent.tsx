@@ -1,7 +1,7 @@
 import { useCustomSession } from 'hooks';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { getSingleUser } from 'utils/api';
 import { DropdownBoardItem } from '..';
 
@@ -11,9 +11,12 @@ interface DropdownBoardsContentProps {
 
 export function DropdownBoardsContent({ type }: DropdownBoardsContentProps) {
   const { username, accessToken, status } = useCustomSession();
-  const { data: user } = useQuery(['users', username], () => {
-    if (status === 'loading') return;
-    return getSingleUser(username, accessToken);
+  const { data: user } = useQuery({
+    queryKey: ['users', username],
+    queryFn: () => {
+      if (status === 'loading') return;
+      return getSingleUser(username, accessToken);
+    },
   });
 
   if (!user) return null;
