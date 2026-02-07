@@ -19,7 +19,7 @@ export function useUpdateList(boardId: string) {
       apiClient
         .put<Board>(
           `/boards/${boardId}/lists/${originListId}/cards`,
-          updatedOriginCards,
+          updatedOriginCards.map((c) => c.id),
           { headers: { Authorization: `Bearer ${accessToken}` } },
         )
         .then((res) => res.data),
